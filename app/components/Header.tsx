@@ -71,10 +71,10 @@ export default function Header() {
               {aboutOpen && (
                 <div className="absolute top-full left-0 pt-2 min-w-[220px] z-50">
                   <div className="bg-gray-100 shadow-lg rounded-lg py-2 animate-slideDown">
-                    <Link href="/industries" className="block px-4 py-2 text-lg font-medium text-black hover:bg-gray-200 transition">
+                    <Link href="/industries" className="block px-4 py-2 text-sm font-bold text-black uppercase hover:text-main transition">
                       Industries We Serve
                     </Link>
-                    <Link href="/faq" className="block px-4 py-2 text-lg font-medium text-black hover:bg-gray-200 transition">
+                    <Link href="/faq" className="block px-4 py-2 text-sm font-bold text-black uppercase hover:text-main transition">
                       FAQ
                     </Link>
                   </div>
@@ -103,7 +103,7 @@ export default function Header() {
                 <div className="absolute top-full left-0 pt-2 min-w-[280px] z-50">
                   <div className="bg-gray-100 shadow-lg rounded-lg py-2 animate-slideDown">
                     <div className="px-4 py-2">
-                      <p className="text-sm font-bold text-gray-600 uppercase mb-2">Digitizers</p>
+                      <Link href="/products/digitizers" className="block text-sm font-bold text-black uppercase mb-2 hover:text-main transition">Digitizers</Link>
                       <Link href="/products/femtodaq-vireo" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
                         FemtoDAQ Vireo (2)
                       </Link>
@@ -118,7 +118,7 @@ export default function Header() {
                     <hr className="my-2 border-gray-300" />
 
                     <div className="px-4 py-2">
-                      <p className="text-sm font-bold text-gray-600 uppercase mb-2">Data Management</p>
+                      <Link href="/products/data-management" className="block text-sm font-bold text-black uppercase mb-2 hover:text-main transition">Data Management</Link>
                       <Link href="/products/solidago-udp" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
                         Solidago UDP Event Generator - 160 Gbps
                       </Link>
@@ -126,14 +126,16 @@ export default function Header() {
 
                     <hr className="my-2 border-gray-300" />
 
-                    <Link href="/skutils" className="block px-4 py-2 text-lg font-medium text-black hover:bg-gray-200 transition">
-                      SkuTek Utilities (Skutils)
-                    </Link>
+                    <div className="px-4 py-2">
+                      <Link href="/skutils" className="block text-sm font-bold text-black uppercase hover:text-main transition">
+                        SkuTek Utilities (Skutils)
+                      </Link>
+                    </div>
 
                     <hr className="my-2 border-gray-300" />
 
                     <div className="px-4 py-2">
-                      <p className="text-sm font-bold text-gray-600 uppercase mb-2">Downloads</p>
+                      <p className="text-sm font-bold text-black uppercase mb-2">Downloads</p>
                       <Link href="/downloads/femtodaq-utilities" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
                         FemtoDAQ Utilities Updater
                       </Link>
@@ -171,72 +173,92 @@ export default function Header() {
             mobileMenuOpen ? 'max-h-[800px] opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
-          <nav className="pb-4 space-y-4 bg-gray-200 px-8 py-4">
-            <div className="space-y-2">
-              <Link href="/about-us" className="block text-lg font-bold text-black hover:text-main">
-                About Us
-              </Link>
-              <Link href="/industries" className="block text-base font-semibold text-black hover:text-main pl-3">
+          <nav className="pb-4 space-y-1 bg-gray-200 px-8 py-4">
+
+            {/* About Us */}
+            <Link href="/about-us" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
+              About Us
+            </Link>
+            <div className="pl-4 py-1 space-y-1">
+              <Link href="/industries" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
                 Industries We Serve
               </Link>
-              <Link href="/faq" className="block text-base font-semibold text-black hover:text-main pl-3">
+              <Link href="/faq" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
                 FAQ
               </Link>
             </div>
 
-            <div className="space-y-2">
-              <Link href="/products" className="block text-lg font-bold text-black hover:text-main">
-                Products
-              </Link>
+            {/* Products */}
+            <Link href="/products" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
+              Products
+            </Link>
 
-              <div className="pl-3 space-y-1">
-                <p className="text-xs font-bold text-gray-500 uppercase mt-2">Digitizers</p>
-                <Link href="/products/femtodaq-vireo" className="block text-sm font-medium text-black hover:text-main">
-                  FemtoDAQ Vireo (2)
-                </Link>
-                <Link href="/products/multichannel-daq" className="block text-sm font-medium text-black hover:text-main">
-                  Multichannel DAQ System
-                </Link>
-                <Link href="/products/chickadee-32" className="block text-sm font-medium text-black hover:text-main">
-                  Chickadee-32 Rear Transition Module
-                </Link>
+            <div className="pl-4 py-1 space-y-3">
+              <div>
+                <Link href="/products/digitizers" className="block text-xs font-bold text-black uppercase tracking-wide mb-1 hover:text-main">Digitizers</Link>
+                <div className="space-y-1">
+                  <Link href="/products/femtodaq-vireo" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                    FemtoDAQ Vireo (2)
+                  </Link>
+                  <Link href="/products/multichannel-daq" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                    Multichannel DAQ System
+                  </Link>
+                  <Link href="/products/chickadee-32" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                    Chickadee-32 Rear Transition Module
+                  </Link>
+                </div>
               </div>
 
-              <div className="pl-3 space-y-1">
-                <p className="text-xs font-bold text-gray-500 uppercase mt-2">Data Management</p>
-                <Link href="/products/solidago-udp" className="block text-sm font-medium text-black hover:text-main">
-                  Solidago UDP Event Generator - 160 Gbps
-                </Link>
+              <div>
+                <Link href="/products/data-management" className="block text-xs font-bold text-black uppercase tracking-wide mb-1 hover:text-main">Data Management</Link>
+                <div className="space-y-1">
+                  <Link href="/products/solidago-udp" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                    Solidago UDP Event Generator - 160 Gbps
+                  </Link>
+                </div>
               </div>
 
-              <Link href="/skutils" className="block text-base font-semibold text-black hover:text-main pl-3 mt-2">
+              <Link href="/skutils" className="block text-xs font-bold text-black uppercase tracking-wide hover:text-main">
                 SkuTek Utilities (Skutils)
               </Link>
-
-              <div className="pl-3 space-y-1">
-                <p className="text-xs font-bold text-gray-500 uppercase mt-2">Downloads</p>
-                <Link href="/downloads/femtodaq-utilities" className="block text-sm font-medium text-black hover:text-main">
-                  FemtoDAQ Utilities Updater
-                </Link>
-              </div>
             </div>
 
-            <Link href="/news" className="block text-base font-semibold text-black hover:text-main">
+            {/* Downloads */}
+            <Link href="/downloads" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
+              Downloads
+            </Link>
+            <div className="pl-4 py-1 space-y-1">
+              <Link href="/downloads/femtodaq-utilities" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                FemtoDAQ Utilities Updater
+              </Link>
+            </div>
+
+            {/* Top-level links */}
+            <Link href="/news" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
               News and Articles
             </Link>
-            <Link href="/careers" className="block text-base font-semibold text-black hover:text-main">
+            <Link href="/careers" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Careers
             </Link>
-            <Link href="/contact" className="block text-base font-semibold text-black hover:text-main">
+            <Link href="/contact" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Support / Contact Us
             </Link>
 
-            <Link
-              href="/quote"
-              className="block bg-main text-white text-base font-semibold px-6 py-3 rounded-lg hover:bg-accent transition text-center"
-            >
-              Get a Quote
-            </Link>
+            <div className="pt-3">
+              <Link
+                href="/quote"
+                className="block bg-main text-white text-base font-semibold px-6 py-3 rounded-lg hover:bg-accent transition text-center"
+              >
+                Get a Quote
+              </Link>
+            </div>
           </nav>
         </div>
       </div>
