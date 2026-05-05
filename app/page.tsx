@@ -1,15 +1,17 @@
 import Hero from './components/home/Hero';
 import LogoScroller from './components/home/LogoScroller';
-import Highlights from './components/home/Highlights';
-import SpaceSection from './components/home/SpaceSection';
+import HighlightsSpace from './components/home/HighlightsSpace';
+import DAQChain from './components/home/DAQChain';
+import LatestNews from './components/home/LatestNews';
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <LogoScroller />
-      <Highlights />
-      <SpaceSection />
+      <HighlightsSpace />
+      <DAQChain />
+      <LatestNews />
     </main>
   );
 }

@@ -10,7 +10,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b border-gray-200" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}>
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}>
       <div className="max-w-[1600px] mx-auto px-8 py-4">
         {/* Mobile Layout - Logo left, Hamburger right */}
         <div className="lg:hidden">
@@ -151,6 +151,9 @@ export default function Header() {
             <Link href="/careers" className="text-xl font-semibold text-black hover:text-main transition">
               Careers
             </Link>
+            <Link href="/documentation" className="text-xl font-semibold text-black hover:text-main transition">
+              Documentation
+            </Link>
             <Link href="/contact" className="text-xl font-semibold text-black hover:text-main transition">
               Support / Contact Us
             </Link>
@@ -180,12 +183,12 @@ export default function Header() {
               About Us
             </Link>
             <div className="pl-4 py-1 space-y-1">
-              <Link href="/industries" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+              <Link href="/industries" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                 Industries We Serve
               </Link>
-              <Link href="/faq" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+              <Link href="/faq" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                 FAQ
               </Link>
             </div>
@@ -199,16 +202,16 @@ export default function Header() {
               <div>
                 <Link href="/products/digitizers" className="block text-xs font-bold text-black uppercase tracking-wide mb-1 hover:text-main">Digitizers</Link>
                 <div className="space-y-1">
-                  <Link href="/products/femtodaq-vireo" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                  <Link href="/products/femtodaq-vireo" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                    <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                     FemtoDAQ Vireo (2)
                   </Link>
-                  <Link href="/products/multichannel-daq" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                  <Link href="/products/multichannel-daq" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                    <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                     Multichannel DAQ System
                   </Link>
-                  <Link href="/products/chickadee-32" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                  <Link href="/products/chickadee-32" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                    <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                     Chickadee-32 Rear Transition Module
                   </Link>
                 </div>
@@ -217,8 +220,8 @@ export default function Header() {
               <div>
                 <Link href="/products/data-management" className="block text-xs font-bold text-black uppercase tracking-wide mb-1 hover:text-main">Data Management</Link>
                 <div className="space-y-1">
-                  <Link href="/products/solidago-udp" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                  <Link href="/products/solidago-udp" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                    <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                     Solidago UDP Event Generator - 160 Gbps
                   </Link>
                 </div>
@@ -234,8 +237,8 @@ export default function Header() {
               Downloads
             </Link>
             <div className="pl-4 py-1 space-y-1">
-              <Link href="/downloads/femtodaq-utilities" className="flex items-center gap-2 text-sm text-gray-700 hover:text-main py-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+              <Link href="/downloads/femtodaq-utilities" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                 FemtoDAQ Utilities Updater
               </Link>
             </div>
@@ -246,6 +249,9 @@ export default function Header() {
             </Link>
             <Link href="/careers" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Careers
+            </Link>
+            <Link href="/documentation" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
+              Documentation
             </Link>
             <Link href="/contact" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Support / Contact Us
