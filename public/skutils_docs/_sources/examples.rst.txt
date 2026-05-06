@@ -1,0 +1,17 @@
+Examples/Application Notes
+==========================
+
+.. nblinkgallery::
+    :caption: All examples using FemtoDAQ Digitizers
+    :name: examples_gallery_femtodaq
+
+    examples/Cs137_Energy_Calibration
+    examples/inspecting_an_event
+    examples/na22_coincidence
+    examples/Recording_noise_example
+
+.. nblinkgallery::
+    :caption: All examples using Chickadee Digitizers
+    :name: examples_gallery_chickadee
+
+    examples/basic_control_of_chickadee

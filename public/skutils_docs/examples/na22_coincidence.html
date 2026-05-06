@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing Coincidence using a Na-22 Source &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../loading_data/index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Testing Coincidence using a Na-22 Source</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/na22_coincidence.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div>
+<i>This page is automatically generated from a Jupyter Notebook.<br>
+Download the original notebook using the button below.</i>
+</div>
+<div>
+<a href="na22_coincidence.ipynb" class="reference download internal" download><button class="btn btn-primary"><span>Download Notebook</span></button></a>
+</div><hr class="docutils" />
+<section id="Testing-Coincidence-using-a-Na-22-Source">
+<h1>Testing Coincidence using a Na-22 Source<a class="headerlink" href="#Testing-Coincidence-using-a-Na-22-Source" title="Link to this heading"></a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading"></a></h2>
+<section id="Coincidence-Filtering-of-Sodium-22-(Na-22)">
+<h3>Coincidence Filtering of Sodium-22 (Na-22)<a class="headerlink" href="#Coincidence-Filtering-of-Sodium-22-(Na-22)" title="Link to this heading"></a></h3>
+<p>Sodium 22 (Na-22) is a radioactive isotope with one less neutron than the “stable” form of Sodium 23. With a half life of 2.60 years, it’s a relatively shelf stable isotype making it conveinent in labs as a calibration.</p>
+<p>In most cases, the Na-22 emits a positron and decays into an excited Ne-22 nucleus. The Ne-22 nucleus then falls to ground state and emits of <em>1.2745 MeV</em> gamma ray.</p>
+<p><img alt="alt text" src="../_images/equation.png" /></p>
+<p>After this initial nuclear decay, the emitted positron generally annilihates with an electron and that reactions emits a pair of <em>.511 MeV</em> gamma rays. Importantly, these annhilitation gamma rays are emitted in opposite directions.</p>
+<p><img alt="image1" src="../_images/equation2.png" /></p>
+<p>Taking advantage of this, we can set up detectors opposite of each other on either side of our Na-22 source and selectively save primarily annihilation events using the FemtoDAQ Vireo’s coincidence filter.</p>
+<p><img alt="image2" src="../_images/setup.png" /></p>
+</section>
+<section id="Experimental-Setup">
+<h3>Experimental Setup<a class="headerlink" href="#Experimental-Setup" title="Link to this heading"></a></h3>
+<p>The Vireo’s <strong>coincidence filter</strong> allows you to selectively trigger on events which create a certain hit pattern on your detectors. In the case of <em>Na-22</em>, we want to only measure events which create pulses on our two detectors simultaneously. This will screen out the vast majority of noise events caused by _Ne-22*_ excitation or ambient noises such as cosmic rays. These noise sources are statistically unlikely to interact with two detectors simultaneously. Unlike the annhiliation decay which
+emits two opposing gamma rays perfectly in line with our detectors.</p>
+<p><img alt="image3" src="../_images/pic_of_setup.jpeg" /></p>
+</section>
+</section>
+<section id="In-this-experiment-we-will:">
+<h2><strong>In this experiment we will:</strong><a class="headerlink" href="#In-this-experiment-we-will:" title="Link to this heading"></a></h2>
+<section id="1)-Collect-data-using-2-hit-coincidence-to-show-detection-of-only-the-.511-MeV-beta-decay-peak">
+<h3>1) <strong>Collect data using 2-hit coincidence</strong> to show detection of only the .511 MeV beta decay peak<a class="headerlink" href="#1)-Collect-data-using-2-hit-coincidence-to-show-detection-of-only-the-.511-MeV-beta-decay-peak" title="Link to this heading"></a></h3>
+</section>
+<section id="2)-Collect-data-without-coincidence-to-show-detection-of-all-sodium-lines---including-the-1.2745-MeV-Ne-22-excitation-peak">
+<h3>2) <strong>Collect data without coincidence</strong> to show detection of all sodium lines - including the 1.2745 MeV Ne-22 excitation peak<a class="headerlink" href="#2)-Collect-data-without-coincidence-to-show-detection-of-all-sodium-lines---including-the-1.2745-MeV-Ne-22-excitation-peak" title="Link to this heading"></a></h3>
+<hr class="docutils" />
+</section>
+</section>
+<hr class="docutils" />
+<section id="Collecting-Data">
+<h2><strong>Collecting Data</strong><a class="headerlink" href="#Collecting-Data" title="Link to this heading"></a></h2>
+<section id="Setting-up-Environment">
+<h3>Setting up Environment<a class="headerlink" href="#Setting-up-Environment" title="Link to this heading"></a></h3>
+<p>We’re going to define some variables up front so they are easier to change later. <code class="docutils literal notranslate"><span class="pre">TRIGGER_SENSITIVITY</span></code> defines how sensitive the trigger is to capture a pulse. <code class="docutils literal notranslate"><span class="pre">NUMBER_OF_EVENTS</span></code> indicates how many events we are going to capture before stopping data collection</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">VIREO_URL</span> <span class="o">=</span> <span class="s2">&quot;vireo-000019.tek&quot;</span>
+<span class="n">TRIGGER_SENSITIVITY</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">NUMBER_OF_EVENTS</span> <span class="o">=</span> <span class="mi">100_000</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Skutils is in beta, please contact support@skutek.com with bugs, issues, and questions
+</pre></div></div>
+</div>
+</section>
+<section id="1)-Connect-to-your-FemtoDAQ-Vireo">
+<h3><strong>1) Connect to your FemtoDAQ Vireo</strong><a class="headerlink" href="#1)-Connect-to-your-FemtoDAQ-Vireo" title="Link to this heading"></a></h3>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code> class to control our digitizer remotely in this python script. The FemtoDAQ Controller contains functions to control trigger, data capture, and recording configuration. We will use it here to configure our trigger parameters.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vireo</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">VIREO_URL</span><span class="p">,</span> <span class="n">skip_version_check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">vireo</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Vireo-000019 (http://vireo-000019.tek)
+Product Revision    : VIREO100_REV_B
+Number of Channels  : 2
+Sampling Frequency  : 100.0 MHz
+ADC Bitdepth        : 14 bits
+Maximum Wave Length : 81.92us
+Firmware Version    : 5.5.0-0
+Software Version    : 5.4.0
+Linux Image Version : 5.1.1
+</pre></div></div>
+</div>
+</section>
+<section id="2)-Configure-Data-Recording-Parameters">
+<h3><strong>2) Configure Data Recording Parameters</strong><a class="headerlink" href="#2)-Configure-Data-Recording-Parameters" title="Link to this heading"></a></h3>
+<p>Before capturing data, we need to configure the instrument to trigger at the appropriate levels.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuring Trigger Settings</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">TRIGGER_SENSITIVITY</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">TRIGGER_SENSITIVITY</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerXPosition</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setInvertADCSignal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setInvertADCSignal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span>
+
+<span class="c1"># Enabling Triggers</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configuring Pulse Windows</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setPulseHeightAveragingWindow</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerActiveWindow</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setPulseHeightWindow</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="3)-Collect-Coincidence-data">
+<h3><strong>3) Collect Coincidence data</strong><a class="headerlink" href="#3)-Collect-Coincidence-data" title="Link to this heading"></a></h3>
+<section id="i)-Set-Coincidence:-Require-at-Least-2-Triggers-for-Saved-Events">
+<h4>i) <strong>Set Coincidence</strong>: Require at Least 2 Triggers for Saved Events<a class="headerlink" href="#i)-Set-Coincidence:-Require-at-Least-2-Triggers-for-Saved-Events" title="Link to this heading"></a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuring Coincidence</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span>  <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="ii)-Recording:-Name-files-with-appropriate-prefix-and-define-our-file-format">
+<h4>ii) <strong>Recording</strong>: Name files with appropriate prefix and define our file format<a class="headerlink" href="#ii)-Recording:-Name-files-with-appropriate-prefix-and-define-our-file-format" title="Link to this heading"></a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure Recording on CH0, CH1</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span><span class="n">channels_to_record</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">file_recording_name_prefix</span> <span class="o">=</span> <span class="s2">&quot;Na-22_with_coincidence&quot;</span><span class="p">,</span>
+                            <span class="n">file_recording_format</span> <span class="o">=</span> <span class="s2">&quot;igorph&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="iii)-Start-Data-Collection:-Wait-until-complete-or-a-maximum-timeout-is-reached">
+<h4>iii) <strong>Start Data Collection</strong>: Wait until complete or a maximum timeout is reached<a class="headerlink" href="#iii)-Start-Data-Collection:-Wait-until-complete-or-a-maximum-timeout-is-reached" title="Link to this heading"></a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vireo</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">NUMBER_OF_EVENTS</span><span class="p">)</span>
+<span class="c1"># Wait for data to be collected up to a maximum of 20 minutes</span>
+<span class="n">timed_out</span> <span class="o">=</span> <span class="n">vireo</span><span class="o">.</span><span class="n">waitUntil</span><span class="p">(</span><span class="n">timeout_time</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="iiii)-Download-Data-Files-for-later-analysis">
+<h4>iiii) <strong>Download Data Files</strong> for later analysis<a class="headerlink" href="#iiii)-Download-Data-Files-for-later-analysis" title="Link to this heading"></a></h4>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coincidence_data_files</span> <span class="o">=</span> <span class="n">vireo</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Vireo-000019 (http://vireo-000019.tek) Controller : downloaded `Na-22_with_coincidence_03.45.26PM_May16_2025_seq000001.itx` to &#39;C:\Users\Jeff\Documents\projects\skutils\docs\examples\Na-22_with_coincidence_03.45.26PM_May16_2025_seq000001.itx&#39;
+</pre></div></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="4)-Collect-No-Coincidence-data">
+<h3><strong>4) Collect No-Coincidence data</strong><a class="headerlink" href="#4)-Collect-No-Coincidence-data" title="Link to this heading"></a></h3>
+<section id="i)-Set-No-Coincidence:-Disable-coincidence-by-setting-a-multiplicity-of-1">
+<h4>i) <strong>Set No Coincidence</strong>: Disable coincidence by setting a multiplicity of 1<a class="headerlink" href="#i)-Set-No-Coincidence:-Disable-coincidence-by-setting-a-multiplicity-of-1" title="Link to this heading"></a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuring Coincidence</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span>  <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h4>ii) <strong>Recording</strong>: Name files with appropriate prefix and define our file format<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure Recording on CH0, CH1</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span><span class="n">channels_to_record</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">file_recording_name_prefix</span> <span class="o">=</span> <span class="s2">&quot;Na-22_with_no_coincidence&quot;</span><span class="p">,</span>
+                            <span class="n">file_recording_format</span> <span class="o">=</span> <span class="s2">&quot;igorph&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h4>iii) <strong>Start Data Collection</strong>: Wait until complete or a maximum timeout is reached<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vireo</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">NUMBER_OF_EVENTS</span><span class="p">)</span>
+<span class="c1"># Wait for data to be collected up to a maximum of 20 minutes</span>
+<span class="n">timed_out</span> <span class="o">=</span> <span class="n">vireo</span><span class="o">.</span><span class="n">waitUntil</span><span class="p">(</span><span class="n">timeout_time</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h4>iiii) <strong>Download Data Files</strong> for later analysis<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">no_coincidence_data_files</span> <span class="o">=</span> <span class="n">vireo</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Vireo-000019 (http://vireo-000019.tek) Controller : downloaded `Na-22_with_no_coincidence_04.05.28PM_May16_2025_seq000001.itx` to &#39;C:\Users\Jeff\Documents\projects\skutils\docs\examples\Na-22_with_no_coincidence_04.05.28PM_May16_2025_seq000001.itx&#39;
+</pre></div></div>
+</div>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="Data-Analysis">
+<h2>Data Analysis<a class="headerlink" href="#Data-Analysis" title="Link to this heading"></a></h2>
+<section id="5)-Loading-Data:-Grab-Pulse-Heights-for-every-Event">
+<h3><strong>5) Loading Data</strong>: Grab Pulse Heights for every Event<a class="headerlink" href="#5)-Loading-Data:-Grab-Pulse-Heights-for-every-Event" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading in coincidence data</span>
+<span class="n">ch0_coincidence_pulse_heights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ch1_coincidence_pulse_heights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">skutils</span><span class="o">.</span><span class="n">quickLoad</span><span class="p">(</span><span class="n">coincidence_data_files</span><span class="p">):</span>
+    <span class="n">ch0_coincidence_pulse_heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pulse_heights</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ch1_coincidence_pulse_heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pulse_heights</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+
+<span class="c1"># loading in no coincidence data</span>
+<span class="n">ch0_no_coincidence_pulse_heights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ch1_no_coincidence_pulse_heights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">skutils</span><span class="o">.</span><span class="n">quickLoad</span><span class="p">(</span><span class="n">no_coincidence_data_files</span><span class="p">):</span>
+    <span class="n">ch0_no_coincidence_pulse_heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pulse_heights</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ch1_no_coincidence_pulse_heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pulse_heights</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+<section id="6)-Histogramming:-Calculate-a-Pulse-Height-Histogram">
+<h3><strong>6) Histogramming</strong>: Calculate a Pulse Height Histogram<a class="headerlink" href="#6)-Histogramming:-Calculate-a-Pulse-Height-Histogram" title="Link to this heading"></a></h3>
+<p>Pulse Heights here refer to the DSP Pulse Height quantity calculated in firmware, which is subject to filtering/averaging and configured in your data collection setup.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bin_width</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">bin_width</span><span class="p">)</span>
+
+<span class="n">coincidence_hist0</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">ch0_coincidence_pulse_heights</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">))</span>
+<span class="n">coincidence_hist1</span><span class="p">,</span> <span class="n">_</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">ch1_coincidence_pulse_heights</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">))</span>
+<span class="n">no_coincidence_hist0</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">ch0_no_coincidence_pulse_heights</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">))</span>
+<span class="n">no_coincidence_hist1</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">ch1_no_coincidence_pulse_heights</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">))</span>
+
+<span class="n">bin_centers</span> <span class="o">=</span> <span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Comparison of histograms between coincidence and no-coincidence for Na-22&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Channel 0&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Pulse Height&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Counts&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span><span class="n">no_coincidence_hist0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;No Coincidence&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span><span class="n">coincidence_hist0</span><span class="p">,</span>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Coincidence&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Channel 1&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Pulse Height&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Counts&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span><span class="n">no_coincidence_hist1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;No Coincidence&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span><span class="n">coincidence_hist1</span><span class="p">,</span>    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Coincidence&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_na22_coincidence_31_0.png" src="../_images/examples_na22_coincidence_31_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Summary">
+<h2>Summary<a class="headerlink" href="#Summary" title="Link to this heading"></a></h2>
+<p>We can see the obvious difference between coincidence (orange) and no-coincidence (blue) histograms. No-Coincidence has a much more prominent noise peak near bin0. Without coincidence suppression, pulse heights are saved for all channels whether or the channel triggered. This results in large “noise” peaks more or less equal to the channel baseline.</p>
+<p>Coincidence histograms also notably only have 1 major signal peak - the 0.511MeV line beta decay line produced by positron and which creates a pair of photons. No-Coincidence histograms see a secondary peak produced by the single photon released by Ne*-22 excitation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<p>Generated by <a class="reference external" href="https://nbsphinx.readthedocs.io/">nbsphinx</a> from a <a class="reference external" href="https://jupyter.org/">Jupyter</a> notebook.</p>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

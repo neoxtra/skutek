@@ -1,0 +1,108 @@
+"""
+Recording and Analyzing Data Using Skutils and a FemtoDAQ Vireo 2-Channel Digitizer
+===================================================================================
+
+
+Skutils is not just designed to help one with analyzing data from your FemtoDAQ Digitizer, but it is also designed to be a fully-controllable system for managing your FemtoDAQ digitizer.
+
+"""
+
+###############################################################################
+# Imports
+import skutils
+import numpy as np
+import matplotlib.pyplot as plt
+import tempfile
+import os
+###############################################################################
+# Variables to modify to run a similar experiment on your own system.
+
+# Fill in this spot with your own FemtoDAQ device location
+DIGITIZER_URL = "http://vireo-000019.tek"
+NUMBER_OF_EVENTS = 1000
+
+###############################################################################
+# Configuring the vireo
+digitizer = skutils.FemtoDAQController(DIGITIZER_URL, skip_version_check=True)
+# Configure the vireo to record both channels, with 4096 samples in the waveform
+# Use eventcsv as it's easier to demo
+recording_channels = [0, 1]
+digitizer.configureRecording(
+    recording_channels,
+    number_of_samples_to_capture=4096,
+    file_recording_format="eventcsv",
+    file_recording_data_output="waveforms",
+)
+# enable triggers
+digitizer.setEnableTrigger(0, True)
+digitizer.setEnableTrigger(1, True)
+# Default offset
+digitizer.setDigitalOffset(0, 0)
+digitizer.setDigitalOffset(1, 0)
+digitizer.setAnalogOffsetPercent(0, 0)
+digitizer.setAnalogOffsetPercent(1, 0)
+
+# Allow us to see the beginning of the pulse, if we wish.
+digitizer.setTriggerXPosition(100)
+# This is the only digitizer we're using here, set the global id to 0
+digitizer.setGlobalId(0)
+# We want to capture the rising edge, and we want a "fairly" sensitive trigger
+digitizer.setTriggerEdge(0, "rising")
+digitizer.setTriggerEdge(1, "rising")
+digitizer.setTriggerSensitivity(0, 1)
+digitizer.setTriggerSensitivity(1, 1)
+# Trigger windows
+# The trigger active window can also be called the "Coincidence window"
+digitizer.setTriggerActiveWindow(4096)
+digitizer.setTriggerAveragingWindow(0, 1)
+digitizer.setTriggerAveragingWindow(1, 1)
+
+# Coincidence settings, I want both channels to have triggered in order to be a true "trigger" and recording the data point
+digitizer.configureCoincidence("multiplicity", trigger_multiplicity=1)
+
+###############################################################################
+# Collect data
+digitizer.start(NUMBER_OF_EVENTS)
+
+# wait until we're done collecting data or 5 minutes has passed
+timed_out = digitizer.waitUntil(timeout_time=360)
+# Technically not needed, just for posterity
+digitizer.stop()
+# We're already in a stopped state at this point, no need to calls stop
+# Because this is actually being executed,
+# in this case I am storing them in a temporary directory to not fill directories on my system
+file_list = digitizer.downloadLastRunDataFiles(tempfile.gettempdir())
+
+
+###############################################################################
+# Histogram of the noise triggers
+
+# Individual
+
+pulse_heights = [[] for _ in digitizer.channels]
+
+for file in file_list:
+    loader = skutils.EventCSVLoader(file)
+    event_count = 0
+    for event in loader:
+        for channel in event.channel_data:
+            assert channel.has_wave
+            height = np.max(channel.wave)
+
+            pulse_heights[channel.channel].append(height)
+
+
+total_range = digitizer.adc_max_val - digitizer.adc_min_val
+total_bins = total_range // 4
+hist_builder = []
+for height_list in pulse_heights:
+    hist_builder.append(np.histogram(height_list, bins=total_bins))
+
+fig, axes = plt.subplots(2, 1)
+
+for i in range(len(hist_builder)):
+    hist, edges = hist_builder[i]
+    axes[i].bar(edges[1:], hist, width=3.5, label=f"channel {i}")
+    axes[i].legend()
+
+plt.show()

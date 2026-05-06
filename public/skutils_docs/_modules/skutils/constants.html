@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.constants &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.constants</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.constants</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struct</span><span class="w"> </span><span class="kn">import</span> <span class="n">Struct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bitstruct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;GEB_HEADER_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SKUTEK_WORD_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;FULL_PULSE_SUMMARY0_HEADER_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;FULL_PACKET0_HEADER_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;FULL_PACKET1_HEADER_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SAMPLE_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SKUTEK_WORDS_LENGTH&#39;</span><span class="p">,</span>
+<span class="s1">&#39;ASCII_VERSION_PREFIX&#39;</span><span class="p">,</span>
+<span class="s1">&#39;ENDIAN_INDICATOR_TIMESTAMP&#39;</span><span class="p">,</span>
+<span class="s1">&#39;GEB_HEADER_BE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;GEB_HEADER_LE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;GEB_HEADER_NATIVE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SKUTEK_WORD1&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SKUTEK_WORD2&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SKUTEK_WORD3&#39;</span><span class="p">,</span>
+<span class="s1">&#39;FULL_PACKET_HEADER&#39;</span><span class="p">,</span>
+<span class="s1">&#39;PULSE_SUMMARY0_BE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;PULSE_SUMMARY0_LE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;PULSE_SUMMARY0_NATIVE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;PulseSummary0&#39;</span><span class="p">,</span>
+<span class="s1">&#39;GebPacketHeader&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SkutekWord1&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SkutekWord2&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SkutekWord3&#39;</span><span class="p">,</span>
+<span class="s1">&#39;BYTE_ALIGNMENT_SIZE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;GebTypes&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">GEB_HEADER_SIZE</span> <span class="o">=</span> <span class="mi">16</span> <span class="c1"># Bytes</span>
+<span class="n">SKUTEK_WORD_SIZE</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># Bytes</span>
+<span class="n">FULL_PULSE_SUMMARY0_HEADER_SIZE</span> <span class="o">=</span> <span class="n">GEB_HEADER_SIZE</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span> <span class="c1"># Bytes</span>
+<span class="n">FULL_PACKET0_HEADER_SIZE</span>        <span class="o">=</span> <span class="n">GEB_HEADER_SIZE</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span> <span class="c1"># Bytes</span>
+<span class="n">FULL_PACKET1_HEADER_SIZE</span>        <span class="o">=</span> <span class="n">GEB_HEADER_SIZE</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span> <span class="c1"># Bytes</span>
+<span class="n">SAMPLE_SIZE</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># Bytes</span>
+<span class="n">SKUTEK_WORDS_LENGTH</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">SKUTEK_WORD_SIZE</span>
+
+<span class="n">ASCII_VERSION_PREFIX</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ENDIAN_INDICATOR_TIMESTAMP</span> <span class="o">=</span> <span class="mh">0x0102030405060708</span>
+<span class="n">GEB_HEADER_BE</span> <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;&gt;llq&#39;</span><span class="p">)</span> <span class="c1"># big endian</span>
+<span class="n">GEB_HEADER_LE</span> <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;&lt;llq&#39;</span><span class="p">)</span>
+<span class="n">GEB_HEADER_NATIVE</span> <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;=llq&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># skutek words are always big endian, but with each element having the LSB last...???</span>
+
+<span class="n">SKUTEK_WORD1</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;u8u8u1u15&gt;&#39;</span><span class="p">)</span>
+<span class="n">SKUTEK_WORD2</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;u4u28&gt;&#39;</span><span class="p">)</span>
+<span class="n">SKUTEK_WORD3</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;u16u16&gt;&#39;</span><span class="p">)</span>
+<span class="n">FULL_PACKET_HEADER</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;s32s32s64u8u8u1u15u4u28&#39;</span><span class="p">)</span>
+
+<span class="n">__ps_raw_format</span> <span class="o">=</span> <span class="s1">&#39;hhB?xx4l&#39;</span>
+<span class="n">PULSE_SUMMARY0_BE</span>     <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">__ps_raw_format</span><span class="p">)</span> <span class="c1"># big endian</span>
+<span class="n">PULSE_SUMMARY0_LE</span>     <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span> <span class="o">+</span> <span class="n">__ps_raw_format</span><span class="p">)</span>
+<span class="n">PULSE_SUMMARY0_NATIVE</span> <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">__ps_raw_format</span><span class="p">)</span>
+<span class="n">PulseSummary0</span>  <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;PulseSummary0&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;pulse_height&#39;</span><span class="p">,</span> <span class="c1"># 2 Bytes</span>
+                                             <span class="s1">&#39;trig_height&#39;</span><span class="p">,</span>   <span class="c1"># 2 Bytes</span>
+                                             <span class="s1">&#39;trig_count&#39;</span><span class="p">,</span>    <span class="c1"># 1 Bytes</span>
+                                             <span class="s1">&#39;triggered&#39;</span><span class="p">,</span>     <span class="c1"># 1 Bytes</span>
+                                             <span class="s1">&#39;qdc_base_sum&#39;</span><span class="p">,</span>  <span class="c1"># 4 Bytes</span>
+                                             <span class="s1">&#39;qdc_fast_sum&#39;</span><span class="p">,</span>  <span class="c1"># 4 Bytes</span>
+                                             <span class="s1">&#39;qdc_slow_sum&#39;</span><span class="p">,</span>  <span class="c1"># 4 Bytes</span>
+                                             <span class="s1">&#39;qdc_tail_sum&#39;</span><span class="p">,</span>  <span class="c1"># 4 Bytes</span>
+                                             <span class="p">])</span>
+
+
+<span class="c1"># SKUTEK_WORD1_BE = bitstruct.compile(&#39;u8u8u1u15&#39;)</span>
+<span class="c1"># SKUTEK_WORD1_NATIVE = SKUTEK_WORD1_LE if (sys.byteorder == &#39;little&#39;) else SKUTEK_WORD1_BE</span>
+
+<span class="c1"># SKUTEK_WORD2_LE = bitstruct.compile(&#39;&gt;u4&gt;u28&gt;&#39;)</span>
+<span class="c1"># SKUTEK_WORD2_BE = bitstruct.compile(&#39;u4u28&lt;&#39;)</span>
+<span class="c1"># SKUTEK_WORD2_NATIVE = SKUTEK_WORD2_LE if (sys.byteorder == &#39;little&#39;) else SKUTEK_WORD2_BE</span>
+
+<span class="c1"># FULL_PACKET_HEADER_LE = bitstruct.compile(&#39;u32u32u64u8u8u1u15u4u28&gt;&#39;)</span>
+<span class="c1"># FULL_PACKET_HEADER_NATIVE  = FULL_PACKET_HEADER_LE if (sys.byteorder == &#39;little&#39;) else FULL_PACKET_HEADER_BE</span>
+
+
+<span class="n">GebPacketHeader</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;GebPacketHeader&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+<span class="n">SkutekWord1</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;SkutekWord1&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;module&#39;</span><span class="p">,</span> <span class="s1">&#39;signed&#39;</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">])</span>
+<span class="n">SkutekWord2</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;SkutekWord2&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bitdepth&#39;</span><span class="p">,</span> <span class="s1">&#39;number_samples&#39;</span><span class="p">])</span>
+<span class="n">SkutekWord3</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;SkutekWord3&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;sample_offset&#39;</span><span class="p">,</span> <span class="s1">&#39;future&#39;</span><span class="p">])</span>
+
+<span class="c1"># all packet sized are divisible by this number</span>
+<span class="n">BYTE_ALIGNMENT_SIZE</span> <span class="o">=</span> <span class="mi">4</span>
+
+
+
+<span class="c1">################################################################################</span>
+<div class="viewcode-block" id="GebTypes">
+<a class="viewcode-back" href="../../skutils.html#skutils.constants.GebTypes">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GebTypes</span><span class="p">:</span>
+    <span class="n">skutek_type_prefix</span> <span class="o">=</span> <span class="mh">0x50000000</span>
+    <span class="n">endian_indicator</span> <span class="o">=</span> <span class="n">skutek_type_prefix</span> <span class="o">+</span> <span class="mh">0x00102050</span>
+    <span class="n">endian_indicator_nonnative</span> <span class="o">=</span> <span class="n">skutek_type_prefix</span> <span class="o">+</span> <span class="mh">0x00201050</span>
+    <span class="c1"># endian_indicator_be = skutek_type_prefix + 0x00201050</span>
+    <span class="n">general_ascii</span> <span class="o">=</span> <span class="n">skutek_type_prefix</span> <span class="o">+</span> <span class="mh">0xA0</span>
+    <span class="n">version_info_ascii</span> <span class="o">=</span> <span class="n">general_ascii</span> <span class="o">+</span> <span class="mh">0x1</span>
+    <span class="n">raw_histogram</span> <span class="o">=</span> <span class="n">skutek_type_prefix</span> <span class="o">+</span> <span class="mh">0x00</span>
+    <span class="n">raw_waveform</span> <span class="o">=</span> <span class="n">skutek_type_prefix</span> <span class="o">+</span> <span class="mh">0x10</span>
+    <span class="n">raw_pulse_summary</span> <span class="o">=</span> <span class="n">skutek_type_prefix</span> <span class="o">+</span> <span class="mh">0x20</span>
+
+    <span class="n">WAVE_TYPE_STRINGS</span> <span class="o">=</span> <span class="p">{</span> <span class="n">raw_waveform</span> <span class="p">:</span> <span class="s2">&quot;waveform&quot;</span><span class="p">,</span>
+                            <span class="n">raw_histogram</span> <span class="p">:</span> <span class="s2">&quot;histogram&quot;</span><span class="p">,</span>
+                            <span class="n">raw_pulse_summary</span> <span class="p">:</span> <span class="s2">&quot;pulse_summary&quot;</span> <span class="p">}</span>
+
+    <span class="c1"># @classmethod</span>
+    <span class="c1"># def endian_indicator_native(cls):</span>
+    <span class="c1">#     # return self.e</span>
+        <span class="c1"># if sys.byteorder == &#39;big&#39;:</span>
+        <span class="c1">#     return cls.endian_indicator_be</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     return cls.endian_indicator_le</span>
+
+<div class="viewcode-block" id="GebTypes.get_wavetype_from_string">
+<a class="viewcode-back" href="../../skutils.html#skutils.constants.GebTypes.get_wavetype_from_string">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_wavetype_from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wave_str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">v</span> <span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">WAVE_TYPE_STRINGS</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">wave_str</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

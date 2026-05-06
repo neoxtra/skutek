@@ -1,0 +1,584 @@
+FemtoDAQ Family Digitizer
+=========================
+
+Requires FemtoDAQ Software |femtodaq_compatible_version|
+
+The :py:class:`skutils.FemtoDAQController<skutils.FemtoDAQController.FemtoDAQController>` is a class for
+controlling and coordinating the FemtoDAQ line of SkuTek Instrumentation
+digitizers. The FemtoDAQ line at this point in time includes the FemtoDAQ Vireo
+and FemtoDAQ Kingfisher.
+
+
+------------------------------------------------------------------------------- 
+
+Connect to a Digitizer Hooked up via USB
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+use the :py:attr:`skutils.FEMTODAQ_USB` to grab the USB IP Address
+
+.. attention:: Only 1 digitizer device can be connected via USB as a time
+
+.. code-block:: python
+   
+   import skutils
+   digitizer = skutils.FemtoDAQController(skutils.FEMTODAQ_USB)
+
+------------------------------------------------------------------------------- 
+
+Connect to a Digitizer on the Network
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Your digitizer will attempt to assign itself a hostname on your network composed of 
+its product and serial number. e.g. `vireo-000019`. However, this may not be possible
+on some networks - particularly those in secure areas or within a Science DMZ. 
+In these cases, the IP Address can be used instead. 
+Consult with your network administrator for assistance getting the IP address.
+
+.. code-block:: python
+   
+   IP_ADDRESS_OR_URL = "vireo-000019.local"
+   digitizer = skutils.FemtoDAQController(IP_ADDRESS_OR_URL)
+
+------------------------------------------------------------------------------- 
+
+Print out Device Information 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`FemtoDAQController.summary()` will print out information about your device
+
+.. code-block:: python
+   
+   print(digitizer.summary())
+
+.. code-block:: 
+
+    Vireo-000019 (http://vireo-000019.tek)
+    Product Revision    : VIREO100_REV_B
+    Number of Channels  : 2
+    Sampling Frequency  : 100.0 MHz
+    ADC Bitdepth        : 14 bits
+    Maximum Wave Length : 81.92us
+    Firmware Version    : 5.5.0-0
+    Software Version    : 5.4.0
+    Linux Image Version : 5.1.1
+
+
+------------------------------------------------------------------------------- 
+
+Changing Trigger Settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+"Trigger Active Window" is sometimes known as "Coincidence Window"
+
+**Configuration**
+
+.. code-block:: python
+
+    TRIGGER_X_POSITION  = 32
+    TRIGGER_WINDOW      = 128
+    TRIGGER_SENSITIVITY = 100
+    TRIGGER_EDGE        = "rising"
+    TRIGGER_AVERAGING   = 4
+
+    digitizer.setTriggerActiveWindow(TRIGGER_WINDOW)
+    digitizer.setTriggerXPosition(TRIGGER_X_POSITION)
+
+    for channel in digitizer.channels:
+        digitizer.setTriggerSensitivity(channel, TRIGGER_SENSITIVITY)
+        digitizer.setTriggerEdge(channel, TRIGGER_EDGE)
+        digitizer.setTriggerAveragingWindow(channel, TRIGGER_AVERAGING)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_trg_active_window = digitizer.getTriggerActiveWindow()
+    readback_trg_x_positon = digitizer.getTriggerXPosition()
+    for channel in digitizer.channels:
+        readback_trg_sensitivity = digitizer.getTriggerSensitivity(channel)
+        readback_trg_edge        = digitizer.getTriggerEdge(channel)
+        readback_trg_avg_window  = digitizer.getTriggerAveragingWindow(channel)
+
+
+------------------------------------------------------------------------------- 
+
+Changing Pulse Height/DSP Filter Settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. attention:: Historical Naming
+
+    Pulse Height Window and Pulse Height Averaging Windows control
+    windows and averaging for many other Digitial Signal Processing (DSP)
+    quantities in FemtoDAQ Firmware. Including Rectangular and Triangular
+    QDC filters.
+
+
+**Configuration**
+
+.. code-block:: python
+
+    DSP_WINDOW             = 128
+    DSP_QUANTITY_AVERAGING = 4
+
+    digitizer.setPulseHeightWindow(DSP_WINDOW)
+    digitizer.setPulseHeightAveragingWindow(DSP_QUANTITY_AVERAGING)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_ph_window = digitizer.getPulseHeightWindow()
+    readback_ph_avg_window = digitizer.setPulseHeightAveragingWindow()
+
+
+------------------------------------------------------------------------------- 
+
+Configuring Automatic Baseline Restoration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+check Baseline Restoration support on your unit with :py:attr:`~.has_baseline_restoration`
+
+
+**Configuration**
+
+.. code-block:: python
+
+    digitizer.setEnableBaselineRestoration(True)
+    digitizer.setBaselineRestorationExclusion(200)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_blr_enabled = digitizer.getEnableBaselineRestoration()
+    readback_blr_exclusion = digitizer.getBaselineRestorationExclusion()
+
+------------------------------------------------------------------------------- 
+
+Configuring QuadQDC Integration Windows
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+check QuadQDC support on your unit with :py:attr:`~.has_quadqdc_integration`
+
+**Configuration**
+
+.. code-block:: python
+
+    base_width = 128
+    fast_width = 16
+    slow_width = 32
+    tail_width = 64
+
+    digitizer.setQuadQDCWindows(base_width,fast_width,slow_width,tail_width)
+    
+
+**Readback**
+
+.. code-block:: python
+
+    readback_quad_qdc = digitizer.getQuadQDCWindows()
+    
+    readback_base_width = readback_quad_qdc[0]
+    readback_fast_width = readback_quad_qdc[1]
+    readback_slow_width = readback_quad_qdc[2]
+    readback_tail_width = readback_quad_qdc[3]
+
+
+------------------------------------------------------------------------------- 
+
+Setting Bias (HV) Voltage Output
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+check Bias Voltage support on your unit with :py:attr:`~.has_high_voltage_output`
+
+
+**Configuration**
+
+.. code-block:: python
+
+    digitizer.setBiasVoltage(30)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_bias_voltage = digitizer.getBiasVoltage()
+
+
+
+------------------------------------------------------------------------------- 
+
+Setting GlobalID / Module Number
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The global ID is used for identifying digitizers when
+operating them in arrays. It is sometimes known as a "module_number"
+
+**Configuration**
+
+.. code-block:: python
+
+    module_number = 99
+
+    digitizer.setGlobalId(module_number)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_module_number = digitizer.getGlobalId()
+
+
+
+------------------------------------------------------------------------------- 
+
+Setting Input Channel Analog Offsets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Quick Configuration**
+
+.. code-block:: python
+
+    desired_channel = 0
+    analog_offset_percent = -50 # 50% of minimum voltage
+
+    digitizer.setAnalogOffsetPercent(desired_channel, analog_offset_percent)
+
+**High Precision Configuration**
+
+For high-precision applications such as non-linearity correction, 
+we can achieve higher performance by writing a raw value directly
+to the voltage generator. 
+
+Use :py:attr:`~.analog_offset_raw_min` and :py:attr:`~.analog_offset_raw_max` 
+to view your available range of selections.
+
+.. code-block:: python
+
+    desired_channel = 0
+    analog_offset_raw = digitizer.analog_offset_raw_max # 50% of minimum voltage
+
+    digitizer.setAnalogOffsetRaw(desired_channel, analog_offset_raw)
+
+**Readback**
+
+.. attention:: This value cannot be read back
+
+
+------------------------------------------------------------------------------- 
+
+Setting Input Channel Digital Offsets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use :py:attr:`~.adc_max_val` and :py:attr:`~.adc_min_val` to see the
+range of possible digital offset values for your FemtoDAQ unit. 
+
+**Configuration**
+
+.. code-block:: python
+
+    desired_channel = 1
+    digitizer.setDigitalOffset(desired_channel, 400)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_dig_offset = digitizer.getDigitalOffset(desired_channel)
+
+
+------------------------------------------------------------------------------- 
+
+Inverting Input Channel ADC Signals 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`True` inverts input values (i.e. -1 * raw_value). 
+
+**Configuration**
+
+.. code-block:: python
+
+    desired_channel = 0
+    digitizer.setInvertADCSignal(desired_channel, True)
+
+**Readback**
+
+.. code-block:: python
+
+    readback_inverted = digitizer.getInvertADCSignal(desired_channel)
+
+
+------------------------------------------------------------------------------- 
+
+Configuring in-firmware histogramming
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. Attention:: 
+    
+    Firmware Histogramming ignores coincidence conditions. 
+    A trigger on any channel updates histogram quantities on all channels
+    
+
+**Configuration**
+
+In-Firmware Histogramming can be performed for different DSP quantities
+that are calculated in firmware.  See :py:meth:`~.setHistogramQuantity` or 
+or your devices user manual for more information about possible histogram
+quantities.
+
+.. Note:: Underflow and Overflow
+    
+    There are generally fewer histogram bins than possible values for your quantity
+    As a result you may need to scale your histograms using `setHistogramScaling`. 
+    Scaling will consolidate multiple values into a single histogram bin to expand 
+    the possible range of histogrammed values. 
+
+    - Quantity values below the valid range will be placed in bin0.
+    - Quantity values above the valid range will be placed in the final bin.
+    - See the valid range of quantity values with :py:meth:`~.getHistogramValueRange` 
+
+.. code-block:: python
+
+    desired_quantity = "pulse_height"
+    scale = True
+    for channel in digitizer.channels:
+        digitizer.setHistogramQuantity(channel, desired_quantity)
+        digitizer.setHistogramScaling(channel, True)
+
+        valid_quantity_range = digitizer.getHistogramValueRange(channel)
+
+
+**Zero Histograms**
+
+.. code-block:: python
+
+    for channel in digitizer.channels:
+        digitizer.zeroHistogram(channel)
+    
+
+**Readout**
+
+Unlike waveform events, firmware histograms can be read out at before,after,
+or during data collection.
+
+.. code-block:: python
+
+    all_hists = digitizer.getHistogramData('all')
+
+    for channel in channels:
+        channel_hist = all_hists[:,channel]
+    
+
+------------------------------------------------------------------------------- 
+
+Configuring Coincidence
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Two types of coincidence are available in FemtoDAQ digitizers.
+
+Multiplicity 
+""""""""""""
+
+Multiplicity coincidence will capture events which have at least
+a specified number of channels that triggered
+
+.. code-block:: python
+
+    multiplicity = 3
+    digitizer.configureCoincidence("multiplicity", multiplicity=multiplicity)
+
+Hit Pattern
+"""""""""""
+    
+Hit Pattern Coincidence requires certain channels to either trigger or not trigger 
+in a specified pattern.
+
+.. code-block:: python
+
+    hit_pattern = {"channel_0_trigger_hit_pattern" : "COINCIDENCE",
+                     "channel_1_trigger_hit_pattern" : "ANTICOINCIDENCE"}
+
+    digitizer.configureCoincidence("hit_pattern", hit_pattern=hit_pattern)
+
+Readback of Coincidence Mode
+""""""""""""""""""""""""""""
+
+.. code-block:: python
+
+    digitizer.getCoincidenceSettings()
+
+.. code-block:: 
+
+   {
+   'coincidence_mode': 'multiplicity',
+   'trigger_multiplicity': 2,
+   'trigger_hit_pattern': {
+      'channel_0_trigger_hit_pattern': 'COINCIDENCE',
+      'channel_1_trigger_hit_pattern': 'ANTICOINCIDENCE'
+     }
+   }
+
+
+------------------------------------------------------------------------------- 
+
+Configuring Data Recording
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See :doc:`file_formats` for information about the possible file formats specified
+with the `file_recording_format` parameter
+
+.. Note:: 
+    
+    See :py:meth:`~.configureRecording` for full documentation
+
+**Configuration**
+
+.. code-block:: python
+
+    digitizer.configureRecording(
+                                channels_to_record=[0,1],
+                                number_of_samples_to_capture=256,
+                                file_recording_name_prefix="my_experiment_run"
+                                file_recording_format='eventcsv'
+                                )
+------------------------------------------------------------------------------- 
+
+.. todo:: Add Software Streaming Docs
+
+------------------------------------------------------------------------------- 
+
+Starting/Stopping Data Collection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    NUMBER_OF_EVENTS_TO_RECORD = 100_000
+
+    # Start data collection 
+    digitizer.start(NUMBER_OF_EVENTS_TO_RECORD)
+    # Wait until data collection is done or 5 minutes have passed
+    digitizer.waitUntil(timeout_time=300)
+    # stop data collection - this will do nothing if collection has already completed
+    digitizer.stop()
+
+------------------------------------------------------------------------------- 
+
+Forcing a Trigger
+^^^^^^^^^^^^^^^^^
+
+This is useful if you want to perform calibrations after specific software 
+events. Such as :ref:`Setting Input Channel Analog Offsets`
+
+.. code-block:: python
+
+    digitizer.forceTrigger()
+
+
+------------------------------------------------------------------------------- 
+
+Downloading Recorded Data
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See :doc:`loaders` for information about reading in this data
+once downloaded
+
+Downloading Data from the last data collection run
+**************************************************
+
+Save to the current working directory
+
+.. code-block:: python
+
+    digitizer.downloadLastRunDataFiles()
+
+OR saving to a specific directory
+
+.. code-block:: python
+
+    digitizer.downloadLastRunDataFiles(save_to="/path/to/download/location")
+
+
+Listing and Downloading Specific Data Files
+*******************************************
+
+.. code-block:: python
+
+    all_data_files_on_digitizer = digitizer.getListOfDataFiles()
+    # download all files that matches a certain pattern
+    for fname in all_data_files_on_digitizer:
+        if "my_experiment_run_name" in fname:
+            digitizer.downloadFile(fname)
+
+
+------------------------------------------------------------------------------- 
+
+Resetting Timestamps
+^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    digitizer.zeroTimestamp()
+
+------------------------------------------------------------------------------- 
+
+Saving/Loading Data Collection Settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Saving a configuration
+**********************
+
+This saves the current FPGA and software configuration to a file on your FemtoDAQ
+unit directly. 
+
+.. code-block:: python
+
+    digitizer.saveCurrentConfig('my_experiment_config')
+
+
+This configuration can then be loaded again 
+with :py:meth:`~.loadandApplyExistingConfig`. This is useful to ensure
+that you can replicate your experiment if someone else has changed
+settings on the device.
+
+Loading a configuration
+***********************
+
+.. code-block:: python
+
+    digitizer.loadandApplyExistingConfig('other_experiment_config')
+
+
+Loading defaults
+****************
+
+A basic default configuration comes with your unit. The settings will 
+likely be suboptimal for your experiment, but can be used to effectively
+"reset" the device to a common reference.
+
+.. code-block:: python
+
+    digitizer.loadDefaultConfig()
+
+
+------------------------------------------------------------------------------- 
+
+Reserving your digitizer from others
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. Note:: 
+
+    Even if you don't explicitly reserve the unit, most settings cannot be changed
+    if data collection is ongoing unless another user uses the `force` keyword. 
+
+
+.. code-block:: python
+
+    digitizer.saveCurrentConfig('my_experiment_config')
+
+
+This configuration can then be loaded again 
+with :py:meth:`~.loadandApplyExistingConfig`. This is useful to ensure
+that you can replicate your experiment if someone else has changed
+settings on the device.
+
+

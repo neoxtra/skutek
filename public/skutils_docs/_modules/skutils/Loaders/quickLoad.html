@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.Loaders.quickLoad &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../loading_data/index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.Loaders.quickLoad</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.Loaders.quickLoad</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">Generator</span><span class="p">,</span>
+    <span class="n">List</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+    <span class="n">IO</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.BaseLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventInfo</span><span class="p">,</span><span class="n">ChannelData</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.EventCSVLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventCSVLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.IGORPulseHeightLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">IGORPulseHeightLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.IGORWaveLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">IGORWaveLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.GretaLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">GretaLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.GretinaLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">GretinaLoader</span>
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="quickLoad">
+<a class="viewcode-back" href="../../../skutils.html#skutils.Loaders.quickLoad">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">quickLoad</span><span class="p">(</span><span class="n">file_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">EventInfo</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;generator which loads events from the list of files provided.</span>
+<span class="sd">    This function determines which `Loader` object to use for each file</span>
+<span class="sd">    depending on the file extension and content. If you need to rebuild events or</span>
+<span class="sd">    utilize other loader features, you will need to use `Loader` Objects directly.</span>
+
+<span class="sd">    :param file_list: a list of files to load events from. Files will be</span>
+<span class="sd">        loaded in the order they are passed in. </span>
+
+<span class="sd">    :yields: EventInfo object for each event in all files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">allowed_file_extensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;.ecsv&#39;</span><span class="p">,</span> <span class="c1"># Event CSV</span>
+                                <span class="s1">&#39;.itx&#39;</span><span class="p">,</span> <span class="c1"># IGOR</span>
+                                <span class="s1">&#39;.geb&#39;</span><span class="p">,</span><span class="s1">&#39;.gretina&#39;</span><span class="p">,</span> <span class="c1"># Gretina</span>
+                                <span class="s1">&#39;.greta&#39;</span> <span class="c1"># GRETA</span>
+                                <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file_list</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">file_list</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_file_extensions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can&#39;t load file with extension &#39;</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Event CSV</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.ecsv&quot;</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">EventCSVLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># IGOR</span>
+        <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.itx&quot;</span><span class="p">:</span>
+            <span class="c1"># grab the first lines of the file to determine if this is an</span>
+            <span class="c1"># Igor Pulse Height of IGOR wave format</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>  <span class="c1"># discard first line</span>
+                <span class="n">raw_format_line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;X // &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">format_type</span> <span class="o">=</span> <span class="n">raw_format_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">format_type</span> <span class="o">==</span> <span class="s2">&quot;IGOR PULSE HEIGHTS&quot;</span><span class="p">:</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="n">IGORPulseHeightLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">format_type</span> <span class="o">==</span> <span class="s2">&quot;IGOR WAVES&quot;</span><span class="p">:</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="n">IGORWaveLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can&#39;t determine IGOR file type for </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">. Attending to decode it as a Waveform file&quot;</span><span class="p">)</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="n">IGORWaveLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># GRETINA</span>
+        <span class="k">elif</span> <span class="n">extension</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.geb&quot;</span><span class="p">,</span> <span class="s2">&quot;.gretina&quot;</span><span class="p">):</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">GretinaLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># GRETA</span>
+        <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.greta&quot;</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">GretaLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can&#39;t load file with extension &#39;</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">event</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

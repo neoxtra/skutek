@@ -1,0 +1,134 @@
+Skutils Documentation
+=====================
+
+.. image:: _static/skutils_logo.png
+   :alt: Skutils Logo
+
+
+SkuTek Utilities or **skutils** is an open-source python library to control
+SkuTek Instrumentation's
+`product lines for data acquisition and data management <http://skutek.com/products>`_.
+**skutils** runs on your lab computer, but controls your hardware remotely using a REST API.
+
+
+.. Badges START
+|PyPI version| |Python Versions| |License| |Status|
+
+
+-----------------
+
+.. list-table:: This Documentation was built for:
+   :stub-columns: 1
+
+   * - Skutils version
+     - |release|
+   * - Skutils Commit Sha
+     - |git sha| 
+   * - FemtoDAQ Software Compatability
+     - |femtodaq_compatible_version|
+
+**please note:** skutils is currently in Beta. Please report any bugs, issues, or typos to `support@skutek.com <mailto:support@skutek.com>`_
+
+Installation
+------------
+
+**Via Pip**
+
+.. code-block:: shell
+
+   pip install skutils
+
+
+**From Source**
+
+.. code-block:: shell
+
+   git clone https://gitlab.com/skutek/libraries/skutils.git
+   pip install ./skutils
+
+
+.. .. nblinkgallery::
+..     :caption: A few Application Note Examples
+..     :name: examples_gallery_short
+
+..     examples/Cs137_Energy_Calibration
+..     examples/inspecting_an_event
+..     examples/na22_coincidence
+..     examples/Recording_noise_example
+
+.. All our published examples can be found :any:`here<examples>`
+
+.. Areas of interest:
+.. ------------------
+
+
+.. :doc:`Digitizer Control and Visualization</femtodaqcontrol>`
+.. ************************************************************
+.. Digitizers are Data Acquisition (DAQ) hardware that digitizes analog signals and performs real-time digitial signal processing. 
+.. This includes operations such pulse processing, triggering, and streaming data.
+
+.. SkuTek's Vireo and Kingfisher Digitizers can be controlled from your desktop using the 
+.. :any:`FemtoDAQController<skutils.FemtoDAQController.FemtoDAQController>` class. 
+.. In the following example, we connect to a Vireo digitizer connected to a computer via 
+.. USB and print out some device information.
+
+
+.. .. code-block:: python
+..    :linenos:
+   
+..    import skutils
+..    digitizer = skutils.FemtoDAQController(skutils.FEMTODAQ_USB)
+..    print(digitizer.summary())
+
+.. Outputs
+
+.. .. code-block:: text
+
+..    Vireo-000019 (192.168.7.2)
+..    Product Revision    : VIREO100_REV_B
+..    Number of Channels  : 2
+..    Sampling Frequency  : 100.0 MHz
+..    ADC Bitdepth        : 14 bits
+..    Maximum Wave Length : 81.92us
+..    Firmware Version    : 5.5.0-0
+..    Software Version    : 5.4.0
+..    Linux Image Version : 5.1.1
+
+
+.. (Coming Soon) :any:`ChickadeeController`
+
+.. :doc:`Loading Data</femtodaqcontrol>`
+.. **************************************
+.. Tools to load, build, and visualize events from all SkuTek data formats.
+
+.. 1. :any:`Automatic File Loader<skutils.Loaders.quickLoad>`
+.. 2. :any:`Gretina File Loader<skutils.Loaders.GretinaLoader.GretinaLoader>`
+.. 3. :any:`Greta File Loader<skutils.Loaders.GretaLoader>`
+.. 4. :any:`Event CSV File Loader<skutils.Loaders.EventCSVLoader.EventCSVLoader>`
+.. 5. :any:`IGOR Waveform File Loader<skutils.Loaders.IGORWaveLoader.IGORWaveLoader>`
+.. 6. :any:`IGOR Pulse Height File Loader<skutils.Loaders.IGORPulseHeightLoader.IGORPulseHeightLoader>`
+.. 7. :meth:`Easy Event Plotting<skutils.quickPlotEvent.quickPlotEvent>`
+
+
+.. :doc:`Data Management</dmtools>`
+.. ********************************
+.. Data Management products are solutions that deal with data after digitization. 
+.. This includes servers to receive digitizer data streams, event building, file handling.
+
+.. 1. :any:`Solidago UDP Cannon Controller<skutils.SolidagoController.SolidagoController>`
+.. 2. (Coming Soon) :any:`CollectorNodeController`
+
+
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents
+
+   femtodaqcontrol
+   chickadeecontrol
+   loading_data/index
+   dmtools
+   skutils
+   examples
+

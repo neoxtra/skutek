@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Management Tools &mdash; skutils 0.1.0-beta documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=40bed639" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=c903bf51"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="skutils package" href="skutils.html" />
+    <link rel="prev" title="Gretina Event Builder (GEB) Format" href="loading_data/gretina.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="femtodaqcontrol.html">Controlling a FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="femtodaqcontrol.html#femtodaqcontroller">FemtoDAQController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="loading_data/index.html#loading-digitizer-data-files">Loading Digitizer Data Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Management Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solidagocontroller">SolidagoController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#collectornodecontroller">CollectorNodeController</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#module-skutils.Loader">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#id19"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.GretaLoader"><code class="docutils literal notranslate"><span class="pre">GretaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loader.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data Management Tools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dmtools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-management-tools">
+<h1>Data Management Tools<a class="headerlink" href="#data-management-tools" title="Link to this heading"></a></h1>
+<section id="solidagocontroller">
+<h2>SolidagoController<a class="headerlink" href="#solidagocontroller" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="skutils.html#skutils.SolidagoController.SolidagoController" title="skutils.SolidagoController.SolidagoController"><code class="xref py py-class docutils literal notranslate"><span class="pre">skutils.SolidagoController.SolidagoController</span></code></a>
+is a controller for the Solidago UDP Streaming System. It can
+control all of the 10G SFP outputs, as well as allows for total control
+over the Solidago device.</p>
+<p>It can start and stop streams, change destinations of any individual stream,
+mass update streams, enable/disable streams from starting,
+and generally anything necessary to use the Solidago for testing with.</p>
+<p>Solidago is often used internally for stress-testing connections to
+high-performance UDP-capture systems with precision behavior on packet control
+and regularity, and automatically testing what levels systems can accurately
+capture the most packets is important for many UDP systems.
+This scenario is where Solidago comes into play, as it is possible to
+discretely control Solidago speeds to test total speed able to be sent and
+captured by the end device, properly simulating networked detector behavior.</p>
+<p>An example usage of the SolidagoController can be found here:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolidagoController</span>
+<span class="c1"># Connect to a specified Solidago Unit over HTTP</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">SolidagoController</span><span class="p">(</span><span class="s2">&quot;solidago.tek&quot;</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">autoincrement_stream_destinations</span><span class="p">(</span><span class="s2">&quot;10.1.3.2&quot;</span><span class="p">,</span> <span class="s2">&quot;1070fdc74744&quot;</span><span class="p">,</span> <span class="mi">5024</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">autoincrement_stream_sources</span><span class="p">(</span><span class="s2">&quot;10.1.3.3&quot;</span><span class="p">,</span> <span class="s2">&quot;100a35000001&quot;</span><span class="p">,</span> <span class="mi">15000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">stream</span> <span class="ow">in</span> <span class="n">controller</span><span class="p">:</span>
+    <span class="c1"># Reminder that 1 word == 64 bits, or 8 bytes, this would be 8000 bytes</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">set_packet_size_words</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="c1"># A consistent random seed</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="c1"># 12 streams of ~5 gbps target</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">configure_by_constant_speed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">controller</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="s2">&quot;independent&quot;</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">enable_streams</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="c1"># Only send for 15 seconds</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">disable_streams</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In this example, Solidago is set up to target a server with a known Network
+Interface Card and IP address, pointing to port 15000-15012 on the server, and
+sending 8000 byte packets to that location with no synchronization between
+boards on clock cycles.</p>
+</section>
+<section id="collectornodecontroller">
+<h2>CollectorNodeController<a class="headerlink" href="#collectornodecontroller" title="Link to this heading"></a></h2>
+<p><em>Coming Soon!</em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="loading_data/gretina.html" class="btn btn-neutral float-left" title="Gretina Event Builder (GEB) Format" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="skutils.html" class="btn btn-neutral float-right" title="skutils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

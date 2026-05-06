@@ -1,0 +1,970 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.ChickadeeController &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../loading_data/index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.ChickadeeController</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.ChickadeeController</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span><span class="n">Sequence</span><span class="p">,</span><span class="n">Literal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pprint</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">argparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">Namespace</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.helpers.parallel</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_functions_in_parallel</span>
+
+<span class="c1">###############################################################################</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_byte</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts the specified byte from the integer&quot;&quot;&quot;</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="mi">8</span><span class="o">*</span><span class="n">byte_index</span>
+    <span class="n">byte_mask</span> <span class="o">=</span> <span class="mh">0xFF</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">&amp;</span> <span class="n">byte_mask</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span>
+
+<span class="c1">###############################################################################</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clear_byte</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zeros the specified byte from the integer&quot;&quot;&quot;</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="mi">8</span><span class="o">*</span><span class="n">byte_index</span>
+    <span class="n">byte_mask</span> <span class="o">=</span> <span class="mh">0xFF</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
+    <span class="n">all_ones</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">64</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">clear_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">all_ones</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">byte_mask</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">clear_mask</span> <span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_byte</span><span class="p">(</span><span class="n">existing</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">byte_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets the specified byte of the integer to the given value&quot;&quot;&quot;</span>
+    <span class="n">cleared_existing</span> <span class="o">=</span> <span class="n">clear_byte</span><span class="p">(</span><span class="n">existing</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">)</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="mi">8</span><span class="o">*</span><span class="n">byte_index</span>
+    <span class="n">write_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">byte_value</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span> <span class="c1"># truncate to 8bit range and shift to proper location</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">cleared_existing</span> <span class="o">|</span> <span class="n">write_mask</span><span class="p">)</span>      
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="FpgaSignalMimic">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FpgaSignalMimic</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mimics register reading/writing operations used in the Chickadee&#39;s Hardware </span>
+<span class="sd">    Abstraction Library. Unlike the HAL, changes are made to an internal integer</span>
+<span class="sd">    which temporarily stores the register value until it&#39;s written to the FPGA over</span>
+<span class="sd">    a POST request. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the FpgaSignalMimic.</span>
+
+<span class="sd">        :param value: The current value of the specified register.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: private variable representing signal value. Edit by using it&#39;s</span>
+        <span class="c1"># property :py:attr:`~.value`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="p">:</span> <span class="nb">int</span>  <span class="o">=</span> <span class="n">value</span> 
+        <span class="c1">#: True if this signal has been edited in any way. Used to indicate if</span>
+        <span class="c1"># a new value needs to be transmitted back to the digitizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_been_updated</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  
+    
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Value of the FPGA signal. May be out of date with actual register values</span>
+<span class="sd">        on the remote digitizer. Call :py:meth:`ChickadeeDspRemote.write_to_registers`</span>
+<span class="sd">        to update the remote values.</span>
+<span class="sd">        </span>
+<span class="sd">        Any changes to this variable will cause the :py:attr:`~.has_been_updated`</span>
+<span class="sd">        boolean to be set to True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__value</span>
+    
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@value</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_been_updated</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.read">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.read">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns the current value of this signal. </span>
+<span class="sd">        May be out of date with actual register values. Call :py:meth:`ChickadeeDspRemote.readback_registers`</span>
+<span class="sd">        to get signals with the most recent register values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.write">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets the local copy of this signal to the given value</span>
+<span class="sd">        </span>
+<span class="sd">        :param value: the new value for this fpga signal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.read_byte">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.read_byte">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the the specified byte in the signal.</span>
+
+<span class="sd">        :param byte_index: index of the byte to extract. </span>
+<span class="sd">            0 is least significant byte. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">extract_byte</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">byte_index</span> <span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.write_byte">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.write_byte">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">byte_value</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets the the specified byte in the signal.</span>
+
+<span class="sd">        :param byte_index: index of the byte to set. </span>
+<span class="sd">            0 is least significant byte. </span>
+<span class="sd">        :param byte_value: 8 bit value to set the specified byte to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">set_byte</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">byte_index</span><span class="p">,</span> <span class="n">byte_value</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.set_bit">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.set_bit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bit_index</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets the specified bit to HIGH (ie. 1) in the FPGA signal</span>
+
+<span class="sd">        :param bit_index: bit to set HIGH. 0 is LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit_index</span><span class="p">)</span></div>
+
+        
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.test_bit">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.test_bit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_bit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bit_index</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns True if the specified bit is HIGH (ie. 1) in the FPGA signal</span>
+
+<span class="sd">        :param bit_index: bit to set HIGH. 0 is LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit_index</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.clear_bit">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.clear_bit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_bit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bit_index</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets the specified bit to LOW (ie. 0) in the FPGA signal</span>
+
+<span class="sd">        :param bit_index: bit to set LOW. 0 is LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">all_ones</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">64</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">clear_mask</span> <span class="o">=</span> <span class="n">all_ones</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">bit_index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&amp;</span> <span class="n">clear_mask</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.pulse_bit">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.pulse_bit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pulse_bit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bit_index</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;pulse_bit cannot be performed remotely.&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.set_many_bits">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.set_many_bits">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_many_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">bit_indices</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets the specified bit indices to HIGH (ie. 1) in the FPGA signal</span>
+
+<span class="sd">        :param bit_indices: bit to set HIGH. 0 is LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">bit_index</span> <span class="ow">in</span> <span class="n">bit_indices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_bit</span><span class="p">(</span><span class="n">bit_index</span><span class="p">)</span></div>
+
+        
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="FpgaSignalMimic.clear_many_bits">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic.clear_many_bits">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_many_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">bit_indices</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets the specified bit indices to LOW (ie. 0) in the FPGA signal</span>
+
+<span class="sd">        :param bit_indices: bit to set LOW. 0 is LSB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">bit_index</span> <span class="ow">in</span> <span class="n">bit_indices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear_bit</span><span class="p">(</span><span class="n">bit_index</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="dsp_dict_to_dsp_namespace">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">dsp_dict_to_dsp_namespace</span><span class="p">(</span><span class="n">dsp_dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a nested dictionary of DSP values into a nested namespace</span>
+
+<span class="sd">    ie. dict[&#39;outer_key&#39;][&#39;inner_key&#39;] --&gt; namespace.outer_key.inner_key</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dsp_namespace</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="n">dsp_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;CHANNELS&quot;</span><span class="p">:</span>
+            <span class="n">dsp_namespace</span><span class="o">.</span><span class="n">CHANNELS</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">channel_id</span><span class="p">,</span><span class="n">channel_values</span> <span class="ow">in</span> <span class="n">dsp_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">dsp_namespace</span><span class="o">.</span><span class="n">CHANNELS</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">channel_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dsp_dict_to_dsp_namespace</span><span class="p">(</span><span class="n">channel_values</span><span class="p">)</span>
+        <span class="c1"># handle nested dictionaries via recursion</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">nested_dsp_namespace</span> <span class="o">=</span> <span class="n">dsp_dict_to_dsp_namespace</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">dsp_namespace</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">nested_dsp_namespace</span><span class="p">)</span>
+        <span class="c1"># all other numerical values should be converted into FPGA Signal mimics</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span><span class="nb">int</span><span class="p">)):</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">dsp_namespace</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">FpgaSignalMimic</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">dsp_namespace</span></div>
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="dsp_namespace_to_dsp_dict">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">dsp_namespace_to_dsp_dict</span><span class="p">(</span><span class="n">dsp_namespace</span><span class="p">,</span> <span class="n">only_updated_values</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a nested namespace DSP values into a nested dictionary</span>
+
+<span class="sd">    ie. namespace.outer_key.inner_key --&gt; dict[&#39;outer_key&#39;][&#39;inner_key&#39;] </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dsp_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">dsp_namespace</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;CHANNELS&quot;</span><span class="p">:</span>
+            <span class="n">dsp_dict</span><span class="p">[</span><span class="s1">&#39;CHANNELS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">channel_id</span><span class="p">,</span><span class="n">channel_values</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">dsp_dict</span><span class="p">[</span><span class="s2">&quot;CHANNELS&quot;</span><span class="p">][</span><span class="nb">int</span><span class="p">(</span><span class="n">channel_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dsp_namespace_to_dsp_dict</span><span class="p">(</span><span class="n">channel_values</span><span class="p">,</span> <span class="n">only_updated_values</span><span class="p">)</span>
+        <span class="c1"># handle nested dictionaries via recursion</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Namespace</span><span class="p">):</span>
+            <span class="n">nested_dict</span> <span class="o">=</span> <span class="n">dsp_namespace_to_dsp_dict</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">only_updated_values</span><span class="p">)</span>
+            <span class="n">dsp_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">nested_dict</span>
+        <span class="c1"># all other FpgaSignal mimics should be converted to numerical values with read()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">FpgaSignalMimic</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">only_updated_values</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">has_been_updated</span><span class="p">):</span>
+                <span class="c1"># only update the value if the value has been edited in any way</span>
+                <span class="n">dsp_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>    
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dsp_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">dsp_dict</span></div>
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="update_dsps_simultaneously">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_dsps_simultaneously</span><span class="p">(</span><span class="o">*</span><span class="n">dsps</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates all remote DSPS as fast as possible simultanesously.&quot;&quot;&quot;</span>
+    <span class="n">transmit_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dsp</span><span class="o">.</span><span class="n">write_to_registers</span> <span class="k">for</span> <span class="n">dsp</span> <span class="ow">in</span> <span class="n">dsps</span><span class="p">]</span>
+    <span class="n">kwargs_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;timeout&#39;</span><span class="p">:</span><span class="n">timeout</span><span class="p">}]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">transmit_funcs</span><span class="p">)</span>
+
+    <span class="n">time_taken_ns</span><span class="p">,</span> <span class="n">responses</span> <span class="o">=</span> <span class="n">run_functions_in_parallel</span><span class="p">(</span><span class="n">transmit_funcs</span><span class="p">,</span> <span class="n">kwargs_list</span><span class="o">=</span><span class="n">kwargs_list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">resp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">responses</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to set DSP values for </span><span class="si">{</span><span class="n">dsps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">time_taken_ns</span></div>
+
+    
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="ChickadeeDspRemote">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChickadeeDspRemote</span><span class="p">(</span><span class="n">Namespace</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the Digital Signal Processing subsystem on the remote digitizer.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes on this object mimic the progamming style of the Hardware Abstraction Library</span>
+<span class="sd">    of the Chickadee. This object contains namespaces representing blocks of registers</span>
+<span class="sd">    within the DSP subsystem. For documentation on register blocks and signals, see your </span>
+<span class="sd">    Chickadee manual.</span>
+
+<span class="sd">    .. code-block:: Psuedo code to write to individual DSP values:</span>
+<span class="sd">        </span>
+<span class="sd">        dsp = ChickadeeDspRemote(url)</span>
+<span class="sd">        dsp.REGISTER_BLOCK.signal_name.write(value)</span>
+
+<span class="sd">        dsp.write_to_registers()</span>
+<span class="sd">        dsp.readback_registers()</span>
+<span class="sd">        dsp.pretty_dump()</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname_or_ip</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">auto_write_on_close</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;initializes the remote DSP for the Chickadee digitizer specified by the</span>
+<span class="sd">        url or hostname. Edits made to FPGA signals will be local until </span>
+<span class="sd">        :py:meth:`.write_to_registers` is called. </span>
+<span class="sd">        </span>
+<span class="sd">        :param hostname_or_ip: network address of the remote digitizer</span>
+<span class="sd">        :param auto_write_on_close: whether or not to automatically write FPGA </span>
+<span class="sd">            signals to remote digitizer when this object is closed. Default is True</span>
+<span class="sd">            to for ease of use in python context managers (use of **with** statement). </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: url for setting/reading DSP signals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_url</span> <span class="o">=</span> <span class="n">hostname_or_ip</span> <span class="o">+</span> <span class="s1">&#39;/dsp/control&#39;</span>
+        <span class="c1">#: url for grabbing waveforms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_url</span>    <span class="o">=</span> <span class="n">hostname_or_ip</span> <span class="o">+</span> <span class="s1">&#39;/dsp/wavedata&#39;</span>
+        <span class="c1">#: whether or not to automatically write to registers when </span>
+        <span class="c1"># :py:meth:`.close` is callsed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto_write_on_close</span> <span class="o">=</span> <span class="n">auto_write_on_close</span>
+
+        <span class="c1">#: number of ADC chips on remote digitizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_adcs</span>             <span class="o">=</span> <span class="kc">None</span> <span class="c1"># defined in readback_registers()</span>
+        <span class="c1">#: bitdepth of ADCs on remote digitizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adc_bitdepth</span>         <span class="o">=</span> <span class="kc">None</span> <span class="c1"># defined in readback_registers()</span>
+        <span class="c1">#: number of channels on remote digitizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span>         <span class="o">=</span> <span class="kc">None</span> <span class="c1"># defined in readback_registers()</span>
+        <span class="c1">#: number of waveform samples for each channel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_waveform_samples</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># defined in readback_registers()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">readback_registers</span><span class="p">()</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">exc_traceback</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.get_transmit_info">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.get_transmit_info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_transmit_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;gets POST request transmission info for updating DSP signals&quot;&quot;&quot;</span>
+        <span class="n">url</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_url</span>
+        <span class="n">dsp_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dsp_dict</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.readback_registers">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.readback_registers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">readback_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Updates this object with most recent values of signals from remote digitizer.</span>
+<span class="sd">        This will overwrite locally changed values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">all_dsp_signals</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">control_url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_from_dict</span><span class="p">(</span><span class="n">all_dsp_signals</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_adcs</span>                  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FIRMWARE_DISCOVERY_REG</span><span class="o">.</span><span class="n">adc_chips_and_bits</span><span class="o">.</span><span class="n">read_byte</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># number of ADC chips. </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adc_bitdepth</span>              <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FIRMWARE_DISCOVERY_REG</span><span class="o">.</span><span class="n">adc_chips_and_bits</span><span class="o">.</span><span class="n">read_byte</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># bitdepth of ADCs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span>              <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FIRMWARE_DISCOVERY_REG</span><span class="o">.</span><span class="n">nr_channels</span><span class="o">.</span><span class="n">read_byte</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># number of logical channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_waveform_samples</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FIRMWARE_DISCOVERY_REG</span><span class="o">.</span><span class="n">num_bram_samples</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Number of waveform samples</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.write_to_registers">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.write_to_registers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_to_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes changes to FPGA signals to the remote digitizer</span>
+
+<span class="sd">        :param timeout: time before post request times out and write operation</span>
+<span class="sd">            is declared a failure</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span><span class="p">,</span><span class="n">dsp_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_transmit_info</span><span class="p">()</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">dsp_dict</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resp</span></div>
+
+        
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.read_wave">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.read_wave">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_wave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]],</span> <span class="n">num_waveform_samples</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_binary</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the waveform for the specified channel as a numpy array</span>
+<span class="sd">        </span>
+<span class="sd">        This returns the waveform &quot;as is&quot; currently in the FPGA buffer. User</span>
+<span class="sd">        is responsible for checking if event capture is ongoing. Check your Chickadee</span>
+<span class="sd">        manual for details.</span>
+
+<span class="sd">        :param channel: desired channel waveform</span>
+<span class="sd">        :param num_waveform_samples: number of samples to read out for waveform. </span>
+<span class="sd">            use None for maximum possible number of samples</span>
+<span class="sd">        :param as_binary: True to read the wavedata as b64 encoded string, False to use a json list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave_url</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1">&#39;</span>        
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;num_waveform_samples&#39;</span><span class="p">:</span><span class="n">num_waveform_samples</span><span class="p">,</span>
+                    <span class="s1">&#39;waveform_as_base64&#39;</span><span class="p">:</span><span class="n">as_binary</span><span class="p">}</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="n">resp_data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;waveform_as_base64&#39;</span><span class="p">]:</span>
+            <span class="n">wavedata</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span> <span class="n">base64</span><span class="o">.</span><span class="n">standard_b64decode</span><span class="p">(</span><span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;wavedata&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">wavedata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;wavedata&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">wavedata</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.read_all_waves">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.read_all_waves">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_all_waves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_waveform_samples</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_binary</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the waveforms for all channels as 2D numpy array. </span>
+<span class="sd">            Shape will be (num_samples, num_channels)</span>
+<span class="sd">        </span>
+<span class="sd">        This returns the waveform &quot;as is&quot; currently in the FPGA buffer. User</span>
+<span class="sd">        is responsible for checking if event capture is ongoing. Check your Chickadee</span>
+<span class="sd">        manual for details.</span>
+
+<span class="sd">        :param num_waveform_samples: number of samples to read out for waveform. </span>
+<span class="sd">            use None for maximum possible number of samples</span>
+<span class="sd">        :param as_binary: True to read the wavedata as b64 encoded string, False to use a json list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_wave</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">num_waveform_samples</span><span class="p">,</span> <span class="n">as_binary</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.close">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called at the end of the context manager. Will automatically update </span>
+<span class="sd">        remote registers is :py:attr:`.auto_write_on_close` is set&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_write_on_close</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_to_registers</span><span class="p">()</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.dump">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.dump">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;prints all FPGA signals and their values&quot;&quot;&quot;</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.pretty_dump">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.pretty_dump">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pretty_dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;prints all FPGA signals and their values&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dump</span><span class="p">()</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.as_dict">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.as_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns this dsp namespace as a dictionary&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dsp_namespace_to_dsp_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">only_updated_values</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.update_from_dict">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.update_from_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dsp_dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;updates this DSP namespace from a dictionary&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="nb">vars</span><span class="p">(</span><span class="n">dsp_dict_to_dsp_namespace</span><span class="p">(</span><span class="n">dsp_dict</span><span class="p">))</span> <span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.to_json">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.to_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;converts saves all current DSP settings to a JSON string for archiving&quot;&quot;&quot;</span>
+        <span class="n">dsp_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">dsp_dict</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspRemote.from_json">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote.from_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_string</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;loads DSP settings from a JSON representation. see :py:meth:`.to_json`&quot;&quot;&quot;</span>
+        <span class="n">dsp_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_from_dict</span><span class="p">(</span><span class="n">dsp_dict</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ChickadeeRemoteDSP (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">control_url</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="ChickadeeDspBitsRemote">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChickadeeDspBitsRemote</span><span class="p">(</span><span class="n">Namespace</span><span class="p">):</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname_or_ip</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Represents the control bit and name indices of the Chickadee&#39;s DSP</span>
+<span class="sd">        </span>
+<span class="sd">        :param hostname_or_ip: network address of the remote digitizer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dsp_bits_dict</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">hostname_or_ip</span> <span class="o">+</span> <span class="s2">&quot;/dsp/get_control_and_status_bits&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">dsp_bits_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeDspBitsRemote.dump">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote.dump">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">)</span></div>
+</div>
+
+
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="ChickadeeController">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChickadeeController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname_or_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the controller for the chickadee associated with the specified URL</span>
+<span class="sd">        </span>
+<span class="sd">        :param hostname_or_ip: url or IP address for the chickadee digitizer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+                
+        <span class="k">if</span> <span class="n">hostname_or_ip</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;https://&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Secure http not supported! (digitizer url must begin with &#39;http&#39; not &#39;https&#39;)&quot;</span><span class="p">)</span>
+        <span class="c1"># add http:// manually if not provided</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">hostname_or_ip</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="p">):</span>
+            <span class="n">hostname_or_ip</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://</span><span class="si">{</span><span class="n">hostname_or_ip</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__address</span> <span class="o">=</span> <span class="n">hostname_or_ip</span>
+
+        <span class="n">versions</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/versions&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1"># breakpoint()</span>
+        <span class="c1"># self.__software_version: str = versions[&quot;software_version&quot;]</span>
+        <span class="c1"># self.__firmware_version: str = versions[&quot;firmware_version&quot;]</span>
+        <span class="c1"># self.__board_revision  : str = versions[&quot;board_revision&quot;]</span>
+        <span class="c1"># self.__board_string    : str = versions[&quot;board_string&quot;]</span>
+
+        <span class="n">information</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/basic_information&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="c1"># self.__num_chans       : int = information[&quot;num_channels&quot;]</span>
+        <span class="c1"># self.__num_adcs        : int = information[&quot;num_adcs&quot;]</span>
+        <span class="c1"># self.__num_samples     : int = information[&quot;num_samples&quot;]</span>
+        <span class="c1"># self.__num_sdac_bits   : int = information[&quot;num_sdac_bits&quot;]</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.remote_dsp">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.remote_dsp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remote_dsp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">auto_write_on_close</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns a :py:class:`ChickadeeDspRemote` object for controlling the Chickadee&#39;s</span>
+<span class="sd">        digitial signal processing (DSP) subsystem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ChickadeeDspRemote</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">auto_write_on_close</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.dsp_bits">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.dsp_bits">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dsp_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ChickadeeDspBitsRemote</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.get_host_udp_information">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.get_host_udp_information">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_host_udp_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">json_val</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/host_information&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">json_val</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.set_host_udp_information">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.set_host_udp_information">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_host_udp_information</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">host_mac</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">host_ip</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">host_port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/host_information&quot;</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;host_mac&quot;</span><span class="p">:</span> <span class="n">host_mac</span><span class="p">,</span> <span class="s2">&quot;host_ip&quot;</span><span class="p">:</span> <span class="n">host_ip</span><span class="p">,</span> <span class="s2">&quot;host_port&quot;</span><span class="p">:</span> <span class="n">host_port</span><span class="p">},</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.get_dest_udp_information">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.get_dest_udp_information">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_dest_udp_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="n">json_val</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/dest_information&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">json_val</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__report_json_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cover every base for raising an error out of the server, this function is *WHY WE NEED TO ALSO RETURN STATUS CODES AS CODES*</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">req</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request raised an error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">req</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request returned error code: </span><span class="si">{</span><span class="n">val</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, description: </span><span class="si">{</span><span class="n">val</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e2</span><span class="p">:</span>
+                <span class="n">new_err</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Error: error response from the server is malformed compared to expected, expected a &#39;code&#39; and &#39;error&#39; field, actual: </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">new_err</span><span class="o">.</span><span class="n">__traceback__</span> <span class="o">=</span> <span class="n">e2</span><span class="o">.</span><span class="n">__traceback__</span>
+                <span class="k">raise</span> <span class="n">new_err</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.set_dest_udp_information">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.set_dest_udp_information">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_dest_udp_information</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dest_mac</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dest_ip</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dest_port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/dest_information&quot;</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dest_mac&quot;</span><span class="p">:</span> <span class="n">dest_mac</span><span class="p">,</span> <span class="s2">&quot;dest_ip&quot;</span><span class="p">:</span> <span class="n">dest_ip</span><span class="p">,</span> <span class="s2">&quot;dest_port&quot;</span><span class="p">:</span> <span class="n">dest_port</span><span class="p">},</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.calibrate_adc_serdes">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.calibrate_adc_serdes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calibrate_adc_serdes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/calibrate_adcs&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="n">bool_val</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;calibration_is_active&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bool_val</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bool_val</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.get_adc_serdes_calibrating">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.get_adc_serdes_calibrating">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_adc_serdes_calibrating</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/calibrate_adcs&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="n">bool_val</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;calibration_is_active&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bool_val</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bool_val</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.get_spy_waveform">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.get_spy_waveform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_spy_waveform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/spy_waveform&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="n">samples</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="n">channel</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="n">wave_arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;wave_arr&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wave_arr</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wave_arr</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.set_spy_enablement">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.set_spy_enablement">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_spy_enablement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enable</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/enable_spy&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;enable_spy&quot;</span><span class="p">:</span> <span class="n">enable</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.get_spy_enablement">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.get_spy_enablement">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_spy_enablement</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/enable_spy&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="n">wave_spy_enabled</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;wave_spy_enabled&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wave_spy_enabled</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wave_spy_enabled</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.set_sdac_offset">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.set_sdac_offset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sdac_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">dac_val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/sdac_offset&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="n">channel</span><span class="p">,</span> <span class="s2">&quot;dac_val&quot;</span><span class="p">:</span> <span class="n">dac_val</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.set_sdac_powerdown">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.set_sdac_powerdown">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sdac_powerdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/disable_sdac_channel&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="n">channel</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.set_adc_firmware_inversion">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.set_adc_firmware_inversion">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_adc_firmware_inversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invert</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/invert_adc_firmware&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;adc_firmware_invert&quot;</span><span class="p">:</span> <span class="n">invert</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChickadeeController.get_adc_firmware_inversion">
+<a class="viewcode-back" href="../../skutils.html#skutils.ChickadeeController.ChickadeeController.get_adc_firmware_inversion">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_adc_firmware_inversion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="s2">&quot;/sw_api/invert_adc_firmware&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__report_json_error</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="n">json_block</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">bool_val</span> <span class="o">=</span> <span class="n">json_block</span><span class="p">[</span><span class="s2">&quot;adc_firmware_invert&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bool_val</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The server failed to return a bool for adc_firmware_invert!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bool_val</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">address</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__address</span></div>
+
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def software_version(self) -&gt; str:</span>
+    <span class="c1">#     return self.__software_version</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def firmware_version(self) -&gt; str:</span>
+    <span class="c1">#     return self.__firmware_version</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def board_revision(self) -&gt; str:</span>
+    <span class="c1">#     return self.__board_revision</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def board_string(self) -&gt; str:</span>
+    <span class="c1">#     return self.__board_string</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def num_channels(self) -&gt; int:</span>
+    <span class="c1">#     return self.__num_chans</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def num_adcs(self) -&gt; int:</span>
+    <span class="c1">#     return self.__num_adcs</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def num_samples(self) -&gt; int:</span>
+    <span class="c1">#     return self.__num_samples</span>
+
+    <span class="c1"># # _________________________________________________________________________</span>
+    <span class="c1"># @property</span>
+    <span class="c1"># def num_sdac_bits(self) -&gt; int:</span>
+    <span class="c1">#     return self.__num_sdac_bits</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">chickadee</span> <span class="o">=</span> <span class="n">ChickadeeController</span><span class="p">(</span><span class="s2">&quot;http://chickadee-32-hd-1.tek:5001&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">chickadee</span><span class="o">.</span><span class="n">remote_dsp</span><span class="p">()</span> <span class="k">as</span> <span class="n">dsp</span><span class="p">:</span>
+        <span class="n">dsp</span><span class="o">.</span><span class="n">CHANNELS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">CONTROL_REG</span><span class="o">.</span><span class="n">digital_offset</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># for each digitizer in an array, prepare dsp, then transmit </span>
+    <span class="c1"># to all digitizers simultanesously</span>
+
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

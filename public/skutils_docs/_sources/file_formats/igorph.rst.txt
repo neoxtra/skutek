@@ -1,0 +1,62 @@
+IGOR Pulse Height Format
+========================
+
+.. list-table:: 
+   :header-rows: 0
+   :stub-columns: 1
+
+   * - 2 Channel Events Per Second
+     - 15612
+
+
+
+The IGOR (**.itx**) data format stores pulse height data in IGOR. Channel 
+waveforms are not supported in this format. Because this format only saves
+pulse heights not full traces, much higher event rates can be sustained than
+when recording waves.
+
+Header
+------
+
+A comment block header indicated the serial number, globalID, and version information
+at the top of the file
+
+Example
+*******
+
+.. code-block:: igor
+
+   IGOR
+   X // Datetime        = "UTC Time: 2025-01-21 18:38:53"
+   X // GlobalID        = 0
+   X // Product         = "VIREO100_REV_B"
+   X // SerialNumber    = "000019"
+   X // SoftwareVersion = "5.3.0"
+   X // FirmwareVersion = "5.3.1"
+
+Event Format
+------------
+
+The first column is the timestamp of the event. The following columns
+represent the height of each pulse detected on the indicated channel. 
+No predefined function definitions are required for this format.
+
+
+Example
+*******
+
+.. code-block:: igor
+
+   WAVES/o/D timestamp, chan0, chan1
+   BEGIN
+   8338315286802 638 680
+   8338316209893 639 681
+   8338316230464 641 680
+   8338316244863 639 680
+   8338316258152 642 680
+   8338316271272 640 680
+   8338316284321 641 680
+   8338316297393 639 680
+   8338316310365 639 680
+   8338316323368 641 682
+   END

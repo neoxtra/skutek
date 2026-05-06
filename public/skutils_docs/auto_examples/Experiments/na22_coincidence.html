@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../femtodaqcontrol.html">Controlling a FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#femtodaqcontroller">FemtoDAQController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Loading Digitizer Data files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#loader-overview">Loader Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmtools.html">Data Management Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#solidagocontroller">SolidagoController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#collectornodecontroller">CollectorNodeController</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../file_formats.html">File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.Loader">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.WrappedGretinaLoader"><code class="docutils literal notranslate"><span class="pre">WrappedGretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.GretaLoader"><code class="docutils literal notranslate"><span class="pre">GretaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/auto_examples/Experiments/na22_coincidence.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-experiments-na22-coincidence-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<p class="sphx-glr-example-title" id="sphx-glr-auto-examples-experiments-na22-coincidence-py">Testing Coincidence using a Na-22 Source</p>
+<hr class="docutils" />
+<p>Introduction</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------</span>
+
+<span class="c1">#</span>
+</pre></div>
+</div>
+<p>Coincidence Filtering of Sodium-22 (Na-22)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Sodium 22 (Na-22) is a radioactive isotope with one less neutron than</span>
+
+<span class="c1"># the &quot;stable&quot; form of Sodium 23. With a half life of 2.60 years, it&#39;s a</span>
+
+<span class="c1"># relatively shelf stable isotype making it conveinent in labs as a</span>
+
+<span class="c1"># calibration.</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># In most cases, the Na-22 emits a positron and decays into an excited</span>
+
+<span class="c1"># Ne-22 nucleus. The Ne-22 nucleus then falls to ground state and emits of</span>
+
+<span class="c1"># *1.2745 MeV* gamma ray.</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># .. figure:: Na22_Coincidence_DATA/equation.png</span>
+
+<span class="c1">#    :alt: alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1">#    alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># After this initial nuclear decay, the emitted positron generally</span>
+
+<span class="c1"># annilihates with an electron and that reactions emits a pair of *.511</span>
+
+<span class="c1"># MeV* gamma rays. Importantly, these annhilitation gamma rays are emitted</span>
+
+<span class="c1"># in opposite directions.</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># .. figure:: Na22_Coincidence_DATA/equation2.png</span>
+
+<span class="c1">#    :alt: alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1">#    alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Taking advantage of this, we can set up detectors opposite of each other</span>
+
+<span class="c1"># on either side of our Na-22 source and selectively save primarily</span>
+
+<span class="c1"># annihilation events using the FemtoDAQ Vireos coincidence filter.</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># .. figure:: Na22_Coincidence_DATA/setup.png</span>
+
+<span class="c1">#    :alt: alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1">#    alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Experimental Setup</span>
+
+<span class="c1"># ~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># The Vireos **coincidence filter** allows you to selectively trigger on</span>
+
+<span class="c1"># events which create a certain hit pattern on your detectors. In the case</span>
+
+<span class="c1"># of *Na-22*, we want to only measure events which create pulses on our</span>
+
+<span class="c1"># two detectors simultaneously. This will screen out the vast majority of</span>
+
+<span class="c1"># noise events caused by \_Ne-22*\_ excitation or ambient noises such as</span>
+
+<span class="c1"># cosmic rays. These noise sources are statistically unlikely to interact</span>
+
+<span class="c1"># with two detectors simultaneously. Unlike the annhiliation decay which</span>
+
+<span class="c1"># emits two opposing gamma rays perfectly in line with our detectors.</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># .. figure:: Na22_Coincidence_DATA/pic_of_setup.jpeg</span>
+
+<span class="c1">#    :alt: alt text</span>
+
+<span class="c1">#</span>
+
+<span class="c1">#    alt text</span>
+
+<span class="c1">#</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+
+<span class="c1"># Collecting Data</span>
+
+<span class="c1"># ---------------</span>
+
+<span class="c1">#</span>
+</pre></div>
+</div>
+<p>Setting up Environment</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Were going to define some variables up front so they are easier to</span>
+
+<span class="c1"># change later. ``TRIGGER_SENSITIVITY`` defines how sensitive the trigger</span>
+
+<span class="c1"># is to capture a pulse. ``NUMBER_OF_EVENTS`` indicates how many events we</span>
+
+<span class="c1"># are going to capture before stopping data collection</span>
+
+<span class="c1">#</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1">#VIREO_URL = &quot;192.168.7.2&quot;         # USB IP address by default if using USB - This does not change</span>
+<span class="c1"># VIREO_URL = &quot;192.168.128.154&quot;</span>
+<span class="n">VIREO_URL</span> <span class="o">=</span> <span class="s2">&quot;vireo-000012.tek&quot;</span>
+<span class="n">TRIGGER_SENSITIVITY</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">NUMBER_OF_EVENTS</span> <span class="o">=</span> <span class="mi">1_000</span>
+<span class="n">EXPERIMENT_NAME</span> <span class="o">=</span> <span class="s2">&quot;Edmonds_Na22_Demonstration&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Connect to your FemtoDAQ Vireo</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># We can use the ``FemtoDAQController`` class to control our digitizer</span>
+
+<span class="c1"># remotely in this python script. The FemtoDAQ Controller contains</span>
+
+<span class="c1"># functions to control trigger, data capture, and recording configuration.</span>
+
+<span class="c1"># We will use it here to configure our trigger parameters.</span>
+
+<span class="c1">#</span>
+
+<span class="n">vireo</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">VIREO_URL</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">vireo</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Vireo-000012 (http://vireo-000012.tek)
+Number of Channels  : 2
+Sampling Frequency  : 100.0 MHz
+ADC Bitdepth        : 14 bits
+Maximum Wave Length : 81.92us
+Firmware Version    : 5.5.0-0
+Software Version    : 5.4.0
+Linux Image Version : 5.1.1
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Configure Data Recording Parameters</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Before capturing data, we need to configure the instrument to trigger at</span>
+
+<span class="c1"># the appropriate level</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Uncomment to load defualt trigger settings - applicable for most experiments</span>
+<span class="c1"># vireo.loadDefaultConfig()</span>
+
+<span class="c1"># Configuring Trigger Settings</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">TRIGGER_SENSITIVITY</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">TRIGGER_SENSITIVITY</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerXPosition</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setInvertADCSignal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setInvertADCSignal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">640</span><span class="p">)</span>
+
+<span class="c1"># Enabling Triggers</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configuring Pulse Windows</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setPulseHeightAveragingWindow</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setTriggerActiveWindow</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">setPulseHeightWindow</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Collecting Data without Coincidence Filtering</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># Configuring Coincidence</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span>  <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Configure Recording on CH0, CH1</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span><span class="n">channels_to_record</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">number_of_samples_to_capture</span> <span class="o">=</span> <span class="mi">192</span><span class="p">,</span>
+                            <span class="n">file_recording_name_prefix</span> <span class="o">=</span> <span class="n">EXPERIMENT_NAME</span><span class="p">,</span>
+                            <span class="n">file_recording_format</span> <span class="o">=</span> <span class="s2">&quot;igorph&quot;</span><span class="p">,</span>
+                            <span class="n">file_recording_data_output</span><span class="o">=</span><span class="s2">&quot;pulse_summaries&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Start Waveform Capture</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ^^^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="c1">#</span>
+
+<span class="n">vireo</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">NUMBER_OF_EVENTS</span><span class="p">)</span>
+<span class="c1"># Wait for data to be collected up to a maximum of 5 minutes</span>
+<span class="n">timed_out</span> <span class="o">=</span> <span class="n">vireo</span><span class="o">.</span><span class="n">waitUntil</span><span class="p">(</span><span class="n">nevents</span><span class="o">=</span><span class="n">NUMBER_OF_EVENTS</span><span class="p">,</span> <span class="n">timeout_time</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">vireo</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Download Data Files for Later Analysis</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="n">vireo</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Vireo-000012 (http://vireo-000012.tek) Controller : downloaded `Edmonds_Na22_Demonstration_03.20.17PM_Apr14_2025_seq000001.itx` to &#39;C:\Users\Jeff\Documents\projects\skutils\examples\Experiments\Edmonds_Na22_Demonstration_03.20.17PM_Apr14_2025_seq000001.itx&#39;
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Grab Pulse Heights from all events</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="c1"># First we are going to grab the pulse heights calculated by our firmware</span>
+
+<span class="c1"># DSP.</span>
+
+<span class="c1">#</span>
+
+<span class="c1">#Skutils loader to display histogram from downloaded files</span>
+<span class="n">pulse_heights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">IGORPulseHeightLoader</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+        <span class="n">pulse_heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pulse_heights</span><span class="p">)</span>
+
+<span class="n">pulse_heights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span> <span class="n">pulse_heights</span> <span class="p">)</span>
+<span class="n">ch0_ph</span> <span class="o">=</span> <span class="n">pulse_heights</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ch1_ph</span> <span class="o">=</span> <span class="n">pulse_heights</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Calculate a histogram using Numpy</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="c1">#</span>
+
+<span class="n">num_bins</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">hist0</span><span class="p">,</span> <span class="n">edges0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">ch0_ph</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
+<span class="n">hist1</span><span class="p">,</span> <span class="n">edges1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">ch1_ph</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">edges0</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">hist0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;channel 0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">edges1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">hist1</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;channel 1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">hist0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">hist1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_na22_coincidence_001.png" srcset="../../_images/sphx_glr_na22_coincidence_001.png" alt="na22 coincidence" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>C:\Users\Jeff\Documents\projects\skutils\examples\Experiments\na22_coincidence.py:314: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  plt.legend()
+1000
+999
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (4 minutes 42.684 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-experiments-na22-coincidence-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/415f1c65870e6d66d86bdeaa6a720aa5/na22_coincidence.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">na22_coincidence.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/a8e4ab53ffe66830ddec08f6c4f9c310/na22_coincidence.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">na22_coincidence.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/eeb01354432f1a3a8bf1674b46dc73ac/na22_coincidence.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">na22_coincidence.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025,     SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

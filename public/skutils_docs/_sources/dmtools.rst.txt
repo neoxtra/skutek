@@ -1,0 +1,56 @@
+Data Management Tools
+=====================
+
+SolidagoController
+------------------
+
+The :py:class:`skutils.SolidagoController.SolidagoController`
+is a controller for the Solidago UDP Streaming System. It can
+control all of the 10G SFP outputs, as well as allows for total control
+over the Solidago device.
+
+It can start and stop streams, change destinations of any individual stream,
+mass update streams, enable/disable streams from starting,
+and generally anything necessary to use the Solidago for testing with.
+
+Solidago is often used internally for stress-testing connections to
+high-performance UDP-capture systems with precision behavior on packet control
+and regularity, and automatically testing what levels systems can accurately
+capture the most packets is important for many UDP systems.
+This scenario is where Solidago comes into play, as it is possible to
+discretely control Solidago speeds to test total speed able to be sent and
+captured by the end device, properly simulating networked detector behavior.
+
+An example usage of the SolidagoController can be found here:
+
+.. code:: python
+
+    from skutils import SolidagoController
+    # Connect to a specified Solidago Unit over HTTP
+    controller = SolidagoController("solidago.tek")
+    controller.autoincrement_stream_destinations("10.1.3.2", "1070fdc74744", 5024)
+    controller.autoincrement_stream_sources("10.1.3.3", "100a35000001", 15000)
+    for stream in controller:
+        # Reminder that 1 word == 64 bits, or 8 bytes, this would be 8000 bytes
+        stream.set_packet_size_words(1000)
+        # A consistent random seed
+        stream.random_seed = 12
+        # 12 streams of ~5 gbps target
+        stream.configure_by_constant_speed(5)
+
+    controller.set_mode("independent")
+    controller.configure()
+    controller.enable_streams(range(0, 12))
+    # Only send for 15 seconds
+    time.sleep(15)
+    controller.disable_streams(range(0, 12))
+
+In this example, Solidago is set up to target a server with a known Network
+Interface Card and IP address, pointing to port 15000-15012 on the server, and
+sending 8000 byte packets to that location with no synchronization between
+boards on clock cycles.
+
+CollectorNodeController
+-----------------------
+
+*Coming Soon!*

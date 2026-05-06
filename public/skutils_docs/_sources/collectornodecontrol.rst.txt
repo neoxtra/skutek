@@ -1,0 +1,99 @@
+Liatris Family CollectorNode
+============================
+
+Requires Chickadee Software **"CHANGE ME"**
+
+
+ChickadeeController
+-------------------
+
+The :py:class:`skutils.ChickadeeController<skutils.ChickadeeController.ChickadeeController>` is a class for
+controlling and coordinating the Chickadee line of SkuTek Instrumentation
+digitizers. 
+
+The Chickadee Controller is built to facillitate control of multiple networked digitizers operating
+as an array in a high-density configuration.
+
+Within the Chickadee there are 2 categories of settings you can change.
+
+1) General Configuration 
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**General Configuration** is largely for first time setup or operational programming that doesn't usually change
+between experimental runs. This includes calibrating ADCs and response linearity, applying analog offsets, and UDP 
+streaming configuration. General purpose configuration is controlled with the 
+:py:class:`skutils.ChickadeeController<skutils.ChickadeeController.ChickadeeController>` directly.
+
+2) Digital Signal Processing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Digital Signal Processing (DSP) Configuration** configures the real-time signal conditioning and processing applied
+by Chickadee firmware as samples are digitized and buffered. This includes configuration of filters, triggers, and 
+configuration of readout. DSP variables may vary depending on what features customers request, however all DSP settings
+are controlled with the :py:class:`skutils.ChickadeeDspRemote<skutils.ChickadeeController.ChickadeeDspRemote>` class
+which is instantiated by the :py:meth:`ChickadeeController.remote_dsp<skutils.ChickadeeController.ChickadeeDspRemote.remote_dsp>` function,
+
+.. attention:: 
+    
+    Not all DSP settings will not be documented on this webpage as they often vary depending on customer request.
+    Please refer to your product manual or other documentation provided by SkuTek after you've purchased your unit 
+    for more information about DSP configuration.
+
+
+
+------------------------------------------------------------------------------- 
+
+Connect to a Chickadee on the Network
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Your Chickadee-32 will attempt to assign itself a hostname on your network composed of 
+its product and serial number. e.g. `chickadee-022502`. However, this may not be possible
+on some networks - particularly those in secure areas or within a Science DMZ. 
+In these cases, the IP Address can be used instead. 
+Consult with your network administrator for assistance getting the IP address.
+
+.. code-block:: python
+   
+   IP_ADDRESS_OR_URL = "chickadee-022502.local"
+   chickadee32 = skutils.ChickadeeController(IP_ADDRESS_OR_URL)
+
+
+
+------------------------------------------------------------------------------- 
+
+DSP Subsystem
+-------------------
+
+Accessing the Digital Signal Processing (DSP) Subsystem
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Method 1 : Using the Context Manager
+*************************************
+
+.. code-block:: python
+   
+   with chickadee32.remote_dsp() as dsp:
+      dsp.BOARD_CONTROL_REG.
+
+
+Method 2 : Manual reads/writes to remote DSP
+********************************************
+
+.. code-block:: python
+   
+   dsp = chickadee32.remote_dsp()
+
+   # upload updates
+   dsp.write_to_registers()
+
+
+------------------------------------------------------------------------------- 
+
+Dumping all Register Setting Values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+   
+   dsp = chickadee32.remote_dsp()
+
+   dsp.pretty_dump()

@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recording and Analyzing Data Using Skutils and a FemtoDAQ Vireo 2-Channel Digitizer &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../femtodaqcontrol.html">Controlling a FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#femtodaqcontroller">FemtoDAQController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Loading Digitizer Data files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#loader-overview">Loader Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmtools.html">Data Management Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#solidagocontroller">SolidagoController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#collectornodecontroller">CollectorNodeController</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../file_formats.html">File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.Loader">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.WrappedGretinaLoader"><code class="docutils literal notranslate"><span class="pre">WrappedGretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.GretaLoader"><code class="docutils literal notranslate"><span class="pre">GretaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Recording and Analyzing Data Using Skutils and a FemtoDAQ Vireo 2-Channel Digitizer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/auto_examples/General/recording.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-general-recording-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="recording-and-analyzing-data-using-skutils-and-a-femtodaq-vireo-2-channel-digitizer">
+<span id="sphx-glr-auto-examples-general-recording-py"></span><h1>Recording and Analyzing Data Using Skutils and a FemtoDAQ Vireo 2-Channel Digitizer<a class="headerlink" href="#recording-and-analyzing-data-using-skutils-and-a-femtodaq-vireo-2-channel-digitizer" title="Link to this heading"></a></h1>
+<p>Skutils is not just designed to help one with analyzing data from your FemtoDAQ Digitizer, but it is also designed to be a fully-controllable system for managing your FemtoDAQ digitizer.</p>
+<p>Imports</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+<p>Variables to modify to run a similar experiment on your own system.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fill in this spot with your own FemtoDAQ device location</span>
+<span class="n">DIGITIZER_URL</span> <span class="o">=</span> <span class="s2">&quot;http://vireo-000019.tek&quot;</span>
+<span class="n">NUMBER_OF_EVENTS</span> <span class="o">=</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+<p>Configuring the vireo</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">DIGITIZER_URL</span><span class="p">,</span> <span class="n">skip_version_check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Configure the vireo to record both channels, with 4096 samples in the waveform</span>
+<span class="c1"># Use eventcsv as it&#39;s easier to demo</span>
+<span class="n">recording_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span>
+    <span class="n">recording_channels</span><span class="p">,</span>
+    <span class="n">number_of_samples_to_capture</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span>
+    <span class="n">file_recording_format</span><span class="o">=</span><span class="s2">&quot;eventcsv&quot;</span><span class="p">,</span>
+    <span class="n">file_recording_data_output</span><span class="o">=</span><span class="s2">&quot;waveforms&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># enable triggers</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Default offset</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setAnalogOffsetPercent</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setAnalogOffsetPercent</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Allow us to see the beginning of the pulse, if we wish.</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerXPosition</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># This is the only digitizer we&#39;re using here, set the global id to 0</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setGlobalId</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># We want to capture the rising edge, and we want a &quot;fairly&quot; sensitive trigger</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerEdge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;rising&quot;</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerEdge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;rising&quot;</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Trigger windows</span>
+<span class="c1"># The trigger active window can also be called the &quot;Coincidence window&quot;</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerActiveWindow</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerAveragingWindow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerAveragingWindow</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Coincidence settings, I want both channels to have triggered in order to be a true &quot;trigger&quot; and recording the data point</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="n">trigger_multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-pytb notranslate"><div class="highlight"><pre><span></span><span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;C:\Users\Jeff\Documents\projects\skutils\examples\General\recording.py&quot;</span>, line <span class="m">30</span>, in <span class="n">&lt;module&gt;</span>
+<span class="w">    </span><span class="n">digitizer</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span>
+  File <span class="nb">&quot;C:\Users\Jeff\Documents\projects\skutils\src\skutils\FemtoDAQController.py&quot;</span>, line <span class="m">1041</span>, in <span class="n">configureRecording</span>
+<span class="w">    </span><span class="bp">self</span><span class="o">.</span><span class="n">__post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__config_url</span><span class="p">(</span><span class="s2">&quot;global&quot;</span><span class="p">,</span> <span class="s2">&quot;RecordingSettings&quot;</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
+  File <span class="nb">&quot;C:\Users\Jeff\Documents\projects\skutils\src\skutils\FemtoDAQController.py&quot;</span>, line <span class="m">197</span>, in <span class="n">__post</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">BusyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FemtoDAQ device responded busy! </span><span class="si">{</span><span class="n">resp_json</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gr">skutils.FemtoDAQController.BusyError</span>: <span class="n">FemtoDAQ device responded busy! Capture is currently running and force option was not requested</span>
+</pre></div>
+</div>
+<p>Collect data</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">NUMBER_OF_EVENTS</span><span class="p">)</span>
+
+<span class="c1"># wait until we&#39;re done collecting data or 5 minutes has passed</span>
+<span class="n">timed_out</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">waitUntil</span><span class="p">(</span><span class="n">timeout_time</span><span class="o">=</span><span class="mi">360</span><span class="p">)</span>
+<span class="c1"># Technically not needed, just for posterity</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="c1"># We&#39;re already in a stopped state at this point, no need to calls stop</span>
+<span class="c1"># Because this is actually being executed,</span>
+<span class="c1"># in this case I am storing them in a temporary directory to not fill directories on my system</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Histogram of the noise triggers</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Individual</span>
+
+<span class="n">pulse_heights</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">EventCSVLoader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">event_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">channel_data</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">channel</span><span class="o">.</span><span class="n">has_wave</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">wave</span><span class="p">)</span>
+
+            <span class="n">pulse_heights</span><span class="p">[</span><span class="n">channel</span><span class="o">.</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+
+
+<span class="n">total_range</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">adc_max_val</span> <span class="o">-</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">adc_min_val</span>
+<span class="n">total_bins</span> <span class="o">=</span> <span class="n">total_range</span> <span class="o">//</span> <span class="mi">4</span>
+<span class="n">hist_builder</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">height_list</span> <span class="ow">in</span> <span class="n">pulse_heights</span><span class="p">:</span>
+    <span class="n">hist_builder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">height_list</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">total_bins</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hist_builder</span><span class="p">)):</span>
+    <span class="n">hist</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">hist_builder</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">hist</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;channel </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.087 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-general-recording-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/ac66bb6ca91ec8bcfc1989954010b3ae/recording.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">recording.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/7f1134d970336cee948cd34fc07711d9/recording.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">recording.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/4ccb1e7d98e913c7428c9e5f856d384c/recording.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">recording.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025,     SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

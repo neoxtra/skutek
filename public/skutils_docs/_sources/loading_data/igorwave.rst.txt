@@ -1,0 +1,309 @@
+IGOR Wave Format
+================
+
+.. important:: 
+   
+   This format can be loaded into Python with :py:class:`skutils.Loaders.IGORWaveLoader`
+
+The IGOR (**.itx**) data format stores data in IGOR. This format is intended to be loaded 
+into a IGOR project with several functions predefined. Calls to these functions are embedded
+in the IGOR file so they are run automatically as data is imported. 
+
+The IGOR Wave format differs from the :doc:`igorph` format in that it can store full waveforms and 
+all Pulse Summaries quantities such as pulse height, trigger height, channel timestamps, and more
+
+
+Format Features
+---------------
+
+.. list-table::
+   :stub-columns: 1
+   :align: left
+
+   * - Type
+     - IGOR Text Wave (ASCII)
+   * - Extension
+     - ".itx"
+   * - Contains Event Timestamp
+     - Yes
+   * - Contains Channel Timestamps
+     - Yes
+   * - Contains Pulse Summary (DSP Quantities)
+     - Yes
+   * - Contains Waveforms
+     - Yes
+   * - Average Data Rate
+     - 3.51MB/s
+   * - 512 Sample Waves Per Second
+     - 2148
+
+
+Decoding Example
+-----------------
+
+Skutils Loaders provide :any:`EventInfo<skutils.Loaders.BaseLoader.EventInfo>` objects which contain all Summary and Waveform data
+associated with your events. 
+See :any:`EventInfo<skutils.Loaders.BaseLoader.EventInfo>` and :any:`ChannelData<skutils.Loaders.BaseLoader.ChannelData>` 
+for more information about available quantities.
+
+.. code-block:: python
+  :linenos:
+
+  import skutils
+  filenames = ['/path/to/your/file_seq000001.itx',
+                '/path/to/your/file_seq000002.itx']
+
+  for event in skutils.quickLoad(filenames):
+     # grab event timestamp and the channels in this event
+     event_timestamp = event.event_timestamp
+     channels        = event.channels
+     # Pulse Summary Quantities can be saved in this format
+     for ch_data in event.channel_data:
+      print(f"Pulse Height for Channel {ch_data.channel} is {ch_data.pulse_height}")
+      print(f"Channel{ch_data.channel}'s trigger fired {ch_data.relative_channel_timestamp} clock cycles after the event trigger")
+
+    # Return an event waveform in which rows are samoples and columns are the channels
+    waveform = event.wavedata() 
+
+_______________________________________________________________________________
+
+The IGOR (**.itx**) data format stores data in IGOR. This format is intended to be loaded 
+into a IGOR project with several functions predefined. Calls to these functions are embedded
+in the IGOR file so they are run automatically as data is imported. 
+
+.. attention:: 
+
+   If you want to load this data into IGOR, you must define two functions in your IGOR workspace: 
+   
+   1. :meth:`InitProcessing` 
+   2. :meth:`ProcessOneEvent`
+
+1) FUNCTION InitProcessing (ntimes)
+--------------------------------
+
+
+
+Example:
+********
+
+.. code-block:: igor
+   
+   FUNCTION InitProcessing (ntimes)
+   VARIABLE ntimes
+      // Folder Scratch will be created if it does not exist
+      NewDataFolder /O/S root:Scratch
+      VARIABLE/g max_index = 0 // prepare aux variables
+      VARIABLE/g min_index = 0
+
+      NewDataFolder /O/S root:Data
+      VARIABLE/g evt_num = -1 // running event number
+      VARIABLE/g timestamp = -1 // running timestamp
+      MAKE/o/n=(ntimes) chan1_height_list // list of ALL chan1 pulse heights
+      MAKE/o/n=(ntimes) chan0_height_list // list of ALL chan0 pulse height
+      MAKE/o/n=(ntimes) chan1_TRUE_list // list of TRUE chan1 pulse heights
+      MAKE/o/n=(ntimes) chan1_RAND_list // list of RAND chan1 pulse heights
+      MAKE/o/n=(ntimes) chan0_TRUE_list // list of TRUE chan0 pulse heights
+      MAKE/o/n=(ntimes) chan0_RAND_list // list of RAND chan0 pulse heights
+      MAKE/o/n=(ntimes) dt_DIF_list // list of time differences chan1 to chan0
+      chan1_height_list = NAN // Not-a-number is a safe default value
+      chan1_TRUE_list = NAN
+      chan1_RAND_list = NAN
+      chan0_height_list = NAN
+      chan0_TRUE_list = NAN
+      chan0_RAND_list = NAN
+      dt_DIF_list = NAN
+      PRINT "Prepared arrays for ", ntimes, " events, at ", time()
+   END // InitProcessing
+
+
+2) FUNCTION ProcessOneEvent ()
+--------------------------------------------------------------
+
+:meth:`ProcessOneEvent` should process data saved in one event waveform. 
+
+A call to :attr:`ProcessOneEvent()` is placed immediately after an event waveform is
+written to disk. This is expected to process/analyze the data before it's dropped in
+
+Example:
+********
+
+.. code-block:: igor
+
+   FUNCTION ProcessOneEvent ()
+
+      SetDataFolder root:Data
+      // NVAR is linking a local variable to a global variable created in InitProcessing
+      NVAR evt_num = root:Data:evt_num // event number
+      NVAR max_index = root:Scratch:max_index // peak of the pulse
+      // These two waves are “automagically” linked to the ones read from the file
+      WAVE Chan0 = root:Data:Chan0 // Input: Chan0 waveform
+      WAVE Chan1 = root:Data:Chan1 // Input: Chan1 waveform
+
+      // The local waves are linked to the global waves created by InitProcessing
+      // Each list provides one memory cell per event (a floating point number)
+      WAVE chan1_height_list = root:Data:chan1_height_list // pulse height ALL
+      WAVE chan1_TRUE_list = root:Data:chan1_TRUE_list // pulse height TRU
+      WAVE chan1_RAND_list = root:Data:chan1_RAND_list // pulse height RAN
+      WAVE chan0_height_list = root:Data:chan0_height_list // pulse height ALL
+      WAVE chan0_TRUE_list = root:Data:chan0_TRUE_list // pulse height TRU
+      WAVE chan0_RAND_list = root:Data:chan0_RAND_list // pulse height RAN
+      WAVE dt_DIF_list = root:Data:dt_DIF_list // time differences
+
+      // Local variables
+      VARIABLE base, len, i, dum
+      VARIABLE dt_peak, dt_DIF
+      VARIABLE chan1_DIF_location, chan0_DIF_location
+      evt_num = evt_num + 1 // begin next event
+
+      //---- chan1 ----
+      // Sample numbers below were read from the waveform display with the cursors
+      // and hardcoded below. Utility Functions are discussed in the next Appendix.
+      // Differentiate is provided by IGOR.
+      base = SubtractBaseline (chan1, 2, 70) // See the next Appendix
+      chan1_height_list [evt_num] = FindPulseHeight (chan1, 100, 200)
+      Differentiate chan1/D=chan1_DIF // provided by IGOR
+      dum = GetMax (chan1_DIF) // sets the scratch variable max_index
+      chan1_DIF_location = max_index // maximum slope of the leading edge
+
+      //---- chan0 ----
+      base = SubtractBaseline (chan0, 2, 100) // See the next Appendix
+      chan0_height_list [evt_num] = FindPulseHeight (chan0, 100, 200)
+      Differentiate chan0/D=chan0_DIF // provided by IGOR
+      dum = GetMax (chan0_DIF) // sets the scratch variable max_index
+      chan0_DIF_location = max_index // maximum slope of the leading edge
+
+      //------------------------------
+      //---- Time between pulses ----
+      //------------------------------
+      dt_DIF = chan1_DIF_location – chan0_DIF_location // START: chan1. STOP: NaI
+      dt_DIF_list [evt_num] = dt_DIF // running list of time diff
+
+      // --------------------------------------------------------
+      // --- TRUE and RANDOM Pulse heights in NaI and chan1 ---
+      // --------------------------------------------------------
+      IF ((dt_DIF >-100) && (dt_DIF < 100)) // timing limits are discussed in the text
+         IF ((dt_DIF >-12) && (dt_DIF < -2)) // TRUE prompt coincidence peak
+            // copy the PH from the main unconstrained lists to coincidence lists
+            chan0_TRUE_list [evt_num] = chan0_height_list [evt_num]
+            chan1_TRUE_list [evt_num] = chan1_height_list [evt_num]
+         ELSE
+            chan0_RAND_list [evt_num] = chan0_height_list [evt_num]
+            chan1_RAND_list [evt_num] = chan1_height_list [evt_num]
+         ENDIF
+      ENDIF
+      print "Event number=", evt_num, " at ", time() // shown in the history window
+      END // ProcessOneEvent
+
+Header
+------
+
+A comment block header indicated the serial number, globalID, and version information
+at the top of the file
+
+Example
+*******
+
+.. code-block:: igor
+
+   IGOR
+   X // Format          = "IGOR WAVE"
+   X // Datetime        = "UTC Time: 2025-01-21 18:38:53"
+   X // GlobalID        = 0
+   X // Product         = "VIREO100_REV_B"
+   X // SerialNumber    = "000019"
+   X // SoftwareVersion = "5.3.0"
+   X // FirmwareVersion = "5.3.1"
+
+Event Data Format
+-----------------
+
+Wave data is stored in a WAVE array. Each column represents a different channel. 
+
+**Note**: Only 8 sample waves are shown for readability. Your data files will likely contain many 
+more samples per wave.
+
+Example
+*******
+
+.. code-block:: igor
+
+   X InitProcessing(0000010)
+   X evt_num = 1
+   X timestamp = 671698605172
+   WAVES/o/D/N=(10,2) pulse_summaries
+   BEGIN
+   0, 1
+   671698605172, 671698605172
+   646, 649
+   1, 0
+   6, 3
+   0, 0
+   0, 0
+   0, 0
+   0, 0
+   0, 0
+   END
+   X SetDimLabel 0,0, 'channel', pulse_summaries
+   X SetDimLabel 0,1, 'timestamp', pulse_summaries
+   X SetDimLabel 0,2, 'pulse_height', pulse_summaries
+   X SetDimLabel 0,3, 'triggered', pulse_summaries
+   X SetDimLabel 0,4, 'trig_height', pulse_summaries
+   X SetDimLabel 0,5, 'trig_count', pulse_summaries
+   X SetDimLabel 0,6, 'qdc_base_sum', pulse_summaries
+   X SetDimLabel 0,7, 'qdc_fast_sum', pulse_summaries
+   X SetDimLabel 0,8, 'qdc_slow_sum', pulse_summaries
+   X SetDimLabel 0,9, 'qdc_tail_sum', pulse_summaries
+   X SetDimLabel 1,0, 'chan0', pulse_summaries
+   X SetDimLabel 1,1, 'chan1', pulse_summaries
+   WAVES/o/D chan0, chan1
+   BEGIN
+   643 647
+   642 645
+   642 646
+   643 643
+   644 647
+   642 646
+   641 645
+   643 648
+   END
+   X ProcessOneEvent()
+   X evt_num = 2
+   X timestamp = 671702864223
+   WAVES/o/D/N=(10,2) pulse_summaries
+   BEGIN
+   0, 1
+   671702864223, 671702864223
+   647, 649
+   1, 0
+   6, 5
+   0, 0
+   0, 0
+   0, 0
+   0, 0
+   0, 0
+   END
+   X SetDimLabel 0,0, 'channel', pulse_summaries
+   X SetDimLabel 0,1, 'timestamp', pulse_summaries
+   X SetDimLabel 0,2, 'pulse_height', pulse_summaries
+   X SetDimLabel 0,3, 'triggered', pulse_summaries
+   X SetDimLabel 0,4, 'trig_height', pulse_summaries
+   X SetDimLabel 0,5, 'trig_count', pulse_summaries
+   X SetDimLabel 0,6, 'qdc_base_sum', pulse_summaries
+   X SetDimLabel 0,7, 'qdc_fast_sum', pulse_summaries
+   X SetDimLabel 0,8, 'qdc_slow_sum', pulse_summaries
+   X SetDimLabel 0,9, 'qdc_tail_sum', pulse_summaries
+   X SetDimLabel 1,0, 'chan0', pulse_summaries
+   X SetDimLabel 1,1, 'chan1', pulse_summaries
+   WAVES/o/D chan0, chan1
+   BEGIN
+   644 645
+   641 645
+   642 645
+   643 646
+   644 645
+   643 646
+   642 647
+   642 645
+   END
+   X ProcessOneEvent()
+   X // more events below

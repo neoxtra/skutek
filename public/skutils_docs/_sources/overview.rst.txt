@@ -1,0 +1,54 @@
+SkuTils Overview
+================
+
+SkuTils is a library fundamentally designed to allow for clean, effecient working with a FemtoDAQ device.
+
+Common actions that SkuTils is designed to make easier is setting common experiment settings, and loading data from a file.
+
+BaseLoader
+----------
+
+All "Loaders" in SkuTils follow the common layout provided by the BaseLoader class.
+The BaseLoader class is as follows:
+
+.. code-block:: python
+
+    class BaseLoader:
+        def __init__(self, fpath: str, rebuild_events_with_window: Optional[int] = None):
+            # ....
+        def channelByChannel(self) -> Generator[ChannelData, Any, None]:
+            # ....
+        def nextEvent(self) -> Optional[EventInfo]:
+            # ....
+        def lazyLoad(self) -> Generator[EventInfo, Any, None]:
+            # ....
+        def __iter__(self):
+            return self.lazyLoad()
+
+As a starter, in the constructor for BaseLoader, it is possible to tell the loader to classify individual channel readings into events, 
+this is useful for some types of files that normally do not save data in events, e.g. the Greta format.
+Conceptually, `channelByChannel` generator iterates over channels in no specified order other than it (should) be the same order every time, 
+simply allowing you to go through all the channels as found in the file.
+By contrast, `nextEvent` grabs the next event from the file, the next event can be one or more channels, or it could be None to signify the end of available events in a file.
+`lazyLoad` will yield calls nextEvent, allowing for constructs such as the following:
+
+.. code-block:: python
+
+    for event in loader.lazyLoad():
+        pass
+
+Lazy loading is a quick and easy way iterate over every event inside of a file.
+
+FemtoDAQController
+------------------
+
+The FemtoDAQController is a controller for FemtoDAQ devices, being able to perform most, if not all actions on any FemtoDAQ device. 
+FemtoDAQ devices include the FemtoDAQ Vireo and FemtoDAQ kingfisher as found on `the skutek website <http://skutek.com>`_.
+
+The FemtoDAQ controller has two typs of methods: "Set" methods, which create POST HTTP requests and do not have a return value, and "Get" requests, 
+which (generally) create GET HTTP requests and will return the "data" portion of the json returned to the function. 
+The GET functions require looking up the corresponding REST API call for your FemtoDAQ device, as found in its documentation package, to see the general specification.
+
+Common functionality includes changing settings, and will soon include starting and stopping the digitization process. Live output is **not** available via SkuTils excepting Streaming data back to your computer.
+Not all updates of SkuTils are perfectly compatible with all updates to FemtoDAQControllers, cnosult the FemtoDAQController page docs for more specific information.
+

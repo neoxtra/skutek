@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspecting and Plotting Events &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../femtodaqcontrol.html">Controlling a FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#femtodaqcontroller">FemtoDAQController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Loading Digitizer Data files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#loader-overview">Loader Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmtools.html">Data Management Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#solidagocontroller">SolidagoController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#collectornodecontroller">CollectorNodeController</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../file_formats.html">File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.Loader">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.WrappedGretinaLoader"><code class="docutils literal notranslate"><span class="pre">WrappedGretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.GretaLoader"><code class="docutils literal notranslate"><span class="pre">GretaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Inspecting and Plotting Events</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/auto_examples/General/inspecting_events.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-general-inspecting-events-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="inspecting-and-plotting-events">
+<span id="sphx-glr-auto-examples-general-inspecting-events-py"></span><h1>Inspecting and Plotting Events<a class="headerlink" href="#inspecting-and-plotting-events" title="Link to this heading"></a></h1>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<p>Connect to your FemtoDAQ</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;vireo-000019.tek&quot;</span> <span class="c1"># skutils.FEMTODAQ_USB # for digitizers connected via USB, other replace with URL or IP</span>
+<span class="n">digitizer</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">skip_version_check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">digitizer</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Vireo-000019 (http://vireo-000019.tek)
+Product Revision    : VIREO100_REV_B
+Number of Channels  : 2
+Sampling Frequency  : 100.0 MHz
+ADC Bitdepth        : 14 bits
+Maximum Wave Length : 81.92us
+Firmware Version    : 5.5.0-0
+Software Version    : 5.4.0
+Linux Image Version : 5.1.1
+</pre></div>
+</div>
+<p>Configure data collection for a -0.8V pulse on channel 0
+and a identical pulse 50ns later on channel 1</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset settings to known values</span>
+<span class="c1"># digitizer.loadDefaultConfig()</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerXPosition</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerActiveWindow</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setPulseHeightWindow</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setPulseHeightAveragingWindow</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># set trigger and pulse height windows</span>
+<span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setInvertADCSignal</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerEdge</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="s2">&quot;rising&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Save 512 samples per waveform</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span><span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">,</span>
+                             <span class="mi">128</span><span class="p">,</span>
+                             <span class="s2">&quot;inspection_example&quot;</span><span class="p">,</span>
+                             <span class="n">waveform_display_enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">display_channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">)</span>
+<span class="c1"># require both channels to fire</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;continuous&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;grabbing event to inspect&quot;</span><span class="p">)</span>
+<span class="n">inspection_event</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">inspectNextEvent</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">skutils</span><span class="o">.</span><span class="n">quickPlotEvent</span><span class="p">(</span><span class="n">digitizer</span><span class="p">,</span> <span class="n">inspection_event</span><span class="p">,</span>
+                        <span class="n">fig_title</span><span class="o">=</span><span class="s2">&quot;Inspected Event for Pocket Pulser with 50ns delay on Ch1&quot;</span><span class="p">,</span>
+                          <span class="n">channel_titles</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;Pocket Pulser&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;Delayed by 50ns&quot;</span><span class="p">})</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-pytb notranslate"><div class="highlight"><pre><span></span><span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;C:\Users\Jeff\Documents\projects\skutils\examples\General\inspecting_events.py&quot;</span>, line <span class="m">56</span>, in <span class="n">&lt;module&gt;</span>
+<span class="w">    </span><span class="n">inspection_event</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">inspectNextEvent</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">                       </span><span class="pm">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class="nb">&quot;C:\Users\Jeff\Documents\projects\skutils\src\skutils\FemtoDAQController.py&quot;</span>, line <span class="m">1455</span>, in <span class="n">inspectNextEvent</span>
+<span class="w">    </span><span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="s2">&quot;maximum timeout was reached&quot;</span><span class="p">)</span>
+<span class="gr">TimeoutError</span>: <span class="n">maximum timeout was reached</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.496 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-general-inspecting-events-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c3e0fd7b3033e8154e179b570c733060/inspecting_events.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">inspecting_events.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/a25d45d6ab9dbe7112800c576eb928c5/inspecting_events.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">inspecting_events.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/937ccff21c0e51ed07e888500330d82b/inspecting_events.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">inspecting_events.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025,     SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

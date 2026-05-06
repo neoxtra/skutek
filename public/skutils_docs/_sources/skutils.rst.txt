@@ -1,0 +1,55 @@
+skutils package
+===============
+
+skutils.FemtoDAQController module
+---------------------------------
+
+.. automodule:: skutils.FemtoDAQController
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+skutils.ChickadeeController module
+---------------------------------
+
+.. automodule:: skutils.ChickadeeController
+   :members:
+   :show-inheritance:
+   :undoc-members:
+   :exclude-members: extract_byte,set_byte,clear_byte
+
+skutils.Loader module
+---------------------      
+
+.. automodule:: skutils.Loaders
+   :members:
+   :show-inheritance:
+   :undoc-members:
+   :no-imported-members:
+   :exclude-members: GretaPacketWaveSubheader, GretaPacketTotal, GretaPacketRoutingHeader, GretaLoader
+
+   .. autoclass:: ChannelData
+      :members:
+
+   .. autoclass:: EventInfo
+      :members:
+
+   
+
+skutils.SolidagoController module
+----------------------------------
+.. automodule:: skutils.SolidagoController
+   :members:
+   :show-inheritance:
+   :undoc-members:
+   :exclude-members: URL_LIST, BoardStates
+
+
+skutils.helpers module
+---------------------
+
+.. automodule:: skutils.helpers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+   :no-imported-members:

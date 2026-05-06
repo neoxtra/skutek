@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IGOR Wave Format &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IGOR Pulse Height Format" href="igorph.html" />
+    <link rel="prev" title="Event Comma Separated Values (Event CSV) Format" href="eventcsv.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reading &amp; Processing Digitizer Data Files</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#format-specifications">Format Specifications</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reading &amp; Processing Digitizer Data Files</a></li>
+      <li class="breadcrumb-item active">IGOR Wave Format</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/loading_data/igorwave.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="igor-wave-format">
+<h1>IGOR Wave Format<a class="headerlink" href="#igor-wave-format" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This format can be loaded into Python with <a class="reference internal" href="../skutils.html#skutils.Loaders.IGORWaveLoader" title="skutils.Loaders.IGORWaveLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">skutils.Loaders.IGORWaveLoader</span></code></a></p>
+</div>
+<p>The IGOR (<strong>.itx</strong>) data format stores data in IGOR. This format is intended to be loaded
+into a IGOR project with several functions predefined. Calls to these functions are embedded
+in the IGOR file so they are run automatically as data is imported.</p>
+<p>The IGOR Wave format differs from the <a class="reference internal" href="igorph.html"><span class="doc">IGOR Pulse Height Format</span></a> format in that it can store full waveforms and
+all Pulse Summaries quantities such as pulse height, trigger height, channel timestamps, and more</p>
+<section id="format-features">
+<h2>Format Features<a class="headerlink" href="#format-features" title="Link to this heading"></a></h2>
+<table class="docutils align-left">
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Type</p></th>
+<td><p>IGOR Text Wave (ASCII)</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Extension</p></th>
+<td><p>“.itx”</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Contains Event Timestamp</p></th>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Contains Channel Timestamps</p></th>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Contains Pulse Summary (DSP Quantities)</p></th>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Contains Waveforms</p></th>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Average Data Rate</p></th>
+<td><p>3.51MB/s</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>512 Sample Waves Per Second</p></th>
+<td><p>2148</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="decoding-example">
+<h2>Decoding Example<a class="headerlink" href="#decoding-example" title="Link to this heading"></a></h2>
+<p>Skutils Loaders provide <a class="reference internal" href="../skutils.html#id21" title="skutils.Loaders.BaseLoader.EventInfo"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code></a> objects which contain all Summary and Waveform data
+associated with your events.
+See <a class="reference internal" href="../skutils.html#id21" title="skutils.Loaders.BaseLoader.EventInfo"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code></a> and <a class="reference internal" href="../skutils.html#id0" title="skutils.Loaders.BaseLoader.ChannelData"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ChannelData</span></code></a>
+for more information about available quantities.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="linenos"> 2</span><span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/path/to/your/file_seq000001.itx&#39;</span><span class="p">,</span>
+<span class="linenos"> 3</span>              <span class="s1">&#39;/path/to/your/file_seq000002.itx&#39;</span><span class="p">]</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">skutils</span><span class="o">.</span><span class="n">quickLoad</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+<span class="linenos"> 6</span>   <span class="c1"># grab event timestamp and the channels in this event</span>
+<span class="linenos"> 7</span>   <span class="n">event_timestamp</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">event_timestamp</span>
+<span class="linenos"> 8</span>   <span class="n">channels</span>        <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">channels</span>
+<span class="linenos"> 9</span>   <span class="c1"># Pulse Summary Quantities can be saved in this format</span>
+<span class="linenos">10</span>   <span class="k">for</span> <span class="n">ch_data</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">channel_data</span><span class="p">:</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pulse Height for Channel </span><span class="si">{</span><span class="n">ch_data</span><span class="o">.</span><span class="n">channel</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">ch_data</span><span class="o">.</span><span class="n">pulse_height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel</span><span class="si">{</span><span class="n">ch_data</span><span class="o">.</span><span class="n">channel</span><span class="si">}</span><span class="s2">&#39;s trigger fired </span><span class="si">{</span><span class="n">ch_data</span><span class="o">.</span><span class="n">relative_channel_timestamp</span><span class="si">}</span><span class="s2"> clock cycles after the event trigger&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>  <span class="c1"># Return an event waveform in which rows are samoples and columns are the channels</span>
+<span class="linenos">15</span>  <span class="n">waveform</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">wavedata</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>The IGOR (<strong>.itx</strong>) data format stores data in IGOR. This format is intended to be loaded
+into a IGOR project with several functions predefined. Calls to these functions are embedded
+in the IGOR file so they are run automatically as data is imported.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If you want to load this data into IGOR, you must define two functions in your IGOR workspace:</p>
+<ol class="arabic simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">InitProcessing()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">ProcessOneEvent()</span></code></p></li>
+</ol>
+</div>
+</section>
+<section id="function-initprocessing-ntimes">
+<h2>1) FUNCTION InitProcessing (ntimes)<a class="headerlink" href="#function-initprocessing-ntimes" title="Link to this heading"></a></h2>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-igor notranslate"><div class="highlight"><pre><span></span><span class="kr">FUNCTION</span><span class="w"> </span>InitProcessing<span class="w"> </span>(ntimes)
+<span class="kt">VARIABLE</span><span class="w"> </span>ntimes
+<span class="w">   </span><span class="c1">// Folder Scratch will be created if it does not exist</span>
+<span class="w">   </span><span class="nc">NewDataFolder</span><span class="w"> </span>/O/S<span class="w"> </span>root:Scratch
+<span class="w">   </span><span class="kt">VARIABLE</span>/g<span class="w"> </span>max_index<span class="w"> </span>=<span class="w"> </span>0<span class="w"> </span><span class="c1">// prepare aux variables</span>
+<span class="w">   </span><span class="kt">VARIABLE</span>/g<span class="w"> </span>min_index<span class="w"> </span>= 0
+
+<span class="w">   </span><span class="nc">NewDataFolder</span><span class="w"> </span>/O/S<span class="w"> </span>root:Data
+<span class="w">   </span><span class="kt">VARIABLE</span>/g<span class="w"> </span>evt_num<span class="w"> </span>=<span class="w"> </span>-1<span class="w"> </span><span class="c1">// running event number</span>
+<span class="w">   </span><span class="kt">VARIABLE</span>/g<span class="w"> </span>timestamp<span class="w"> </span>=<span class="w"> </span>-1<span class="w"> </span><span class="c1">// running timestamp</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>chan1_height_list<span class="w"> </span><span class="c1">// list of ALL chan1 pulse heights</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>chan0_height_list<span class="w"> </span><span class="c1">// list of ALL chan0 pulse height</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>chan1_TRUE_list<span class="w"> </span><span class="c1">// list of TRUE chan1 pulse heights</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>chan1_RAND_list<span class="w"> </span><span class="c1">// list of RAND chan1 pulse heights</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>chan0_TRUE_list<span class="w"> </span><span class="c1">// list of TRUE chan0 pulse heights</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>chan0_RAND_list<span class="w"> </span><span class="c1">// list of RAND chan0 pulse heights</span>
+<span class="w">   </span><span class="nc">MAKE</span>/o/n=(ntimes)<span class="w"> </span>dt_DIF_list<span class="w"> </span><span class="c1">// list of time differences chan1 to chan0</span>
+<span class="w">   </span>chan1_height_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span><span class="w"> </span><span class="c1">// Not-a-number is a safe default value</span>
+<span class="w">   </span>chan1_TRUE_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span>
+<span class="w">   </span>chan1_RAND_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span>
+<span class="w">   </span>chan0_height_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span>
+<span class="w">   </span>chan0_TRUE_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span>
+<span class="w">   </span>chan0_RAND_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span>
+<span class="w">   </span>dt_DIF_list<span class="w"> </span>=<span class="w"> </span><span class="nf">NAN</span>
+<span class="w">   </span><span class="nc">PRINT</span><span class="w"> </span><span class="s">&quot;Prepared arrays for &quot;</span>,<span class="w"> </span>ntimes,<span class="w"> </span><span class="s">&quot; events, at &quot;</span>,<span class="w"> </span><span class="nf">time</span>()
+<span class="kr">END</span><span class="w"> </span><span class="c1">// InitProcessing</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="function-processoneevent">
+<h2>2) FUNCTION ProcessOneEvent ()<a class="headerlink" href="#function-processoneevent" title="Link to this heading"></a></h2>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">ProcessOneEvent()</span></code> should process data saved in one event waveform.</p>
+<p>A call to <code class="xref py py-attr docutils literal notranslate"><span class="pre">ProcessOneEvent()</span></code> is placed immediately after an event waveform is
+written to disk. This is expected to process/analyze the data before it’s dropped in</p>
+<section id="id1">
+<h3>Example:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-igor notranslate"><div class="highlight"><pre><span></span><span class="kr">FUNCTION</span><span class="w"> </span>ProcessOneEvent<span class="w"> </span>()
+
+<span class="w">   </span><span class="nc">SetDataFolder</span><span class="w"> </span>root:Data
+<span class="w">   </span><span class="c1">// NVAR is linking a local variable to a global variable created in InitProcessing</span>
+<span class="w">   </span><span class="kt">NVAR</span><span class="w"> </span>evt_num<span class="w"> </span>=<span class="w"> </span>root:Data:evt_num<span class="w"> </span><span class="c1">// event number</span>
+<span class="w">   </span><span class="kt">NVAR</span><span class="w"> </span>max_index<span class="w"> </span>=<span class="w"> </span>root:Scratch:max_index<span class="w"> </span><span class="c1">// peak of the pulse</span>
+<span class="w">   </span><span class="c1">// These two waves are “automagically” linked to the ones read from the file</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>Chan0<span class="w"> </span>=<span class="w"> </span>root:Data:Chan0<span class="w"> </span><span class="c1">// Input: Chan0 waveform</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>Chan1<span class="w"> </span>=<span class="w"> </span>root:Data:Chan1<span class="w"> </span><span class="c1">// Input: Chan1 waveform</span>
+
+<span class="w">   </span><span class="c1">// The local waves are linked to the global waves created by InitProcessing</span>
+<span class="w">   </span><span class="c1">// Each list provides one memory cell per event (a floating point number)</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>chan1_height_list<span class="w"> </span>=<span class="w"> </span>root:Data:chan1_height_list<span class="w"> </span><span class="c1">// pulse height ALL</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>chan1_TRUE_list<span class="w"> </span>=<span class="w"> </span>root:Data:chan1_TRUE_list<span class="w"> </span><span class="c1">// pulse height TRU</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>chan1_RAND_list<span class="w"> </span>=<span class="w"> </span>root:Data:chan1_RAND_list<span class="w"> </span><span class="c1">// pulse height RAN</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>chan0_height_list<span class="w"> </span>=<span class="w"> </span>root:Data:chan0_height_list<span class="w"> </span><span class="c1">// pulse height ALL</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>chan0_TRUE_list<span class="w"> </span>=<span class="w"> </span>root:Data:chan0_TRUE_list<span class="w"> </span><span class="c1">// pulse height TRU</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>chan0_RAND_list<span class="w"> </span>=<span class="w"> </span>root:Data:chan0_RAND_list<span class="w"> </span><span class="c1">// pulse height RAN</span>
+<span class="w">   </span><span class="kt">WAVE</span><span class="w"> </span>dt_DIF_list<span class="w"> </span>=<span class="w"> </span>root:Data:dt_DIF_list<span class="w"> </span><span class="c1">// time differences</span>
+
+<span class="w">   </span><span class="c1">// Local variables</span>
+<span class="w">   </span><span class="kt">VARIABLE</span><span class="w"> </span>base,<span class="w"> </span>len,<span class="w"> </span><span class="nf">i</span>,<span class="w"> </span>dum
+<span class="w">   </span><span class="kt">VARIABLE</span><span class="w"> </span>dt_peak,<span class="w"> </span>dt_DIF
+<span class="w">   </span><span class="kt">VARIABLE</span><span class="w"> </span>chan1_DIF_location,<span class="w"> </span>chan0_DIF_location
+<span class="w">   </span>evt_num<span class="w"> </span>=<span class="w"> </span>evt_num<span class="w"> </span>+<span class="w"> </span>1<span class="w"> </span><span class="c1">// begin next event</span>
+
+<span class="w">   </span><span class="c1">//---- chan1 ----</span>
+<span class="w">   </span><span class="c1">// Sample numbers below were read from the waveform display with the cursors</span>
+<span class="w">   </span><span class="c1">// and hardcoded below. Utility Functions are discussed in the next Appendix.</span>
+<span class="w">   </span><span class="c1">// Differentiate is provided by IGOR.</span>
+<span class="w">   </span>base<span class="w"> </span>=<span class="w"> </span>SubtractBaseline<span class="w"> </span>(chan1,<span class="w"> </span>2,<span class="w"> </span>70)<span class="w"> </span><span class="c1">// See the next Appendix</span>
+<span class="w">   </span>chan1_height_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>FindPulseHeight<span class="w"> </span>(chan1, 100, 200)
+<span class="w">   </span><span class="nc">Differentiate</span><span class="w"> </span>chan1/D=chan1_DIF<span class="w"> </span><span class="c1">// provided by IGOR</span>
+<span class="w">   </span>dum<span class="w"> </span>=<span class="w"> </span>GetMax<span class="w"> </span>(chan1_DIF)<span class="w"> </span><span class="c1">// sets the scratch variable max_index</span>
+<span class="w">   </span>chan1_DIF_location<span class="w"> </span>=<span class="w"> </span>max_index<span class="w"> </span><span class="c1">// maximum slope of the leading edge</span>
+
+<span class="w">   </span><span class="c1">//---- chan0 ----</span>
+<span class="w">   </span>base<span class="w"> </span>=<span class="w"> </span>SubtractBaseline<span class="w"> </span>(chan0,<span class="w"> </span>2,<span class="w"> </span>100)<span class="w"> </span><span class="c1">// See the next Appendix</span>
+<span class="w">   </span>chan0_height_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>FindPulseHeight<span class="w"> </span>(chan0, 100, 200)
+<span class="w">   </span><span class="nc">Differentiate</span><span class="w"> </span>chan0/D=chan0_DIF<span class="w"> </span><span class="c1">// provided by IGOR</span>
+<span class="w">   </span>dum<span class="w"> </span>=<span class="w"> </span>GetMax<span class="w"> </span>(chan0_DIF)<span class="w"> </span><span class="c1">// sets the scratch variable max_index</span>
+<span class="w">   </span>chan0_DIF_location<span class="w"> </span>=<span class="w"> </span>max_index<span class="w"> </span><span class="c1">// maximum slope of the leading edge</span>
+
+<span class="w">   </span><span class="c1">//------------------------------</span>
+<span class="w">   </span><span class="c1">//---- Time between pulses ----</span>
+<span class="w">   </span><span class="c1">//------------------------------</span>
+<span class="w">   </span>dt_DIF<span class="w"> </span>=<span class="w"> </span>chan1_DIF_location<span class="w"> </span>–<span class="w"> </span>chan0_DIF_location<span class="w"> </span><span class="c1">// START: chan1. STOP: NaI</span>
+<span class="w">   </span>dt_DIF_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>dt_DIF<span class="w"> </span><span class="c1">// running list of time diff</span>
+
+<span class="w">   </span><span class="c1">// --------------------------------------------------------</span>
+<span class="w">   </span><span class="c1">// --- TRUE and RANDOM Pulse heights in NaI and chan1 ---</span>
+<span class="w">   </span><span class="c1">// --------------------------------------------------------</span>
+<span class="w">   </span><span class="k">IF</span><span class="w"> </span>((dt_DIF<span class="w"> </span>&gt;-100)<span class="w"> </span>&amp;&amp;<span class="w"> </span>(dt_DIF<span class="w"> </span>&lt;<span class="w"> </span>100))<span class="w"> </span><span class="c1">// timing limits are discussed in the text</span>
+<span class="w">      </span><span class="k">IF</span><span class="w"> </span>((dt_DIF<span class="w"> </span>&gt;-12)<span class="w"> </span>&amp;&amp;<span class="w"> </span>(dt_DIF<span class="w"> </span>&lt;<span class="w"> </span>-2))<span class="w"> </span><span class="c1">// TRUE prompt coincidence peak</span>
+<span class="w">         </span><span class="c1">// copy the PH from the main unconstrained lists to coincidence lists</span>
+<span class="w">         </span>chan0_TRUE_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>chan0_height_list<span class="w"> </span>[evt_num]
+<span class="w">         </span>chan1_TRUE_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>chan1_height_list<span class="w"> </span>[evt_num]
+<span class="w">      </span><span class="k">ELSE</span>
+<span class="w">         </span>chan0_RAND_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>chan0_height_list<span class="w"> </span>[evt_num]
+<span class="w">         </span>chan1_RAND_list<span class="w"> </span>[evt_num]<span class="w"> </span>=<span class="w"> </span>chan1_height_list<span class="w"> </span>[evt_num]
+<span class="w">      </span><span class="k">ENDIF</span>
+<span class="w">   </span><span class="k">ENDIF</span>
+<span class="w">   </span><span class="nc">print</span><span class="w"> </span><span class="s">&quot;Event number=&quot;</span>,<span class="w"> </span>evt_num,<span class="w"> </span><span class="s">&quot; at &quot;</span>,<span class="w"> </span><span class="nf">time</span>()<span class="w"> </span><span class="c1">// shown in the history window</span>
+<span class="w">   </span><span class="kr">END</span><span class="w"> </span><span class="c1">// ProcessOneEvent</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="header">
+<h2>Header<a class="headerlink" href="#header" title="Link to this heading"></a></h2>
+<p>A comment block header indicated the serial number, globalID, and version information
+at the top of the file</p>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-igor notranslate"><div class="highlight"><pre><span></span>IGOR
+X<span class="w"> </span><span class="c1">// Format          = &quot;IGOR WAVE&quot;</span>
+X<span class="w"> </span><span class="c1">// Datetime        = &quot;UTC Time: 2025-01-21 18:38:53&quot;</span>
+X<span class="w"> </span><span class="c1">// GlobalID        = 0</span>
+X<span class="w"> </span><span class="c1">// Product         = &quot;VIREO100_REV_B&quot;</span>
+X<span class="w"> </span><span class="c1">// SerialNumber    = &quot;000019&quot;</span>
+X<span class="w"> </span><span class="c1">// SoftwareVersion = &quot;5.3.0&quot;</span>
+X<span class="w"> </span><span class="c1">// FirmwareVersion = &quot;5.3.1&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="event-data-format">
+<h2>Event Data Format<a class="headerlink" href="#event-data-format" title="Link to this heading"></a></h2>
+<p>Wave data is stored in a WAVE array. Each column represents a different channel.</p>
+<p><strong>Note</strong>: Only 8 sample waves are shown for readability. Your data files will likely contain many
+more samples per wave.</p>
+<section id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-igor notranslate"><div class="highlight"><pre><span></span>X<span class="w"> </span>InitProcessing(0000010)
+X<span class="w"> </span>evt_num<span class="w"> </span>= 1
+X<span class="w"> </span>timestamp<span class="w"> </span>= 671698605172
+WAVES/o/D/N=(10,2)<span class="w"> </span>pulse_summaries
+BEGIN
+0, 1
+671698605172, 671698605172
+646, 649
+1, 0
+6, 3
+0, 0
+0, 0
+0, 0
+0, 0
+0, 0
+<span class="kr">END</span>
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,0,<span class="w"> </span>&#39;channel&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,1,<span class="w"> </span>&#39;timestamp&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,2,<span class="w"> </span>&#39;pulse_height&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,3,<span class="w"> </span>&#39;triggered&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,4,<span class="w"> </span>&#39;trig_height&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,5,<span class="w"> </span>&#39;trig_count&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,6,<span class="w"> </span>&#39;qdc_base_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,7,<span class="w"> </span>&#39;qdc_fast_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,8,<span class="w"> </span>&#39;qdc_slow_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,9,<span class="w"> </span>&#39;qdc_tail_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>1,0,<span class="w"> </span>&#39;chan0&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>1,1,<span class="w"> </span>&#39;chan1&#39;,<span class="w"> </span>pulse_summaries
+WAVES/o/D<span class="w"> </span>chan0,<span class="w"> </span>chan1
+BEGIN
+643 647
+642 645
+642 646
+643 643
+644 647
+642 646
+641 645
+643 648
+<span class="kr">END</span>
+X<span class="w"> </span>ProcessOneEvent()
+X<span class="w"> </span>evt_num<span class="w"> </span>= 2
+X<span class="w"> </span>timestamp<span class="w"> </span>= 671702864223
+WAVES/o/D/N=(10,2)<span class="w"> </span>pulse_summaries
+BEGIN
+0, 1
+671702864223, 671702864223
+647, 649
+1, 0
+6, 5
+0, 0
+0, 0
+0, 0
+0, 0
+0, 0
+<span class="kr">END</span>
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,0,<span class="w"> </span>&#39;channel&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,1,<span class="w"> </span>&#39;timestamp&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,2,<span class="w"> </span>&#39;pulse_height&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,3,<span class="w"> </span>&#39;triggered&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,4,<span class="w"> </span>&#39;trig_height&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,5,<span class="w"> </span>&#39;trig_count&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,6,<span class="w"> </span>&#39;qdc_base_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,7,<span class="w"> </span>&#39;qdc_fast_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,8,<span class="w"> </span>&#39;qdc_slow_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>0,9,<span class="w"> </span>&#39;qdc_tail_sum&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>1,0,<span class="w"> </span>&#39;chan0&#39;,<span class="w"> </span>pulse_summaries
+X<span class="w"> </span><span class="nc">SetDimLabel</span><span class="w"> </span>1,1,<span class="w"> </span>&#39;chan1&#39;,<span class="w"> </span>pulse_summaries
+WAVES/o/D<span class="w"> </span>chan0,<span class="w"> </span>chan1
+BEGIN
+644 645
+641 645
+642 645
+643 646
+644 645
+643 646
+642 647
+642 645
+<span class="kr">END</span>
+X<span class="w"> </span>ProcessOneEvent()
+X<span class="w"> </span><span class="c1">// more events below</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="eventcsv.html" class="btn btn-neutral float-left" title="Event Comma Separated Values (Event CSV) Format" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="igorph.html" class="btn btn-neutral float-right" title="IGOR Pulse Height Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

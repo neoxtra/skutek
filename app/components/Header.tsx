@@ -72,7 +72,7 @@ export default function Header() {
                 <div className="absolute top-full left-0 pt-2 min-w-[220px] z-50">
                   <div className="bg-gray-100 shadow-lg rounded-lg py-2 animate-slideDown">
                     <Link href="/industries" className="block px-4 py-2 text-sm font-bold text-black uppercase hover:text-main transition">
-                      Industries We Serve
+                      Industries
                     </Link>
                     <Link href="/faq" className="block px-4 py-2 text-sm font-bold text-black uppercase hover:text-main transition">
                       FAQ
@@ -103,23 +103,23 @@ export default function Header() {
                 <div className="absolute top-full left-0 pt-2 min-w-[280px] z-50">
                   <div className="bg-gray-100 shadow-lg rounded-lg py-2 animate-slideDown">
                     <div className="px-4 py-2">
-                      <Link href="/products/digitizers" className="block text-sm font-bold text-black uppercase mb-2 hover:text-main transition">Digitizers</Link>
-                      <Link href="/products/femtodaq-vireo" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
+                      <span className="block text-sm font-bold text-black uppercase mb-2">Digitizers</span>
+                      <Link href="/products/digitizers/femtodaq-vireo" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
                         FemtoDAQ Vireo (2)
                       </Link>
-                      <Link href="/products/multichannel-daq" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
-                        Multichannel DAQ System
+                      <Link href="/products/digitizers/multichannel-daq-system" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
+                        Multi-Channel DAQ System
                       </Link>
-                      <Link href="/products/chickadee-32" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
-                        Chickadee-32 Rear Transition Module
+                      <Link href="/products/digitizers/chickadee-32" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
+                        CHK-32 Rear Transition Module
                       </Link>
                     </div>
 
                     <hr className="my-2 border-gray-300" />
 
                     <div className="px-4 py-2">
-                      <Link href="/products/data-management" className="block text-sm font-bold text-black uppercase mb-2 hover:text-main transition">Data Management</Link>
-                      <Link href="/products/solidago-udp" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
+                      <span className="block text-sm font-bold text-black uppercase mb-2">Data Management</span>
+                      <Link href="/products/digitizers/solidago-udp" className="block py-1 pl-3 text-base font-medium text-black hover:text-main transition">
                         Solidago UDP Event Generator - 160 Gbps
                       </Link>
                     </div>
@@ -179,87 +179,88 @@ export default function Header() {
           <nav className="pb-4 space-y-1 bg-gray-200 px-8 py-4">
 
             {/* About Us */}
-            <Link href="/about-us" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
+            <Link href="/about-us" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               About Us
             </Link>
             <div className="pl-4 py-1 space-y-1">
-              <Link href="/industries" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+              <Link href="/industries" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                 <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
-                Industries We Serve
+                Industries
               </Link>
-              <Link href="/faq" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+              <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                 <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                 FAQ
               </Link>
             </div>
 
             {/* Products */}
-            <Link href="/products" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
+            <Link href="/products" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
               Products
             </Link>
 
             <div className="pl-4 py-1 space-y-3">
               <div>
-                <Link href="/products/digitizers" className="block text-xs font-bold text-black uppercase tracking-wide mb-1 hover:text-main">Digitizers</Link>
+                <span className="block text-xs font-bold text-black uppercase tracking-wide mb-1">Digitizers</span>
                 <div className="space-y-1">
-                  <Link href="/products/femtodaq-vireo" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                  <Link href="/products/digitizers/femtodaq-vireo" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                     <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                     FemtoDAQ Vireo (2)
                   </Link>
-                  <Link href="/products/multichannel-daq" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                  <Link href="/products/digitizers/multichannel-daq-system" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                     <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
-                    Multichannel DAQ System
+                    Multi-Channel DAQ System
                   </Link>
-                  <Link href="/products/chickadee-32" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                  <Link href="/products/digitizers/chickadee-32" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                     <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
-                    Chickadee-32 Rear Transition Module
+                    CHK-32 Rear Transition Module
                   </Link>
                 </div>
               </div>
 
               <div>
-                <Link href="/products/data-management" className="block text-xs font-bold text-black uppercase tracking-wide mb-1 hover:text-main">Data Management</Link>
+                <span className="block text-xs font-bold text-black uppercase tracking-wide mb-1">Data Management</span>
                 <div className="space-y-1">
-                  <Link href="/products/solidago-udp" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+                  <Link href="/products/digitizers/solidago-udp" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                     <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                     Solidago UDP Event Generator - 160 Gbps
                   </Link>
                 </div>
               </div>
 
-              <Link href="/skutils" className="block text-xs font-bold text-black uppercase tracking-wide hover:text-main">
+              <Link href="/skutils" onClick={() => setMobileMenuOpen(false)} className="block text-xs font-bold text-black uppercase tracking-wide hover:text-main">
                 SkuTek Utilities (Skutils)
               </Link>
             </div>
 
             {/* Downloads */}
-            <Link href="/downloads" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
+            <Link href="/downloads" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
               Downloads
             </Link>
             <div className="pl-4 py-1 space-y-1">
-              <Link href="/downloads/femtodaq-utilities" className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
+              <Link href="/downloads/femtodaq-utilities" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-base text-gray-900 hover:text-main py-1">
                 <span className="w-2 h-2 rounded-full bg-main flex-shrink-0"></span>
                 FemtoDAQ Utilities Updater
               </Link>
             </div>
 
             {/* Top-level links */}
-            <Link href="/news" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
+            <Link href="/news" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
               News and Articles
             </Link>
-            <Link href="/careers" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
+            <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Careers
             </Link>
-            <Link href="/documentation" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
+            <Link href="/documentation" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Documentation
             </Link>
-            <Link href="/contact" className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Support / Contact Us
             </Link>
 
             <div className="pt-3">
               <Link
                 href="/quote"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block bg-main text-white text-base font-semibold px-6 py-3 rounded-lg hover:bg-accent transition text-center"
               >
                 Get a Quote

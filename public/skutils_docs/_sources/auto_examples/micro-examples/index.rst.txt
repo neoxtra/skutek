@@ -1,0 +1,120 @@
+
+
+.. _sphx_glr_auto_examples_micro-examples:
+
+Microscopic Examples of Configuration and Usage
+===============================================
+
+Below are some basic usage and configuration examples for Skutils.
+These are usually just one line demonstratibng functionality that one may not
+find obvious from reading the documentation.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Get statistics from your current/previous run.">
+
+.. only:: html
+
+  .. image:: /auto_examples/micro-examples/images/thumb/sphx_glr_statistics_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_micro-examples_statistics.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Statistics</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="How to clear the timestamp before a run">
+
+.. only:: html
+
+  .. image:: /auto_examples/micro-examples/images/thumb/sphx_glr_timestamp_clear_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_micro-examples_timestamp_clear.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Timestamp clearing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Download File Example">
+
+.. only:: html
+
+  .. image:: /auto_examples/micro-examples/images/thumb/sphx_glr_download_file_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_micro-examples_download_file.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Download File Example</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This is an example of inspecting events during a recording session, inspection is slow, and should not be relied on for actual data acquisition.">
+
+.. only:: html
+
+  .. image:: /auto_examples/micro-examples/images/thumb/sphx_glr_inspection_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_micro-examples_inspection.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Inspecting events</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This is a small example demonstrating how to configure coincidences in skutils">
+
+.. only:: html
+
+  .. image:: /auto_examples/micro-examples/images/thumb/sphx_glr_coincidence_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_micro-examples_coincidence.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Changing Coincidence Example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/micro-examples/statistics
+   /auto_examples/micro-examples/timestamp_clear
+   /auto_examples/micro-examples/download_file
+   /auto_examples/micro-examples/inspection
+   /auto_examples/micro-examples/coincidence
+

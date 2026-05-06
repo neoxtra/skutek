@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gretina Event Builder (GEB) Format &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=de2df7d2" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../femtodaqcontrol.html">Controlling a FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#femtodaqcontroller">FemtoDAQController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../loaders.html">Loading Digitizer Data files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../loaders.html#loader-overview">Loader Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dmtools.html">Data Management Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dmtools.html#solidagocontroller">SolidagoController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dmtools.html#collectornodecontroller">CollectorNodeController</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.Loader">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.WrappedGretinaLoader"><code class="docutils literal notranslate"><span class="pre">WrappedGretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.GretaLoader"><code class="docutils literal notranslate"><span class="pre">GretaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loader.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Gretina Event Builder (GEB) Format</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/file_formats/gretina.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gretina-event-builder-geb-format">
+<h1>Gretina Event Builder (GEB) Format<a class="headerlink" href="#gretina-event-builder-geb-format" title="Link to this heading"></a></h1>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Average Data Rate</p></th>
+<td><p>6.61MB/s</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>512 Sample Waves Per Second</p></th>
+<td><p>3229</p></td>
+</tr>
+</tbody>
+</table>
+<section id="reading-gretina-data-into-python">
+<h2>Reading GRETINA data into Python<a class="headerlink" href="#reading-gretina-data-into-python" title="Link to this heading"></a></h2>
+<p>To read Vireo Gretina files, SkuTek provides a python library called
+“skutils” which can parse the files and building events. This library
+can be downloaded from Vireo’s Web GUI. Navigate to the Programming
+Guide and click on the header link “Accessing Recorded Data”.</p>
+<img alt="file_formats/manual_images/GUI-screenshot-programming-guide-readout-button.png" class="align-center" src="file_formats/manual_images/GUI-screenshot-programming-guide-readout-button.png" />
+<p>This library is intended to be installed on lab computers or servers
+used for offline processing. It can be installed a precompiled Python
+wheel file or used as Python source code.</p>
+<img alt="file_formats/manual_images/GUI-screenshot-programming-guide-readout.png" class="align-center" src="file_formats/manual_images/GUI-screenshot-programming-guide-readout.png" />
+<p>The webpage section “Parsing Data Files” contains instructions for
+installation of the library and a link to additional usage
+documentation.</p>
+<p>Once installed, the library can be imported in python as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+</pre></div>
+</div>
+<p>Files can be opened using the <strong>GretinaLoader</strong> object. Events can be
+iterated through in a loop using the number <strong>next_event()</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">GretinaLoader</span><span class="p">(</span><span class="s2">&quot;path/to/your.geb&quot;</span><span class="p">)</span>
+<span class="n">metadata</span><span class="p">,</span><span class="n">event</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">next_event</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Event data (‘event’ in the above example) is returned as a Pandas
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">Dataframe</a>.
+This is a tabular representation of the event data. The names of the
+columns are the channel index, and the rows are the samples for that
+channel.</p>
+<p>Metadata (‘metadata’) in the above example is a python dictionary
+containing collection metadata such as the digitizer bitdepth, number of
+samples per trace, and pulse summary objects.</p>
+<p>Refer to the full library documentation in the programming guide for
+more details.</p>
+</section>
+<section id="file-format-specification">
+<h2>File Format Specification<a class="headerlink" href="#file-format-specification" title="Link to this heading"></a></h2>
+<p>The Vireo can record data in the binary <em>G</em>retina <em>E</em>vent <em>B</em>uilder
+(GEB) file format developed for the GRETA &amp; GRETINA gamma ray detection
+arrays. This is a highly efficient format that saves data in a series of
+independently formatted packets.</p>
+<p>These files are best decoded packet by packet in a while loop which
+reads packet headers, and then decodes the packet contents based on the
+information contained in the header. The rough approach is as follows.
+For each packet in file:</p>
+<ol class="arabic simple">
+<li><p>Read header to determine packet type and size.</p></li>
+<li><p>Read the number of bytes specified by header into a buffer.</p></li>
+<li><p>Pass the buffer to a decoding function unique to the packet type.</p></li>
+<li><p>Decode packet contents.</p></li>
+</ol>
+<p>All packets are prefixed with a standard <em>G</em>retina <em>E</em>vent
+<em>B</em>uilder (GEB) header. GEB Headers are <strong>always 16 Bytes</strong> total and
+broken up as follows.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Packet Type</strong></p></td>
+<td><p>int32</p></td>
+<td><p>Identifier for this type of packet. This should determine your decoding strategy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Packet Length</strong></p></td>
+<td><p>int32</p></td>
+<td><p>Size of this packet’s payload. <em>(i.e. packet size NOT including this header).</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Timestamp</strong></p></td>
+<td><p>int64</p></td>
+<td><p>The timestamp for this packet.</p></td>
+</tr>
+</tbody>
+</table>
+<p>In the form of a C struct, this is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">gretina_header</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"> </span><span class="c1">/// type of packet</span>
+<span class="w">   </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="c1">/// length of packet in bytes following this header</span>
+<span class="w">   </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">timestamp</span><span class="p">;</span><span class="w"> </span><span class="c1">/// FPGA timestamp for this packet data</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Packet length will always be a multiple of 4 bytes. 1-3 Bytes of null
+padding may be appended to the end of the packet to maintain this 4 byte
+alignment.</p>
+<section id="subheaders">
+<h3>SubHeaders<a class="headerlink" href="#subheaders" title="Link to this heading"></a></h3>
+<p>Following the standard header, packets may have a subheader composed of
+32bit words. These words are formatted as follows:</p>
+</section>
+<section id="skutek-word1">
+<h3>SkuTek Word1<a class="headerlink" href="#skutek-word1" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Bits in Word</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Packet Subtype</strong></p></td>
+<td><p>31-24</p></td>
+<td><p>Subtype of packet. <em>(may be safely ignored on the Vireo)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Digitizer Global ID</strong></p></td>
+<td><p>26-16</p></td>
+<td><p>Unsigned number between 0-255 as set by user. Useful for multi-digitizer configurations where</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Signed</strong></p></td>
+<td><p>15</p></td>
+<td><p>1 if packet contains signed data. 0 for unsigned.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Channel ID</strong></p></td>
+<td><p>14-0</p></td>
+<td><p>The channel number for this packet</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">gretina_header</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"> </span><span class="c1">/// type of packet</span>
+<span class="w">   </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="c1">/// length of packet in bytes following this header</span>
+<span class="w">   </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">timestamp</span><span class="p">;</span><span class="w"> </span><span class="c1">/// FPGA timestamp for this packet data</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="skutek-word2">
+<h3>SkuTek Word2<a class="headerlink" href="#skutek-word2" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Bits in Word</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Sample Bitdepth</strong></p></td>
+<td colspan="2"><p>31-28            | Number of significant bits for each sample. Encoded as one less than actual bitdepth. I.e. 13 for 14bit ADC. 15 for 16bit ADC.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Number of Samples</strong></p></td>
+<td colspan="2"><p>27-0             | Number of data samples in the packet.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="skutek-word3">
+<h3>SkuTek Word3<a class="headerlink" href="#skutek-word3" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Bits in Word</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Starting sample index</strong></p></td>
+<td colspan="2"><p>31-16           | Index of first sample in the trace or histogram. For instance, If the packet contains histogram bins 256-1024, then this value will be 256.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>&lt;unused&gt;</strong></p></td>
+<td colspan="2"><p>15-0            |</p></td>
+</tr>
+</tbody>
+</table>
+<p>Some packet types may not have a subheader at all or may only contain 1
+or 2 of these words in their subheader.</p>
+</section>
+<section id="endian-byte-order-packet">
+<h3>Endian (Byte Order) Packet<a class="headerlink" href="#endian-byte-order-packet" title="Link to this heading"></a></h3>
+<p>This is a <em>header-only</em> packet written at the beginning of Vireo data
+files. This will indicate the endianness (or order of bytes) for every
+32bit (4byte) word. If you are decoding this file on a little-endian
+computer, then this packet can usually be safely ignored.</p>
+<p>If you are using a big-endian computer or if you are using the your
+packet content is big-endian</p>
+</section>
+<section id="header">
+<h3>Header<a class="headerlink" href="#header" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Packet Type</strong></p></td>
+<td><p>0x50102050</p>
+<p><em>(if unpacked with proper endianness, otherwise 0x50201050)</em></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Length</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Timestamp</strong></p></td>
+<td><p>0x0102030405060708</p>
+<p><em>(if unpacked with proper endianness, otherwise 0x0807060504030201)</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="text-packet-human-readable-debugging">
+<h3>Text Packet (human readable debugging)<a class="headerlink" href="#text-packet-human-readable-debugging" title="Link to this heading"></a></h3>
+<p><strong>Packet Type: 0x500000A0</strong></p>
+<p>This packet stores a human-readable string of metadata about this data
+collection run.</p>
+</section>
+<section id="payload">
+<h3>Payload<a class="headerlink" href="#payload" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Bytes in Packet</p></th>
+<th class="head"><p>Info/Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Subtype</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>String length</strong></p></td>
+<td><p>1-3</p></td>
+<td><p>Number of characters in the string. Not including null padding at end of packet.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>String</strong></p></td>
+<td><p>4 till end</p></td>
+<td><p>The string contents</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Firmware</span> <span class="n">Revision</span><span class="p">:</span> <span class="mi">11</span><span class="o">/</span><span class="mi">23</span><span class="o">/</span><span class="mi">22</span> <span class="n">build</span> <span class="mi">0</span>
+<span class="n">DDC</span> <span class="n">Apps</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">4.0.0</span><span class="o">-</span><span class="mi">94</span><span class="o">-</span><span class="n">gb160502</span>
+<span class="n">Git</span> <span class="n">Branch</span><span class="p">:</span> <span class="n">master</span>
+<span class="n">PartNumber</span><span class="o">-</span><span class="n">SerialNumber</span><span class="p">:</span> <span class="n">AC00010</span><span class="o">-</span><span class="mi">1903</span>
+<span class="n">Output</span> <span class="n">Initialization</span> <span class="n">Datetime</span><span class="p">(</span><span class="n">UTC</span><span class="p">):</span> <span class="n">UTC</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">2023</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">09</span> <span class="mi">17</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">25</span>
+</pre></div>
+</div>
+</section>
+<section id="trace-waveform-packet">
+<h3>Trace/Waveform Packet<a class="headerlink" href="#trace-waveform-packet" title="Link to this heading"></a></h3>
+<p><strong>Packet Type: 0x50000010</strong></p>
+</section>
+<section id="subheader">
+<h3>Subheader<a class="headerlink" href="#subheader" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Word</p></th>
+<th class="head"><p>Bytes in Packet</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Skutek Word1</strong></p></td>
+<td><p>0-3</p></td>
+<td><p>Decode as SkuTek Word1</p>
+<p><em>(see above)</em></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Skutek Word2</strong></p></td>
+<td><p>4-7</p></td>
+<td><p>Decode as SkuTek Word2</p>
+<p><em>(see above)</em></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>Skutek Word3</strong></p></td>
+<td><p>8-11</p></td>
+<td><p>Decode as SkuTek Word3</p>
+<p><em>(see above)</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h3>Payload<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Trace payloads are made up of an array of 2-byte ADC samples. The length
+of the array is determined by the “<strong>Number of Samples”</strong> field in
+SkutekWord2 decoded from the subheader. The index of the first sample is
+defined.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><div class="DefinitionTerm"><p><strong>Content</strong></p>
+</div></th>
+<th class="head"><p><em>Format</em></p></th>
+<th class="head"><p>Size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="DefinitionTerm"><p><strong>Data</strong></p>
+</div><p><strong>sample0</strong></p>
+<p><strong>sample1</strong></p>
+<p><strong>:</strong></p>
+<p><strong>sample N</strong></p>
+</td>
+<td><p><em>Array of data samples</em></p></td>
+<td><p>2Bytes * number of samples</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="histogram-packet">
+<h3>Histogram Packet<a class="headerlink" href="#histogram-packet" title="Link to this heading"></a></h3>
+<p><strong>Packet Type: 0x50000000</strong></p>
+</section>
+<section id="id2">
+<h3>Subheader<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Word</p></th>
+<th class="head"><p>Bytes in Packet</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Skutek Word1</strong></p></td>
+<td><p>0-3</p></td>
+<td><p>Decode as SkuTek Word1</p>
+<p><em>(see above)</em></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Skutek Word2</strong></p></td>
+<td><p>4-7</p></td>
+<td><p>Decode as SkuTek Word2</p>
+<p><em>(see above)</em></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>Skutek Word3</strong></p></td>
+<td><p>8-11</p></td>
+<td><p>Decode as SkuTek Word3</p>
+<p><em>(see above)</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h3>Payload<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>Histogram payloads are made up of an array of 4-byte unsigned integer
+samples. The length of the array is determined by the “<strong>Number of
+Samples”</strong> field in SkutekWord2 decoded from the subheader. The index of
+the first sample is defined in SkuTek Word 3.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><div class="DefinitionTerm"><p><strong>Content</strong></p>
+</div></th>
+<th class="head"><p><em>Format</em></p></th>
+<th class="head"><p>Size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="DefinitionTerm"><p><strong>Data</strong></p>
+</div><p><strong>sample0</strong></p>
+<p><strong>sample1</strong></p>
+<p><strong>:</strong></p>
+<p><strong>sample N</strong></p>
+</td>
+<td><p><em>Array of data samples</em></p></td>
+<td><p>4Bytes * number of samples</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pulse-summary-packet">
+<h3>Pulse Summary Packet<a class="headerlink" href="#pulse-summary-packet" title="Link to this heading"></a></h3>
+<p><strong>Packet Type: 0x50000020</strong></p>
+</section>
+<section id="id4">
+<h3>Subheader<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 20.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Word</p></th>
+<th class="head"><p>Bytes in Packet</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Skutek Word1</strong></p></td>
+<td><p>0-3</p></td>
+<td><p>Decode as SkuTek Word1 <em>(see above)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Skutek Word2</strong></p></td>
+<td><p>4-7</p></td>
+<td><p>Decode as SkuTek Word2 <em>(see above)</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Skutek Word3</strong></p></td>
+<td><p>8-11</p></td>
+<td><p>Decode as SkuTek Word3 <em>(see above)</em></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h3>Payload<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>Pulse Summary payloads are a static structure of constant size: 28
+bytes. All fields are at least a full byte in width.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Word</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Info</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Pulse Height</strong></p></td>
+<td><p>Int16</p></td>
+<td><p>Maximum Pulse Height</p>
+<p>after averaging filter is applied</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Trigger Height</strong></p></td>
+<td><p>Int16</p></td>
+<td><p>Absolute Value of Maximum Trigger Height.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Trigger Count</strong></p></td>
+<td><p>Uint8</p></td>
+<td><p>Number of triggers that were detected within the Trigger Window.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Triggered</strong></p></td>
+<td><p>Uint8</p></td>
+<td><p>Boolean. HIGH if this channel triggered</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>*&lt;Reserved&gt;*</strong></p></td>
+<td><p>Uint16</p></td>
+<td><p><em>Reserved for future development.</em></p></td>
+</tr>
+</tbody>
+</table>
+<p>The entire packet following the header can be read into the following C
+structure.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Vireo_PulseSummaryPacket</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                           </span><span class="c1">// member_size, total_size</span>
+<span class="w">   </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">word1</span><span class="p">;</span><span class="w">        </span><span class="c1">// 4, 4</span>
+<span class="w">   </span><span class="kt">int16_t</span><span class="w">  </span><span class="n">pulse_height</span><span class="p">;</span><span class="w"> </span><span class="c1">// 2, 6</span>
+<span class="w">   </span><span class="kt">int16_t</span><span class="w">  </span><span class="n">trig_height</span><span class="p">;</span><span class="w">  </span><span class="c1">// 2, 8</span>
+<span class="w">   </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">trig_count</span><span class="p">;</span><span class="w">   </span><span class="c1">// 1, 9</span>
+<span class="w">   </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">triggered</span><span class="p">;</span><span class="w">    </span><span class="c1">// 1, 10</span>
+<span class="w">   </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">null_padding</span><span class="p">;</span><span class="w"> </span><span class="c1">// 2, 12</span>
+<span class="p">}</span><span class="w"> </span><span class="n">__attribute__</span><span class="p">((</span><span class="n">__packed__</span><span class="p">,</span><span class="w"> </span><span class="n">aligned</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">));</span><span class="w"> </span><span class="c1">//Required to avoid compiler padding errors.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-gretina-file-structure">
+<h2>Example Gretina File Structure<a class="headerlink" href="#example-gretina-file-structure" title="Link to this heading"></a></h2>
+<img alt="file_formats/manual_images/Vireo-gretina-file-structure.png" class="align-center" src="file_formats/manual_images/Vireo-gretina-file-structure.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

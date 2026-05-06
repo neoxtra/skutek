@@ -1,0 +1,866 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.GretinaLoader &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">SkuTils Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.GretinaLoader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.GretinaLoader</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># import pandas as pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mmap</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bitstruct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">deprecated</span>
+
+<span class="c1">################################################################################</span>
+<div class="viewcode-block" id="EventMetadata">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.EventMetadata">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EventMetadata</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packets</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="c1"># make sure all packets have the same timestamp</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="n">timestamp</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packets</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;invalid packet list. packets have different timestamps&quot;</span><span class="p">)</span>
+
+        <span class="c1"># sort packets by channel - smallest first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packets</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">packets</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span> <span class="p">:</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span><span class="n">p</span><span class="o">.</span><span class="n">wave_type</span><span class="p">)</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">channel</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packets</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">start</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">end</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trace_packets</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_waveform</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hist_packets</span>  <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_histogram</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ps_packets</span>    <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">)]</span>
+
+
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span>          <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span>            <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span>             <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signed</span>             <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">signed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bitdepth</span>           <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bitdepth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span>          <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">wave_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_type_string</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">wave_type_string</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace_packets</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample_offset</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace_packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sample_offset</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trace_packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_samples</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample_offset</span>  <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="EventMetadata.as_dict">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.EventMetadata.as_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;sample_offset&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_offset</span><span class="p">,</span>
+                    <span class="s1">&#39;number_samples&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">,</span>
+                    <span class="s1">&#39;event_number&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+                    <span class="s1">&#39;packets&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span><span class="p">,</span>
+                    <span class="s1">&#39;channels&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">channels</span><span class="p">,</span>
+                    <span class="s1">&#39;timestamp&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+                    <span class="s1">&#39;version_num&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+                    <span class="s1">&#39;module_num&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span>
+                    <span class="s1">&#39;signed&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">signed</span><span class="p">,</span>
+                    <span class="s1">&#39;bitdepth&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bitdepth</span><span class="p">,</span>
+                    <span class="s1">&#39;wave_types&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span><span class="p">,</span>
+                    <span class="s1">&#39;wave_type_strings&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave_type_string</span><span class="p">,</span>
+                    <span class="p">}</span>
+        <span class="k">return</span> <span class="n">metadata</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="EventMetadata.load_arrays_from_file">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.EventMetadata.load_arrays_from_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_arrays_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads hists or traces for this event into a dataframe&quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">event_buffer</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+        <span class="n">packets</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">==</span> <span class="n">wave_type</span><span class="p">)]</span>
+        <span class="n">raw_arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">extract_data_from_event_buffer</span><span class="p">(</span><span class="n">event_buffer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packets</span><span class="p">]</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">channel</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packets</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_arrays</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># event = pd.DataFrame()</span>
+            <span class="n">event</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_samples</span>     <span class="o">=</span> <span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_samples</span>
+            <span class="n">sample_offset</span> <span class="o">=</span> <span class="n">packets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sample_offset</span>
+
+            <span class="c1"># NOTE: in testing this system. stacking or building the dataframe</span>
+            <span class="c1"># usually took 0us, but occasionally took about 1000us. Never between the two</span>
+            <span class="c1"># The reason for the inconsistency is unknown, but I&#39;m assuming is more</span>
+            <span class="c1"># OS/python related than this code -JM</span>
+
+            <span class="c1"># start = time.time() # DEBUG</span>
+            <span class="c1"># build a pandas dataframe. Rows are indices. Columns are channels</span>
+            <span class="n">event</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">raw_arrays</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># index = np.arange(sample_offset, (sample_offset+n_samples))</span>
+            <span class="c1"># event = pd.DataFrame(stacked_data, columns=channels, index=index, dtype=stacked_data.dtype)</span>
+            <span class="c1"># end = time.time() # DEBUG</span>
+            <span class="c1"># print(f&quot;stacked and DF built in {round(1e6*(end-start),0)}us&quot;) # DEBUG</span>
+
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">event</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="EventMetadata.load_histograms_from_file">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.EventMetadata.load_histograms_from_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_histograms_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads HIST data for this event into a dataframe&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_arrays_from_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">,</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_histogram</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="EventMetadata.load_traces_from_file">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.EventMetadata.load_traces_from_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_traces_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads TRACE data for this event into a dataframe&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_arrays_from_file</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">,</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_waveform</span><span class="p">)</span></div>
+
+        
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="EventMetadata.load_summaries_from_file">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.EventMetadata.load_summaries_from_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_summaries_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads PULSER SUMMARY data for this event into a dataframe&quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+
+        <span class="n">packets</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packets</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">)]</span>
+        <span class="n">summary_struct</span> <span class="o">=</span> <span class="n">PULSE_SUMMARY0_BE</span> <span class="k">if</span> <span class="n">big_endian</span> <span class="k">else</span> <span class="n">PULSE_SUMMARY0_LE</span>
+        <span class="n">summaries</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packets</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">data_start</span><span class="p">)</span>
+            <span class="n">raw</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">data_length</span><span class="p">)</span>
+            <span class="n">summary</span> <span class="o">=</span> <span class="n">PulseSummary0</span><span class="p">(</span><span class="o">*</span><span class="n">summary_struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
+            <span class="n">summaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="o">.</span><span class="n">_asdict</span><span class="p">())</span>
+     
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="c1"># df = pd.DataFrame.from_records(summaries, columns=PulseSummary0._fields)</span>
+        <span class="k">return</span> <span class="n">summaries</span></div>
+</div>
+
+        
+
+<span class="c1">################################################################################</span>
+<div class="viewcode-block" id="PacketMetadata">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.PacketMetadata">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PacketMetadata</span><span class="p">:</span>
+    <span class="n">TRACE_DTYPES</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u2&#39;</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;i2&#39;</span><span class="p">)],</span> <span class="c1"># little endian: unsigned, signed</span>
+              <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u2&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;i2&#39;</span><span class="p">)]]</span> <span class="c1"># big endian: unsigned, signed</span>
+    <span class="n">HIST_DTYPES</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u4&#39;</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;i4&#39;</span><span class="p">)],</span> <span class="c1"># little endian: unsigned, signed</span>
+              <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u4&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;i4&#39;</span><span class="p">)]]</span> <span class="c1"># big endian: unsigned, signed</span>
+    <span class="n">PS_DTYPES</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u1&#39;</span><span class="p">)],</span> <span class="c1"># little endian: unsigned</span>
+                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u1&#39;</span><span class="p">)]]</span> <span class="c1"># big endian: unsigned</span>
+    <span class="n">ALL_DTYPES</span> <span class="o">=</span> <span class="p">{</span><span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_waveform</span>      <span class="p">:</span> <span class="n">TRACE_DTYPES</span><span class="p">,</span> 
+                  <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_histogram</span>     <span class="p">:</span> <span class="n">HIST_DTYPES</span><span class="p">,</span>
+                  <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span> <span class="p">:</span> <span class="n">PS_DTYPES</span><span class="p">}</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packet_header</span><span class="p">,</span> <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">,</span> <span class="n">word3</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">=</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">timestamp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="n">module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signed</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="n">signed</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">!=</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="n">channel</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span> <span class="o">+=</span> <span class="n">GEB_HEADER_SIZE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span> <span class="o">+=</span> <span class="n">SKUTEK_WORD_SIZE</span>
+
+        <span class="k">if</span> <span class="n">word2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bitdepth</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="n">bitdepth</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># need to add one to bitdepth per DDC standard</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="n">number_samples</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span> <span class="o">+=</span> <span class="n">SKUTEK_WORD_SIZE</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bitdepth</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span>
+
+        <span class="k">if</span> <span class="n">word3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample_offset</span> <span class="o">=</span> <span class="n">word3</span><span class="o">.</span><span class="n">sample_offset</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span> <span class="o">+=</span> <span class="n">SKUTEK_WORD_SIZE</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sample_offset</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Calculated values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_type_string</span> <span class="o">=</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">WAVE_TYPE_STRINGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span> <span class="c1"># &quot;unknown&quot; if unrecognized type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">full_length</span> <span class="o">=</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">length</span> <span class="o">+</span> <span class="n">GEB_HEADER_SIZE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ALL_DTYPES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">itemsize</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ALL_DTYPES</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>  <span class="c1"># get size of each sample. Default to 1 Byte</span>
+      
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave_type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_length</span> <span class="o">=</span> <span class="n">PULSE_SUMMARY0_LE</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_size</span>
+      
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">null_padding_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_length</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pre_payload_size</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_length</span><span class="p">)</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="PacketMetadata.extract_data_from_event_buffer">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.PacketMetadata.extract_data_from_event_buffer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_data_from_event_buffer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">event_start</span><span class="p">,</span> <span class="n">big_endian</span><span class="p">,</span> <span class="n">wave_type</span><span class="o">=</span><span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_waveform</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pulls the packet data from the byte array of event data&quot;&quot;&quot;</span>
+        <span class="n">wave_start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_start</span> <span class="o">-</span> <span class="n">event_start</span>
+        <span class="n">wave_end</span>   <span class="o">=</span> <span class="n">wave_start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_length</span>
+
+        <span class="c1"># finally read out the data and cast the type required</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ALL_DTYPES</span><span class="p">[</span><span class="n">wave_type</span><span class="p">][</span><span class="n">big_endian</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">signed</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">wave_start</span><span class="p">:</span><span class="n">wave_end</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;PacketMetadataCh</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<span class="c1">################################################################################</span>
+<div class="viewcode-block" id="GretinaLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader">[docs]</a>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;This class is deprecated, it will be removed in a future update, please use LegacyGretinaLoader for future support or switch to WrappedGretinaLoader&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GretinaLoader</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    NOTE: Public facing access to GretinaLoader is deprecated, future versions may remove GretinaLoader from public access entirely.</span>
+<span class="sd">    Object to load in event data from Skutek Gretina formats. unrecognized</span>
+<span class="sd">    packet types will be ignored</span>
+
+<span class="sd">    UNTESTED WITH BIG ENDIAN DATA</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        filename(str): filename being loaded</span>
+<span class="sd">        memmap(bool): whether or not the whole file was loaded into memory.</span>
+<span class="sd">        cache_event_metadata(bool): if True, then cache the positions of</span>
+<span class="sd">        events as they are loaded. This makes traversing backwards through</span>
+<span class="sd">        the file much faster. default is True</span>
+<span class="sd">        fp(IoBuffer): open file or memory mapped file object</span>
+<span class="sd">        big_endian(bool): whether or the not the file is big endian or small endian.</span>
+<span class="sd">            defaults to system byte order, but is updated as soon as an endian packet</span>
+<span class="sd">            is parsed</span>
+<span class="sd">            None if no ascii version packet is parsed</span>
+<span class="sd">        ascii_header(list): list of ascii version data. Typically</span>
+<span class="sd">            [ddc_apps_version, git_branch_name, firmware_revision]</span>
+<span class="sd">            empty list `[]` if no ascii version packet is parsed</span>
+<span class="sd">        event_number(int): index of most recently parsed event</span>
+<span class="sd">        packet_parser_functions(dict): dictionary of functions to parse packet</span>
+<span class="sd">            contents. wave and histogram packets are parsed independently of this</span>
+<span class="sd">            list. Functions are called with arguments (file_pointer, packet_start, packet_end)</span>
+<span class="sd">            and are expected not to advance the file position.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">memmap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cache_event_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiates the Gretina File Loader</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename(str): filename to load in</span>
+<span class="sd">            memmap(bool): whether or not to load the file into memory. Can be</span>
+<span class="sd">                much faster especially when seeking events, but at cost of extra memory</span>
+<span class="sd">            cache_event_metadata(bool): if True, then cache the positions of</span>
+<span class="sd">                events as they are loaded. This makes traversing backwards through</span>
+<span class="sd">                the file much faster. default is True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memmap</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># assigned in __make_memmap()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_event_metadata</span> <span class="o">=</span> <span class="n">cache_event_metadata</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="c1"># assumed to be true by default, but will be updated to reflect the</span>
+        <span class="c1"># contents of endian indicator packets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span> <span class="o">=</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">byteorder</span> <span class="o">==</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span> <span class="c1"># updated if/when endian packet is parsed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ascii_header</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># assigned if/when ascii version packet is parsed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># assigned in __reset()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">packet_parser_functions</span> <span class="o">=</span> <span class="p">{</span>
+                                        <span class="n">GebTypes</span><span class="o">.</span><span class="n">general_ascii</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parse_version_packet</span><span class="p">,</span>
+                                        <span class="n">GebTypes</span><span class="o">.</span><span class="n">version_info_ascii</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parse_version_packet</span><span class="p">,</span>
+                                        <span class="n">GebTypes</span><span class="o">.</span><span class="n">endian_indicator</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parse_endian_packet</span><span class="p">,</span>
+                                        <span class="n">GebTypes</span><span class="o">.</span><span class="n">endian_indicator_nonnative</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parse_endian_packet</span><span class="p">,</span>
+                                        <span class="p">}</span>
+        <span class="c1"># if we want to memory map this file, then we&#39;ll replace the file IOBuffer</span>
+        <span class="c1"># with a memory mapped I/O buffer. This will load the file into memory</span>
+        <span class="c1"># but we can still use standard file I/O operations</span>
+        <span class="k">if</span> <span class="n">memmap</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__make_memmap</span><span class="p">()</span>
+
+        <span class="c1"># reset event number and file position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reset</span><span class="p">()</span>
+        <span class="c1"># peek at the first packet. This will usually load endian and version info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_packet_metadata</span><span class="p">()</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;resets file position and event number&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__make_memmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sets up the memory mapped I/O buffer&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memmap</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># 2nd arg as 0 loads the whole file into memory</span>
+        <span class="n">mmap_fp</span> <span class="o">=</span> <span class="n">mmap</span><span class="o">.</span><span class="n">mmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="n">mmap</span><span class="o">.</span><span class="n">ACCESS_READ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span>
+        <span class="c1"># self.fp.close() # close the file on disk</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span> <span class="o">=</span> <span class="n">mmap_fp</span> <span class="c1"># replace the file pointer with the mmap</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__parse_nondata_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packet_header</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;parses non-data packets. calls the contents of self.packet_parser_functions&quot;&quot;&quot;</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">packet_parser_functions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">packet_header</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">func</span><span class="p">:</span>
+            <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_histogram</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;currently unable to parse histograms&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;currently unable to parse pulse summaries&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unable to parse packet type </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">packet_header</span><span class="o">.</span><span class="n">type</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__parse_endian_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;parses the endian packet type and updates the self.endian attribute&quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">raw_geb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">GEB_HEADER_SIZE</span><span class="p">)</span> <span class="c1"># read the endian indicator</span>
+        <span class="c1"># parse as little endian and check if the timestamp is correct</span>
+        <span class="n">packet_header</span> <span class="o">=</span> <span class="n">GebPacketHeader</span><span class="p">(</span> <span class="o">*</span><span class="n">GEB_HEADER_LE</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">raw_geb</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">==</span> <span class="n">ENDIAN_INDICATOR_TIMESTAMP</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__parse_version_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;parses version_info_ascii packets and updates the version info attributes&quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">raw_geb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">GEB_HEADER_SIZE</span><span class="p">)</span>
+
+        <span class="c1"># read the geb header at the start of the packet</span>
+        <span class="n">header_type</span> <span class="o">=</span> <span class="n">GEB_HEADER_BE</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span> <span class="k">else</span> <span class="n">GEB_HEADER_LE</span>
+        <span class="n">packet_header</span> <span class="o">=</span> <span class="n">GebPacketHeader</span><span class="p">(</span> <span class="o">*</span><span class="n">header_type</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">raw_geb</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># read and decode the skutek word which contains the length of the string</span>
+            <span class="c1"># unused currently, but here for completeness</span>
+            <span class="n">raw_length</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span>
+            <span class="n">strlength</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">raw_length</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;little&#39;</span><span class="p">,</span><span class="s1">&#39;big&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span><span class="p">])</span>
+
+            <span class="c1"># read the ascii version data</span>
+            <span class="n">raw</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">packet_header</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span>
+            <span class="n">raw</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[:</span><span class="n">strlength</span><span class="p">]</span> <span class="c1"># remove padding</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ascii_header</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unable to parse ascii version packet at file index=</span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.peek_at_next_packet_metadata">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.peek_at_next_packet_metadata">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">peek_at_next_packet_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns the metadata for the next data packet in the file without advancing</span>
+<span class="sd">        the file position. Returns None if the end of the file is hit. If it encounters</span>
+<span class="sd">        non-data packets during its peeking, then it will pass positional information</span>
+<span class="sd">        to whatever function is defined for that packet in `packet_parser_functions`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            PacketMetadata: metadata and info about the next data packet. This includes</span>
+<span class="sd">                GEB Headers, Skutek words, and position information in the file.</span>
+<span class="sd">                OR None if we&#39;ve reached the end of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="n">raw_geb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">GEB_HEADER_SIZE</span><span class="p">)</span>
+        <span class="c1"># Check if we&#39;ve reached EOF, and return None if true</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_geb</span><span class="p">)</span> <span class="o">!=</span> <span class="n">GEB_HEADER_SIZE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># read the geb header at the start of the packet</span>
+        <span class="n">header_type</span> <span class="o">=</span> <span class="n">GEB_HEADER_BE</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span> <span class="k">else</span> <span class="n">GEB_HEADER_LE</span>
+        <span class="n">packet_header</span> <span class="o">=</span> <span class="n">GebPacketHeader</span><span class="p">(</span> <span class="o">*</span><span class="n">header_type</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">raw_geb</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="c1"># NON-DATA PACKET PARSING</span>
+        <span class="c1"># If this isn&#39;t a data packet, then parse the contents in a separate function</span>
+        <span class="c1"># and continue onto the next data packet</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">packet_header</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_waveform</span><span class="p">,</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_histogram</span><span class="p">,</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">)):</span>
+            <span class="c1"># run the function meant to handle this packet type. assuming it</span>
+            <span class="c1"># won&#39;t change file position</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="n">GEB_HEADER_SIZE</span> <span class="o">+</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">length</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__parse_nondata_packet</span><span class="p">(</span><span class="n">packet_header</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="c1"># meanwhile advance to the start of next packet and return the next data packet</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+            
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_packet_metadata</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="n">packet_header</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">GebTypes</span><span class="o">.</span><span class="n">raw_pulse_summary</span><span class="p">:</span>
+            <span class="n">word1_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span>
+            <span class="n">word1_raw</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="n">word1_raw</span><span class="p">)</span>
+            <span class="n">skutek_word1</span> <span class="o">=</span> <span class="n">SkutekWord1</span><span class="p">(</span> <span class="o">*</span><span class="n">SKUTEK_WORD1</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">word1_raw</span><span class="p">)</span> <span class="p">)</span>
+            <span class="c1"># no other words in pulse summary</span>
+            <span class="n">skutek_word2</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">skutek_word3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># DATA PACKET PARSING</span>
+            <span class="c1"># this is a data packet, we continue to read the skutek words</span>
+            <span class="c1"># and then the data.</span>
+            <span class="n">raw_skutek</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span>
+            <span class="c1"># Check if we&#39;ve reached EOF, and return None if true</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_skutek</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="o">*</span><span class="n">SKUTEK_WORD_SIZE</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="c1"># read the two skutek-defined metadata words</span>
+
+            <span class="c1"># skutek words are always big endian?</span>
+            <span class="n">word1_raw</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="n">raw_skutek</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">word2_raw</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="n">raw_skutek</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+            <span class="n">skutek_word1</span> <span class="o">=</span> <span class="n">SkutekWord1</span><span class="p">(</span> <span class="o">*</span><span class="n">SKUTEK_WORD1</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">word1_raw</span><span class="p">)</span> <span class="p">)</span>
+            <span class="n">skutek_word2</span> <span class="o">=</span> <span class="n">SkutekWord2</span><span class="p">(</span> <span class="o">*</span><span class="n">SKUTEK_WORD2</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">word2_raw</span><span class="p">)</span> <span class="p">)</span>
+
+            <span class="c1"># verison 1 packets have an extra word</span>
+            <span class="k">if</span> <span class="n">skutek_word1</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">SKUTEK_WORD_SIZE</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">!=</span> <span class="n">SKUTEK_WORD_SIZE</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="n">word3_raw</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
+                <span class="n">skutek_word3</span> <span class="o">=</span> <span class="n">SkutekWord3</span><span class="p">(</span> <span class="o">*</span><span class="n">SKUTEK_WORD3</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">word3_raw</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">skutek_word3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">packet</span> <span class="o">=</span> <span class="n">PacketMetadata</span><span class="p">(</span><span class="n">packet_header</span><span class="p">,</span> <span class="n">skutek_word1</span><span class="p">,</span> <span class="n">skutek_word2</span><span class="p">,</span> <span class="n">skutek_word3</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">packet</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.peek_at_next_event_metadata">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.peek_at_next_event_metadata">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">peek_at_next_event_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finds all packets associated with the next event and returns metadata</span>
+<span class="sd">        about the next event which can be used to read it. Does not advance file position</span>
+
+<span class="sd">        returns None if there are no more events in the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If the metadata is already in the cache, then don&#39;t bother parsing</span>
+        <span class="c1"># the file</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_event_metadata</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">event_number</span><span class="p">]</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="c1"># parse the first packet and use it&#39;s timestamp to identify event association</span>
+        <span class="n">packet1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_packet_metadata</span><span class="p">()</span>
+        <span class="c1"># If there are no more packets, then we are at the end of the file and</span>
+        <span class="c1"># out of events. So we return None</span>
+        <span class="k">if</span> <span class="n">packet1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">packets</span> <span class="o">=</span> <span class="p">[</span><span class="n">packet1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">packet1</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">next_packet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_packet_metadata</span><span class="p">()</span>
+            <span class="c1"># If there are no more packets, then we are at the end of the file</span>
+            <span class="c1"># and thus also the event of this event</span>
+            <span class="k">if</span> <span class="n">next_packet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="c1"># If true, then we are in the same event and can advance to the next packet</span>
+            <span class="k">if</span> <span class="n">packet1</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">==</span> <span class="n">next_packet</span><span class="o">.</span><span class="n">timestamp</span><span class="p">:</span>
+                <span class="n">packets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_packet</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">next_packet</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="n">event_metadata</span> <span class="o">=</span> <span class="n">EventMetadata</span><span class="p">(</span><span class="n">packets</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_event_metadata</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">event_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">event_metadata</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">event_metadata</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.seek_event">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.seek_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seek_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desired_event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;goes to the specified event in the file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            desired_event(int): the desired event number</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            RuntimeError if event does not exist in this file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="c1"># only used for failure conditions</span>
+        <span class="n">event_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="c1"># only used for failure conditions</span>
+
+        <span class="c1"># if the next event is the desired event, then we don&#39;t have to do anything</span>
+        <span class="k">if</span> <span class="n">desired_event</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_event_metadata</span><span class="p">:</span>
+            <span class="c1"># Check if this event already exists in cache. load it if exists</span>
+            <span class="k">if</span> <span class="n">desired_event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">desired_event</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">=</span> <span class="n">desired_event</span>
+                <span class="k">return</span>
+            <span class="c1"># If we are caching, but haven&#39;t cached across the one we want</span>
+            <span class="c1"># then seek to the closest cached event prior to the desired event</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># gambling that descending order will be slightly faster for most applications</span>
+                <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">desired_event</span><span class="o">-</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">seek_event</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+                        <span class="k">break</span>
+
+        <span class="c1"># if we are past the desired event, then reset file location to zero</span>
+        <span class="k">if</span> <span class="n">desired_event</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__reset</span><span class="p">()</span>
+
+        <span class="c1"># iterate through the file event by event until we get to the desired one</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">&lt;</span> <span class="n">desired_event</span><span class="p">:</span>
+            <span class="n">event_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_event_metadata</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">event_metadata</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># if we hit the end of the file and still haven&#39;t found the event</span>
+            <span class="c1"># then throw a runtime error</span>
+            <span class="k">if</span> <span class="n">event_metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># reset position so other operations aren&#39;t affected if this</span>
+                <span class="c1"># error is ignored by calling process</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">=</span> <span class="n">event_num</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;event </span><span class="si">{</span><span class="n">desired_event</span><span class="si">}</span><span class="s2"> does not exist&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.fetch_event">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.fetch_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desired_event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;fetches the specified event in the file. Does not advance event number</span>
+<span class="sd">        or file position</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple:</span>
+<span class="sd">                dict: dictionary of metadata about the packet. keys are &#39;packets&#39;,</span>
+<span class="sd">                    &#39;channels&#39;, &#39;wave_type_string&#39;, &#39;timestamp&#39;, &#39;event_number&#39;</span>
+<span class="sd">                pandas.DataFrame: The event data. Columns are channels (smallest first),</span>
+<span class="sd">                    row is the index of the event sample</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            RuntimeError if event does not exist in this file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="n">event_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">seek_event</span><span class="p">(</span><span class="n">desired_event</span><span class="p">)</span>
+        <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_event</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">=</span> <span class="n">event_num</span>
+        <span class="k">return</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.next_event">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.next_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">next_event</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads next event from the current file location and returns a metadata dictionary</span>
+<span class="sd">        and a pandas dataframe of the event data. This will advance the location</span>
+<span class="sd">        in the file.</span>
+
+<span class="sd">        Events are defined as a series of contiguous packets with the same timestamp</span>
+
+<span class="sd">        Warning:</span>
+<span class="sd">            if end of file has been reached, then this will return (None, None)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple:</span>
+<span class="sd">                dict: dictionary of metadata about the packet. keys are &#39;packets&#39;,</span>
+<span class="sd">                    &#39;channels&#39;, &#39;wave_type_string&#39;, &#39;timestamp&#39;, &#39;event_number&#39;. OR None if EOF</span>
+<span class="sd">                pandas.DataFrame: The event data. Columns are channels (smallest first),</span>
+<span class="sd">                    row is the index of the event sample. OR None if EOF</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">event_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_event_metadata</span><span class="p">()</span>
+        <span class="c1"># we&#39;ve reached the end of the file. Return None in this case</span>
+        <span class="k">if</span> <span class="n">event_metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
+
+        <span class="n">event</span> <span class="o">=</span> <span class="n">event_metadata</span><span class="o">.</span><span class="n">load_traces_from_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">event_metadata</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">event_metadata</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;histograms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event_metadata</span><span class="o">.</span><span class="n">load_histograms_from_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span><span class="p">)</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;summaries&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event_metadata</span><span class="o">.</span><span class="n">load_summaries_from_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.load_and_sort_all_events">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.load_and_sort_all_events">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_and_sort_all_events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves a list of all events sorted by timestamp. Unlike fetch_event</span>
+<span class="sd">        and seek_event, all packets with the same timestamp are defined as an</span>
+<span class="sd">        event even if the packets are non-contiguous in the file.</span>
+
+<span class="sd">        Regardless of instantiation parameters, this function will enable memmap</span>
+<span class="sd">        to seek the process up</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple:</span>
+<span class="sd">                list of dicts: metadata for all events, ordered by timestamp (smallest first)</span>
+<span class="sd">                list of DataFrames: data for all events, ordered by timestamp (smallest first)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># force memory mapping mode. No matter what this data will be loaded</span>
+        <span class="c1"># into memory, so we aren&#39;t gaining anything with memmap=False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">memmap</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__make_memmap</span><span class="p">()</span>
+
+        <span class="c1"># return to the beginning of the file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reset</span><span class="p">()</span>
+
+        <span class="c1"># Assume that timestamps are mostly in order from smallest-greatest</span>
+        <span class="c1"># we can use an ordered dictionary to retain timestamp keys that are</span>
+        <span class="c1"># already mostly or already sorted</span>
+        <span class="n">all_packets</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+        <span class="c1"># iterate through all packets and add them to the timestamp dictionary</span>
+        <span class="n">packet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_packet_metadata</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">packet</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">packet</span><span class="o">.</span><span class="n">timestamp</span> <span class="ow">in</span> <span class="n">all_packets</span><span class="p">:</span>
+                <span class="n">all_packets</span><span class="p">[</span><span class="n">packet</span><span class="o">.</span><span class="n">timestamp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">all_packets</span><span class="p">[</span><span class="n">packet</span><span class="o">.</span><span class="n">timestamp</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">packet</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">packet</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="n">packet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_packet_metadata</span><span class="p">()</span>
+
+        <span class="c1"># build list of all events sorted by timestamp</span>
+        <span class="n">event_metadata</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_packets</span><span class="p">)</span> <span class="p">):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">all_packets</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+            <span class="n">event_metadata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">EventMetadata</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="c1"># generate metadata dictionaries</span>
+        <span class="n">metadata_dicts</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">event_metadata</span><span class="p">]</span>
+        <span class="c1"># metadata_dicts = []</span>
+        <span class="c1"># for em in event_metadata:</span>
+        <span class="c1">#     em_dict = em.as_dict()</span>
+        <span class="c1">#     # add histograms if they exist to the dict</span>
+        <span class="c1">#     em_dict[&#39;hists&#39;] = em.load_histograms_from_file(self.fp, self.big_endian)</span>
+        <span class="c1">#     metadata_dicts.append(em_dict)</span>
+        <span class="c1"># generate event data</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">load_traces_from_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">big_endian</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">event_metadata</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">metadata_dicts</span><span class="p">,</span> <span class="n">events</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.calculate_number_of_events">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.calculate_number_of_events">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_number_of_events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># if we&#39;re already at the end of the file, we can just fetch the event_number + 1</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="n">ev_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span>
+        <span class="n">ev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_event_metadata</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># otherwise we have to iterate through all event headers until we find the last one</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">next_ev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_at_next_event_metadata</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">next_ev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">next_ev</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="n">ev</span> <span class="o">=</span> <span class="n">next_ev</span>
+
+        <span class="n">num_events</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">number</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># because events are 0-based indexing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="c1"># reset file back to old state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">=</span> <span class="n">ev_num</span>
+        <span class="k">return</span> <span class="n">num_events</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.reopen">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.reopen">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reopen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaLoader.close">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaLoader.GretinaLoader.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;old_fp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">old_fp</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">old_fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">next_event_num</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_number</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_event</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span>
+            <span class="c1"># event will become None if EOF</span>
+            <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_event</span><span class="p">()</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

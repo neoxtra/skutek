@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.GretinaFileWriter &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.GretinaFileWriter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.GretinaFileWriter</h1><div class="highlight"><pre>
+<span></span><span class="c1"># import pandas as pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struct</span><span class="w"> </span><span class="kn">import</span> <span class="n">Struct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bitstruct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zlib</span>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">GebTypes</span><span class="p">,</span> <span class="n">GebPacketHeader</span><span class="p">,</span> <span class="n">SkutekWord1</span><span class="p">,</span> <span class="n">SkutekWord2</span><span class="p">,</span> <span class="n">SkutekWord3</span><span class="p">,</span> <span class="n">ENDIAN_INDICATOR_TIMESTAMP</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEB_HEADER_SIZE</span><span class="p">,</span> <span class="n">FULL_PACKET0_HEADER_SIZE</span><span class="p">,</span> <span class="n">FULL_PACKET1_HEADER_SIZE</span><span class="p">,</span> <span class="n">SKUTEK_WORD_SIZE</span><span class="p">,</span> <span class="n">SAMPLE_SIZE</span><span class="p">,</span> <span class="n">SKUTEK_WORDS_LENGTH</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEB_HEADER_BE</span><span class="p">,</span> <span class="n">GEB_HEADER_LE</span><span class="p">,</span> <span class="n">SKUTEK_WORD1</span><span class="p">,</span> <span class="n">SKUTEK_WORD2</span><span class="p">,</span> <span class="n">SKUTEK_WORD3</span><span class="p">,</span> <span class="n">GEB_HEADER_NATIVE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASCII_VERSION_PREFIX</span>
+
+<div class="viewcode-block" id="channel_by_channel">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.channel_by_channel">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">channel_by_channel</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;yield channel index and channel data&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">yield</span> <span class="n">channel</span><span class="p">,</span> <span class="n">event</span><span class="p">[:,</span><span class="n">channel</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="GretinaFileWriter">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GretinaFileWriter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes Skutek formatted Gretina data to data files - the same format</span>
+<span class="sd">    as the &quot;.bin&quot; files saved natively by our digitizer.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">ascii_version_header</span><span class="o">=</span><span class="p">[]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            fname(str): The filename to save data to. File will be overwritten if</span>
+<span class="sd">                it already exists</span>
+<span class="sd">            ascii_version_header(list of str): the ascii version data in the 2nd</span>
+<span class="sd">                packet of Skutek Gretina files. usually [ddc_apps_version, git branch, firwmare revision]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="n">fname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packets_written</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_written</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_file</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span> <span class="c1"># md5 running checksum for the file.</span>
+        <span class="c1"># use the property self.checksum to get the hex</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__write_endian_packet</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__write_ascii_version_packet</span><span class="p">(</span><span class="n">ascii_version_header</span><span class="p">)</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;creates the file pointer&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__write_endian_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;writes system endian schema&quot;&quot;&quot;</span>
+        <span class="n">packet_data</span> <span class="o">=</span> <span class="n">GEB_HEADER_NATIVE</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">GebTypes</span><span class="o">.</span><span class="n">endian_indicator</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ENDIAN_INDICATOR_TIMESTAMP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">packet_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">packet_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_written</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">packet_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packets_written</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__write_ascii_version_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ascii_version_header</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;writes ascii version data to the file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ascii_version_header(list of str): the ascii version data in the 2nd</span>
+<span class="sd">                packet of Skutek Gretina files. usually [ddc_apps_version, git branch, firwmare revision]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">version_string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ascii_version_header</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">version_string</span><span class="p">)</span>
+        <span class="c1"># length encoded as 32 bit integer</span>
+        <span class="n">length_word</span> <span class="o">=</span> <span class="n">Struct</span><span class="p">(</span><span class="s1">&#39;=l&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">ASCII_VERSION_PREFIX</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span> <span class="o">|</span> <span class="n">strlen</span><span class="p">)</span>
+        <span class="n">payload_data</span> <span class="o">=</span> <span class="n">length_word</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">version_string</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="c1"># encode the header now that we know the size</span>
+        <span class="n">header_data</span> <span class="o">=</span> <span class="n">GEB_HEADER_NATIVE</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">GebTypes</span><span class="o">.</span><span class="n">version_info_ascii</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">payload_data</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">packet_data</span> <span class="o">=</span> <span class="n">header_data</span> <span class="o">+</span> <span class="n">payload_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">packet_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">packet_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_written</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">packet_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packets_written</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaFileWriter.write_ascii_packet">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter.write_ascii_packet">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_ascii_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;not yet implemented&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaFileWriter.write_data_packet">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter.write_data_packet">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_data_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">,</span> <span class="n">module_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">version_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bitdepth</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;writes a packet to the file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel(int): channel index of data</span>
+<span class="sd">            data(numpy.ndarry): data. must be a 1D numpy array of dtype uint16 or int16</span>
+<span class="sd">            timestamp(int): trigger timestamp</span>
+<span class="sd">            wave_type(str):  GebTypes.raw_waveform or GebTypes.raw_histogram</span>
+<span class="sd">            module_num(int): module number to go in skutek words. default is 0</span>
+<span class="sd">            version_num(int): version number to go in skutek words. default is 0</span>
+<span class="sd">            bitdepth(int): bitdepth to be encoded in packet. defaults to 14bit</span>
+<span class="sd">            compression(int): compression level for zlib. 0 is None, 9 is max</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># assert(wave_type == GebTypes.raw_waveform or GebTypes.raw_histogram), &quot;wave_type must be histogram or wave gebtypes&quot;</span>
+        <span class="c1"># assert isinstance(timestamp,int), &quot;timestamp must be integer&quot;</span>
+        <span class="c1"># assert isinstance(data,(np.ndarray), &quot;data must be numpy array&quot;</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;only 2byte datum types allowed&quot;</span>
+        <span class="n">signed</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_raw_packet</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span>
+                                <span class="n">data</span><span class="o">.</span><span class="n">tobytes</span><span class="p">(),</span>
+                                <span class="n">signed</span><span class="p">,</span>
+                                <span class="n">timestamp</span><span class="p">,</span>
+                                <span class="n">wave_type</span><span class="p">,</span>
+                                <span class="n">module_num</span><span class="p">,</span>
+                                <span class="n">version_num</span><span class="p">,</span>
+                                <span class="n">bitdepth</span><span class="p">,</span>
+                                <span class="n">compression</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaFileWriter.write_event">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter.write_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">,</span> <span class="n">module_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">version_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bitdepth</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;writes an event to the file. Event must be a pandas dataframe with</span>
+<span class="sd">        the integer channel number being the column header</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event(numpy.ndarry): The event data. If a pandas data</span>
+<span class="sd">                frame, then Columns must be the integer channels number.</span>
+<span class="sd">                If numpy array, then first column is assumed to be channel 0</span>
+<span class="sd">            timestamp(int): trigger timestamp</span>
+<span class="sd">            wave_type(str): skutils.GebTypes.raw_waveform OR skutils.GebTypes.raw_histogram</span>
+<span class="sd">            module_num(int): module number to go in skutek words. default is 0</span>
+<span class="sd">            version_num(int): module number to go in skutek words. default is 0</span>
+<span class="sd">            bitdepth(int): bitdepth to be encoded in packets. defaults to 14bit</span>
+<span class="sd">            compression(int): compression level for zlib. 0 is None, 9 is max</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># assert(wave_type == &quot;wave&quot; or wave_type == &quot;histogram&quot;), &quot;wave_type must be &#39;histogram&#39; or &#39;wave&#39;&quot;</span>
+        <span class="c1"># assert isinstance(timestamp,int), &quot;timestamp must be integer&quot;</span>
+        <span class="k">for</span> <span class="n">ch</span><span class="p">,</span><span class="n">data</span> <span class="ow">in</span> <span class="n">channel_by_channel</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_data_packet</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">,</span> <span class="n">module_num</span><span class="p">,</span> <span class="n">version_num</span><span class="p">,</span> <span class="n">bitdepth</span><span class="p">,</span> <span class="n">compression</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaFileWriter.write_raw_packet">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter.write_raw_packet">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_raw_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">raw_data</span><span class="p">,</span> <span class="n">signed</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">,</span> <span class="n">module_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">version_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bitdepth</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span> <span class="o">//</span> <span class="n">SAMPLE_SIZE</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">compression</span><span class="p">:</span>
+            <span class="n">raw_data</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">compression</span><span class="p">)</span>
+        <span class="n">data_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+        <span class="n">packet_length</span> <span class="o">=</span> <span class="n">SKUTEK_WORDS_LENGTH</span> <span class="o">+</span> <span class="n">data_size</span> <span class="c1"># length AFTER geb header</span>
+
+        <span class="c1"># generate header binary</span>
+        <span class="n">geb_header</span> <span class="o">=</span> <span class="n">GEB_HEADER_NATIVE</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">wave_type</span><span class="p">,</span> <span class="n">packet_length</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+        <span class="c1"># skutek words are always big endian?</span>
+        <span class="c1"># subtract 1 from bitdepth per format spec</span>
+        <span class="n">word1</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="n">SKUTEK_WORD1</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">version_num</span><span class="p">,</span> <span class="n">module_num</span><span class="p">,</span> <span class="n">signed</span><span class="p">,</span> <span class="n">channel</span><span class="p">))</span>
+        <span class="n">word2</span> <span class="o">=</span> <span class="n">bitstruct</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="n">SKUTEK_WORD2</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">bitdepth</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">))</span>
+
+        <span class="n">full_header</span> <span class="o">=</span> <span class="n">geb_header</span> <span class="o">+</span> <span class="n">word1</span> <span class="o">+</span> <span class="n">word2</span>
+
+        <span class="c1"># write packet to preallocated byte array</span>
+        <span class="c1"># start = time.time()</span>
+        <span class="n">packet_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_header</span><span class="p">)</span> <span class="o">+</span> <span class="n">data_size</span>
+        <span class="n">packet</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span> <span class="n">packet_size</span> <span class="p">)</span>
+        <span class="n">packet</span><span class="p">[:</span><span class="n">FULL_PACKET_HEADER_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_header</span>
+        <span class="n">packet</span><span class="p">[</span><span class="n">FULL_PACKET_HEADER_SIZE</span><span class="p">:]</span> <span class="o">=</span> <span class="n">raw_data</span>
+        <span class="c1">#t = time.time() - start</span>
+        <span class="c1"># import pdb; pdb.set_trace()</span>
+
+        <span class="c1"># save data</span>
+        <span class="n">n_written</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">packet</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packets_written</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_written</span> <span class="o">+=</span> <span class="n">n_written</span>
+
+        <span class="c1"># # DEBUGGING</span>
+        <span class="c1"># n_got = len(raw_data)</span>
+
+        <span class="k">if</span> <span class="n">n_written</span> <span class="o">!=</span> <span class="n">packet_size</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;packet was </span><span class="si">{</span><span class="n">packet_size</span><span class="si">}</span><span class="s2"> Bytes, but only wrote </span><span class="si">{</span><span class="n">n_written</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaFileWriter.write_raw_event">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter.write_raw_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_raw_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">raw_event</span><span class="p">,</span> <span class="n">signed</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">wave_type</span><span class="p">,</span> <span class="n">module_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">version_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bitdepth</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">n_channels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+        <span class="n">channel_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_event</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_channels</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="n">channel_size</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_channels</span><span class="p">):</span>
+            <span class="n">ch</span> <span class="o">=</span> <span class="n">channels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ch_data</span> <span class="o">=</span> <span class="n">raw_event</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="n">channel_size</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_raw_packet</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span>
+                                    <span class="n">ch_data</span><span class="p">,</span>
+                                    <span class="n">signed</span><span class="p">,</span>
+                                    <span class="n">timestamp</span><span class="p">,</span>
+                                    <span class="n">wave_type</span><span class="p">,</span>
+                                    <span class="n">module_num</span><span class="p">,</span>
+                                    <span class="n">version_num</span><span class="p">,</span>
+                                    <span class="n">bitdepth</span><span class="p">,</span>
+                                    <span class="n">compression</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="n">channel_size</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="GretinaFileWriter.close">
+<a class="viewcode-back" href="../../skutils.html#skutils.GretinaFileWriter.GretinaFileWriter.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># --------------------------------------------------------------------------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

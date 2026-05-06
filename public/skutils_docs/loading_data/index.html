@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading &amp; Processing Digitizer Data Files &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-gallery.css?v=26227f6e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Event Comma Separated Values (Event CSV) Format" href="eventcsv.html" />
+    <link rel="prev" title="Chickadee Family Digitizer" href="../chickadeecontrol.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reading &amp; Processing Digitizer Data Files</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/loading_data/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reading-processing-digitizer-data-files">
+<h1>Reading &amp; Processing Digitizer Data Files<a class="headerlink" href="#reading-processing-digitizer-data-files" title="Link to this heading"></a></h1>
+<section id="format-specifications">
+<span id="format-specs"></span><h2>Format Specifications<a class="headerlink" href="#format-specifications" title="Link to this heading"></a></h2>
+<p>Detailed specifications for the file formats supported by
+FemtoDAQ digitizer line are documented below. Each of these
+formats can be read into numpy arrays using skutils
+<a class="reference internal" href="#using-loaders"><span class="std std-ref">Loader objects</span></a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="toctree-wrapper compound" id="loading-examples">
+<span id="using-loaders"></span><p class="caption" role="heading"><span class="caption-text">Examples: working with your data files</span></p>
+<div class="nbsphinx-gallery">
+<a class="reference internal" href="examples/Histogramming_Quantities_on_FemtoDAQ.html">
+  <div><img alt="" src="../_images\loading_data_examples_Histogramming_Quantities_on_FemtoDAQ_10_0.png"></div>
+  <div>Histogramming Pulse Summary (DSP) Quantities on FemtoDAQ Vireo</div>
+</a>
+<a class="reference internal" href="examples/Processing_Waveforms.html">
+  <div><img alt="" src="../_images\loading_data_examples_Processing_Waveforms_5_0.png"></div>
+  <div>Processing Waveforms from your events</div>
+</a>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="loadering-overview">
+<h2>Loadering Overview<a class="headerlink" href="#loadering-overview" title="Link to this heading"></a></h2>
+<p>Loaders allows for quick and easy reading of FemtoDAQ digitizer data files.
+These Loaders are designed with the idea of fast, common interfaces for
+various file formats, to allow for easy and fast development no matter the
+file format used.</p>
+<p>Loaders can return two data structures:</p>
+<p>1. <code class="xref py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code> structures which aggregate data from multiple channels
+within a pre-defined timestamp window.</p>
+<p>2. <code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelData</span></code> which contains metadata and/or waveform data
+from a single channel</p>
+<hr class="docutils" />
+<section id="downloading-data-from-a-femtodaq-digitizer">
+<h3>Downloading Data from a FemtoDAQ Digitizer<a class="headerlink" href="#downloading-data-from-a-femtodaq-digitizer" title="Link to this heading"></a></h3>
+<p>Immediately following a data collection run, you can using <code class="xref py py-meth docutils literal notranslate"><span class="pre">skutils.FemtoDAQController.downloadLastRunDataFiles()</span></code>
+to download all data files that were generated during that run.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="n">digitizer</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="s2">&quot;url_or_ip_address&quot;</span><span class="p">)</span>
+
+<span class="n">last_run_data_files</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="loading-data-from-files">
+<h3>Loading Data from Files<a class="headerlink" href="#loading-data-from-files" title="Link to this heading"></a></h3>
+<section id="quick-loading">
+<h4>Quick Loading<a class="headerlink" href="#quick-loading" title="Link to this heading"></a></h4>
+<p>For most applications, <code class="xref py py-meth docutils literal notranslate"><span class="pre">skutils.quickLoad</span></code> provides the easiest way
+to load data in for analysis. <code class="xref py py-meth docutils literal notranslate"><span class="pre">skutils.quickLoad</span></code>
+automatically uses the correct type of <code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code> object for the
+type of data file and return each <code class="xref py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code> as they were saved by your device.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">event_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">skutils</span><span class="o">.</span><span class="n">quickLoad</span><span class="p">(</span><span class="n">last_run_files</span><span class="p">):</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="n">waveforms</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">wavedata</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timestamp for this event is </span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">event_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="explicit-loading">
+<h4>Explicit Loading<a class="headerlink" href="#explicit-loading" title="Link to this heading"></a></h4>
+<p>In cases where you need to re-build Events or use advanced loading features, you
+can instantiate a <code class="xref py py-class docutils literal notranslate"><span class="pre">Loader</span></code> Object. <cite>skutils</cite> provides
+tools to load each of the supported data types <a class="reference internal" href="#format-specs"><span class="std std-ref">Data Formats</span></a>.</p>
+<p>The following block assumes you are working with EventCSV data files</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">last_run_data_files</span><span class="p">:</span>
+    <span class="c1"># create the loader for this file</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">EventCSVLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">event_timestamp</span>
+        <span class="n">waves</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">wavedata</span><span class="p">()</span>
+        <span class="n">pulse_heights</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pulse_heights</span>
+        <span class="c1"># do processing...</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="working-with-event-data">
+<h2>Working with Event Data<a class="headerlink" href="#working-with-event-data" title="Link to this heading"></a></h2>
+<p>The following examples assume you will have an <code class="xref py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code>
+instantiated using a tool such as <code class="xref py py-meth docutils literal notranslate"><span class="pre">skutils.quickLoad</span></code></p>
+<p>Each <code class="xref py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code> object contains data from multiple channels.
+Depending on the format, this allows you to access timestamps, pulse_heights and other DSP quantities</p>
+<section id="iterating-through-channels-in-an-event">
+<h3>Iterating through channels in an Event<a class="headerlink" href="#iterating-through-channels-in-an-event" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ch_data</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">channel_data</span><span class="p">:</span>
+   <span class="n">channel</span> <span class="o">=</span> <span class="n">ch_data</span><span class="o">.</span><span class="n">channel</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="waveform-data">
+<h3>Waveform Data<a class="headerlink" href="#waveform-data" title="Link to this heading"></a></h3>
+<p>Waveform data for an event can be grabbed with <a class="reference internal" href="../skutils.html#id25" title="skutils.Loaders.EventInfo.wavedata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wavedata()</span></code></a>. This
+returns a numpy array where rows are waveform samples, and columns are the channels.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Some events may not contain waveforms - depending on your recording configuration.
+In these cases <a class="reference internal" href="../skutils.html#id23" title="skutils.Loaders.EventInfo.has_waves"><code class="xref py py-attr docutils literal notranslate"><span class="pre">has_waves</span></code></a> should be checked before you attempt to grab
+waveforms that don’t exist.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">channels</span>
+<span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">has_waves</span><span class="p">:</span>
+   <span class="n">waveforms</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">wavedata</span><span class="p">()</span>
+
+   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This event contains waveform data for channels: </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2">. Each wave has </span><span class="si">{</span><span class="n">waveforms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="rebuilding-events">
+<h3>Rebuilding Events<a class="headerlink" href="#rebuilding-events" title="Link to this heading"></a></h3>
+<p>By default Events are build</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chickadeecontrol.html" class="btn btn-neutral float-left" title="Chickadee Family Digitizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="eventcsv.html" class="btn btn-neutral float-right" title="Event Comma Separated Values (Event CSV) Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

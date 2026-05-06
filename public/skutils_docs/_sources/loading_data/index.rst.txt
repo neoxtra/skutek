@@ -1,0 +1,177 @@
+Reading & Processing Digitizer Data Files
+=========================================
+
+.. _Format Specs:
+
+Format Specifications
+---------------------
+
+Detailed specifications for the file formats supported by 
+FemtoDAQ digitizer line are documented below. Each of these
+formats can be read into numpy arrays using skutils 
+:ref:`Loader objects <Using Loaders>`.
+
+.. toctree::
+   :maxdepth: 1
+
+   eventcsv
+   igorwave
+   igorph
+   gretina
+
+_______________________________________________________________________________
+
+
+.. _Using Loaders:
+
+
+.. nblinkgallery::
+    :caption: Examples: working with your data files
+    :name: loading_examples
+
+    examples/Histogramming_Quantities_on_FemtoDAQ
+    examples/Processing_Waveforms
+
+
+_______________________________________________________________________________
+
+
+Loadering Overview
+------------------
+
+
+Loaders allows for quick and easy reading of FemtoDAQ digitizer data files.
+These Loaders are designed with the idea of fast, common interfaces for
+various file formats, to allow for easy and fast development no matter the
+file format used.
+
+Loaders can return two data structures:
+
+1. :py:class:`EventInfo<skutils.Loader.EventInfo>` structures which aggregate data from multiple channels
+within a pre-defined timestamp window.
+
+2. :py:class:`ChannelData<skutils.Loader.ChannelData>` which contains metadata and/or waveform data
+from a single channel
+
+
+_______________________________________________________________________________
+
+Downloading Data from a FemtoDAQ Digitizer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Immediately following a data collection run, you can using :py:meth:`skutils.FemtoDAQController.downloadLastRunDataFiles`
+to download all data files that were generated during that run. 
+
+.. code-block:: python
+
+    import skutils
+    digitizer = skutils.FemtoDAQController("url_or_ip_address")
+
+    last_run_data_files = digitizer.downloadLastRunDataFiles()
+
+
+_______________________________________________________________________________
+
+Loading Data from Files
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Quick Loading
+*************
+
+For most applications, :py:meth:`skutils.quickLoad<skutils.Loader.quickLoad>` provides the easiest way
+to load data in for analysis. :py:meth:`skutils.quickLoad<skutils.Loader.quickLoad>`
+automatically uses the correct type of :py:class:`Loader<skutils.Loader.BaseLoader>` object for the 
+type of data file and return each :py:class:`EventInfo<skutils.Loader.EventInfo>` as they were saved by your device.
+
+.. code-block:: python
+
+    event_count = 0
+    for event in skutils.quickLoad(last_run_files):
+        timestamp = event.timestamp
+        waveforms = event.wavedata()
+
+        print(f"Timestamp for this event is {timestamp}")
+        event_count += 1
+
+Explicit Loading
+****************
+
+In cases where you need to re-build Events or use advanced loading features, you
+can instantiate a :py:class:`Loader<skutils.Loader.BaseLoader>` Object. `skutils` provides
+tools to load each of the supported data types :ref:`Data Formats <Format Specs>`.
+
+The following block assumes you are working with EventCSV data files
+
+.. code-block:: python
+
+    for fname in last_run_data_files:
+        # create the loader for this file
+        loader = skutils.EventCSVLoader(fname)
+
+        for event in loader:
+            timestamp = event.event_timestamp
+            waves = event.wavedata()
+            pulse_heights = event.pulse_heights
+            # do processing...
+
+_______________________________________________________________________________
+
+
+Working with Event Data
+-----------------------
+
+The following examples assume you will have an :py:class:`EventInfo<skutils.Loader.EventInfo>` 
+instantiated using a tool such as :py:meth:`skutils.quickLoad<skutils.Loader.quickLoad>`
+
+Each :py:class:`EventInfo<skutils.Loader.EventInfo>` object contains data from multiple channels.
+Depending on the format, this allows you to access timestamps, pulse_heights and other DSP quantities
+
+
+Iterating through channels in an Event
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    for ch_data in event.channel_data:
+       channel = ch_data.channel
+
+
+_______________________________________________________________________________
+
+
+.. todo::
+
+   Grabbing Channel Timestamps in this Event
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+   _______________________________________________________________________________
+
+
+Waveform Data
+^^^^^^^^^^^^^
+
+Waveform data for an event can be grabbed with :py:meth:`~.EventInfo.wavedata`. This
+returns a numpy array where rows are waveform samples, and columns are the channels.
+
+.. attention:: 
+    
+    Some events may not contain waveforms - depending on your recording configuration.
+    In these cases :py:attr:`~.EventInfo.has_waves` should be checked before you attempt to grab
+    waveforms that don't exist.
+
+.. code-block:: python
+
+    channels = event.channels
+    if event.has_waves:
+       waveforms = event.wavedata()
+
+       print(f"This event contains waveform data for channels: {channels}. Each wave has {waveforms.shape[0]} samples")
+
+
+
+_______________________________________________________________________________
+
+Rebuilding Events
+^^^^^^^^^^^^^^^^^
+
+By default Events are build 

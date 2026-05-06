@@ -1,0 +1,117 @@
+Event Comma Separated Values (Event CSV) Format
+===============================================
+
+.. important:: 
+   
+   This format can be loaded into Python with :py:class:`skutils.Loaders.EventCSVLoader`
+
+
+
+
+EventCSV is variation of a comma separated value. It was brought to our attention by researchers at the Facility for Rare Isotope Beams. 
+Event CSV files are a mixture of tab-separate data columns and comma separated values
+
+
+Format Features
+---------------
+
+.. list-table::
+   :stub-columns: 1
+   :align: left
+
+   * - Type
+     - ASCII
+   * - Extension
+     - ".ecsv"
+   * - Contains Event Timestamp
+     - Yes
+   * - Contains Channel Timestamps
+     - No
+   * - Contains Pulse Summary (DSP Quantities)
+     - No
+   * - Contains Waveforms
+     - Yes
+   * - Average Data Rate (Vireo)
+     - 4.66 MB/s
+   * - 512 Sample Waveforms Per Second
+     - 2274
+
+
+Decoding Example
+-----------------
+
+Skutils Loaders provide :any:`EventInfo<skutils.Loaders.BaseLoader.EventInfo>` objects which contain all Summary and Waveform data
+associated with your events. 
+See :any:`EventInfo<skutils.Loaders.BaseLoader.EventInfo>` and :any:`ChannelData<skutils.Loaders.BaseLoader.ChannelData>` 
+for more information about available quantities.
+
+.. code-block:: python
+  :linenos:
+
+  import skutils
+  filenames = ['/path/to/your/file_seq000001.ecsv',
+                '/path/to/your/file_seq000002.ecsv']
+
+  for event in skutils.quickLoad(filenames):
+    # grab event timestamp and the channels in this event
+    event_timestamp = event.event_timestamp
+    channels        = event.channels
+    # DSP Quantities are not saved in this format and their values will be None
+    for ch_data in event.channel_data:
+       ch_data.channel_timestamp
+       ch_data.trigger_height
+       ch_data.pulse_height
+
+    # Grabbings waveforms. rows are samples, channels are columns
+    waveform        = event.wavedata()
+
+
+Each EventCSV file contains a human-readable header with Metadata information about the collection run. 
+Each line of the header is prefixed with '#' to indicate that it's a comment and 
+should be ignored by any parsing tools.
+
+Example File Content
+********************
+
+.. code-block:: text
+   :linenos:
+
+   # Datetime        : "UTC Time: 2025-01-17 15:06:05"
+   # GlobalID        : 0
+   # Product         : "Vireo"
+   # SerialNumber    : "000019"
+   # SoftwareVersion : "5.2.2"
+   # FirmwareVersion : "255.255.255"
+   # FormatSample : 
+   # event_timestamp	channel_list	channel_waveform_data-->
+   # event_timestamp1	[channel_list]	[chA_0, ..., chA_N]	[chB_0, ..., chB_N]	...
+   # event_timestamp2	[channel_list]	[chA_0, ..., chA_N]	[chB_0, ..., chB_N]	...
+   # BEGIN
+
+Data Format
+-----------
+
+Following the header, each line of the file contains data related to an event that occured
+at a specific timestamp. Columns are separated by tab characters.
+
+#. The first column is the timestamp of the Event. This is defined as the timestamp of first 
+channel that triggered within the trigger window.
+#. The second column is a bracketed list of channels that are represented in the event. The channels 
+are separated by commas within the brackets and the order of channels in this list is the order
+channel data appears in subsequent columns
+#. All remaining columns contain waveform data from the channels that triggered in the Event. 
+Each wave is a bracketed list of comma separated values
+
+
+Example
+*******
+**Note**: Only 8 sample waves are shown for readability. Your data files will likely contain many 
+more samples per wave.
+
+.. code-block:: text
+   
+   # timestamp	channel_list	channel_data-->
+   67353554155614	[0,1]	[632,632,633,636,636,633,635]	[675,673,672,678,677,676,675,678]
+   67353554670210	[0,1]	[634,633,632,632,632,636,634]	[677,676,675,679,677,677,678,678]
+   67353554696271	[0,1]	[632,631,631,633,631,633,632]	[673,677,676,675,674,674,674,674]
+   ...

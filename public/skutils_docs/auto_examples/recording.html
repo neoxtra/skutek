@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recording and Analyzing Data Using SkuTils and a FemtoDAQ Vireo 2-Channel Digitizer &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ae83248f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Recording and Analyzing Data Using SkuTils and a FemtoDAQ Vireo 2-Channel Digitizer</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Recording and Analyzing Data Using SkuTils and a FemtoDAQ Vireo 2-Channel Digitizer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/auto_examples/recording.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-recording-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="recording-and-analyzing-data-using-skutils-and-a-femtodaq-vireo-2-channel-digitizer">
+<span id="sphx-glr-auto-examples-recording-py"></span><h1>Recording and Analyzing Data Using SkuTils and a FemtoDAQ Vireo 2-Channel Digitizer<a class="headerlink" href="#recording-and-analyzing-data-using-skutils-and-a-femtodaq-vireo-2-channel-digitizer" title="Link to this heading"></a></h1>
+<p>SkuTils is not just designed to help one with analyzing data from your FemtoDAQ Digitizer, but it is also designed to be a fully-controllable system for managing your FemtoDAQ digitizer.</p>
+<p>Imports</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>remove me: this is a development line to allow Jeff to test skutils on Windows
+</pre></div>
+</div>
+<p>Variables to modify to run a similar experiment on your own system.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fill in this spot with your own FemtoDAQ device location</span>
+<span class="n">femto_daq_url</span> <span class="o">=</span> <span class="s2">&quot;http://vireo-000012.tek&quot;</span>
+</pre></div>
+</div>
+<p>Configuring the vireo</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">vireo_location</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">femto_daq_url</span><span class="p">)</span>
+<span class="c1"># Configure the vireo to record both channels, with 4096 samples in the waveform</span>
+<span class="c1"># Use eventcsv as it&#39;s easier to demo</span>
+<span class="n">recording_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span>
+    <span class="n">recording_channels</span><span class="p">,</span>
+    <span class="n">number_of_samples_to_capture</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span>
+    <span class="n">file_recording_format</span><span class="o">=</span><span class="s2">&quot;eventcsv&quot;</span><span class="p">,</span>
+    <span class="n">file_recording_data_output</span><span class="o">=</span><span class="s2">&quot;waveforms&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># enable triggers</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setEnableTrigger</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Allow us to see the beginning of the pulse, if we wish.</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerXPosition</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># This is the only digitizer we&#39;re using here, set the global id to 0</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setGlobalId</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># We want to capture the rising edge, and we want a &quot;fairly&quot; sensitive trigger</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerEdge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;rising&quot;</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerEdge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;rising&quot;</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Trigger windows</span>
+<span class="c1"># The trigger active window can also be called the &quot;Coincidence window&quot;</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerActiveWindow</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerAveragingWindow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">setTriggerAveragingWindow</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Coincidence settings, I want both channels to have triggered in order to be a true &quot;trigger&quot; and recording the data point</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="n">trigger_multiplicity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Collect data</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">vireo_location</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">waitUntil</span><span class="p">()</span>
+<span class="c1"># Technically not needed, just for posterity</span>
+<span class="n">vireo_location</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="c1"># We&#39;re already in a stopped state at this point, no need to calls stop</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="n">vireo_location</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Vireo-000012 (http://vireo-000012.tek) Controller : downloaded `API_Recording_04.53.15PM_Apr10_2025_seq000001.ecsv` to &#39;.\API_Recording_04.53.15PM_Apr10_2025_seq000001.ecsv&#39;
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.059 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-recording-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/0b8d1cd498e558e7dc8b610498aefe8e/recording.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">recording.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/2406f9a829d6deec2dbb92ae7f26e2a2/recording.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">recording.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/c9babb1c7b8bea01d364921783f905e0/recording.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">recording.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

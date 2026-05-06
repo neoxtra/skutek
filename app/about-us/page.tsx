@@ -82,32 +82,22 @@ export default function AboutPage() {
           <div>
             <p className="text-xs uppercase tracking-widest text-main font-bold mb-4">Who We Are</p>
             <h2 className="text-3xl font-bold text-gray-900 leading-tight mb-6">
-              Tightly integrated with the scientific community
+              We are Physicists and Data Acquisition Experts
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed text-[1.0625rem]">
               <p>
-                Most of our team are former scientists — we are tightly integrated with the nuclear and
-                astrophysics communities. We specialize in high-speed Data Acquisition systems and
-                Digital Pulse Processing electronics.
+                We are a small American company dedicated to serving physics researchers worldwide.
+                Most of our team are former scientists and we are tightly integrated with the nuclear
+                and astrophysics communities. We specialize in high-speed Data Acquisition systems
+                and Digital Pulse Processing electronics.
               </p>
               <p>
-                Our product line covers the whole data acquisition chain: detectors, digitizers,
+                Our product line consists of the whole data acquisition chain: detectors, digitizers,
                 firmware pulse processing, and data management for scientific big-data applications.
               </p>
-            </div>
-
-            {/* Pillars */}
-            <div className="mt-10 grid grid-cols-3 gap-4">
-              {[
-                { icon: '🔬', label: 'Former scientists on staff' },
-                { icon: '🇺🇸', label: 'American-made hardware' },
-                { icon: '🔗', label: 'End-to-end DAQ chain' },
-              ].map(p => (
-                <div key={p.label} className="flex flex-col items-center text-center gap-2 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                  <span className="text-2xl">{p.icon}</span>
-                  <span className="text-xs font-semibold text-gray-700 leading-tight">{p.label}</span>
-                </div>
-              ))}
+              <p>
+                Please reach out to discuss your research with us and how we can help.
+              </p>
             </div>
 
             <div className="mt-10 flex flex-wrap gap-3">
@@ -184,14 +174,14 @@ export default function AboutPage() {
             <div className="mt-1 h-[3px] bg-main rounded-full w-16 mb-8" />
             <div className="space-y-4 text-gray-600 leading-relaxed text-[1.0625rem]">
               <p>
-                We got our start developing and supplying over 1,500 digitizer channels for the
-                LUX dark matter experiment — taking place several thousand feet below the surface
-                in Lead, South Dakota. Since they were installed underground, there has not been a
-                single reported failure.
+                We got our start developing and supplying over 1500 digitizer channels for the LUX
+                dark matter experiment which takes place several thousand feet below the surface in
+                Lead, South Dakota. Since they were installed underground 3 years ago, there has not
+                been a single reported failure.
               </p>
               <p>
-                We have since expanded our product line and provided data acquisition hardware to
-                researchers across nuclear physics, particle astrophysics, biophysics, and medical
+                We have since expanded our product line and have provided data acquisition hardware
+                to researchers in nuclear physics, particle astrophysics, biophysics, and medical
                 research.
               </p>
             </div>

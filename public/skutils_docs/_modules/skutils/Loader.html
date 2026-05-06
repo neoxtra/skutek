@@ -1,0 +1,1157 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.Loader &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40bed639" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../femtodaqcontrol.html">Controlling a FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../femtodaqcontrol.html#femtodaqcontroller">FemtoDAQController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../loading_data/index.html#loading-digitizer-data-files">Loading Digitizer Data Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmtools.html">Data Management Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#solidagocontroller">SolidagoController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dmtools.html#collectornodecontroller">CollectorNodeController</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.Loader">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#id19"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.GretaLoader"><code class="docutils literal notranslate"><span class="pre">GretaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.Loader.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.Loader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.Loader</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">Generator</span><span class="p">,</span>
+    <span class="n">List</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+    <span class="n">IO</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+
+<span class="c1"># Python 3.8 minimum because of this and walrus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">LegacyGretinaLoader</span>  <span class="c1"># type: ignore</span>
+
+<span class="c1"># Prep if we ever move up np minimum requirements to 1.21</span>
+<span class="c1"># OurNumpyArrType = np.ndarray[tuple[int, ...], np.dtype[np.int16]]</span>
+<span class="n">OurNumpyArrType</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="ChannelData">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.ChannelData">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChannelData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    All data related to a single channel, could be as part of an event or not as part of an event, and may or may not have a pulse summary or wave</span>
+
+<span class="sd">    Check self.has_wave and self.has_summary to see if either are present</span>
+
+<span class="sd">    .. autoattribute::</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">pulse_summary</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+        <span class="n">wave</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OurNumpyArrType</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="c1"># General / Tracking Variables</span>
+
+        <span class="c1">#: channel ID </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">channel</span>
+        <span class="c1">#: FPGA Event Timestamp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">timestamp</span>
+        <span class="c1">#: Boolean indicating whether this channel contains waveform data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_wave</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+        <span class="c1">#: Boolean indicating whether this channel contains DSP summary data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_summary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pulse_summary</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+
+        <span class="c1">#: Numpy Waveform for digitizer signal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OurNumpyArrType</span><span class="p">]</span> <span class="o">=</span> <span class="n">wave</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_wave</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="c1">#: Dictionary of Pulse Summary (DSP) Information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">pulse_summary</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pulse_summary</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="p">)</span>
+
+        <span class="c1">#: Maximum height of pulse in the pulse height window. Subject to averaging</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pulse_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pulse_height&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: Maximum height of trigger in the trigger active window. Subject to averaging</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;trigger_height&quot;</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger_height</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;trig_height&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1">#: QuadQDC BASE Integration. Not supported on all digitizer models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_base</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quadqdc_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: QuadQDC FAST Integration. Not supported on all digitizer models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_fast</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quadqdc_fast&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: QuadQDC SLOW Integration. Not supported on all digitizer models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_slow</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quadqdc_slow&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: QuadQDC TAIL Integration. Not supported on all digitizer models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_tail</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quadqdc_tail&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_base</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qdc_base_sum&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_fast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_fast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qdc_fast_sum&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_slow</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_slow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qdc_slow_sum&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_tail</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quadqdc_tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qdc_tail_sum&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: Boolean indicating whether this channel triggered</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triggered</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;triggered&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: The number of times the trigger for this channel fired in the trigger window</span>
+        <span class="c1">#: Also known as pileup count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger_multiplicity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;trigger_count&quot;</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger_multiplicity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_summary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;trig_count&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1"># Future:</span>
+        <span class="c1"># self.qdc_rect     : int</span>
+        <span class="c1"># self.qdc_tri      : int</span>
+        <span class="c1"># self.mwd          : int</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChannelData.pileup">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.ChannelData.pileup">[docs]</a>
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pileup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns true if there have been multiple triggers in this channel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger_multiplicity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="ChannelData.num_wave_samples">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.ChannelData.num_wave_samples">[docs]</a>
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_wave_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of samples in the wave, 0 if this has no wave</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_wave</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+</div>
+
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="EventInfo">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.EventInfo">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EventInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Information related to a group of channels collated as an &quot;Event&quot;</span>
+<span class="sd">    as defined by either the file format or a rebuilt coincidence window.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :channel_data: A list of more than one channel constituting an event</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: number of channels in this event</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channel_data</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;At least one channel must be provided&quot;</span>
+        <span class="c1"># Ensure channel data is homogenous</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="n">channel_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">has_wave</span> <span class="o">==</span> <span class="n">channel_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">has_wave</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="n">channel_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">has_summary</span> <span class="o">==</span> <span class="n">channel_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">has_summary</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">channel_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">cd</span><span class="p">:</span> <span class="n">cd</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_waves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True if this Event contains waveform data for ALL of it&#39;s channels&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">cd</span><span class="o">.</span><span class="n">has_wave</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True if this Event contains pulse summary data for ALL of it&#39;s channels&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_summary</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">cd</span><span class="o">.</span><span class="n">has_summary</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">)</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="c1"># Waveforms Shape</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    
+<div class="viewcode-block" id="EventInfo.wavedata">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.EventInfo.wavedata">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wavedata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OurNumpyArrType</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An np.ndarray of waves in the event. Rows are samples, columns are the </span>
+<span class="sd">        channels in this event. see `channels` for the list of channel numbers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_waves</span><span class="p">:</span>
+            <span class="c1"># stack multiple waves into a single array. Each channel is one column</span>
+            <span class="n">arrays</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">OurNumpyArrType</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">cd</span><span class="o">.</span><span class="n">wave</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">arrays</span><span class="o">=</span><span class="n">arrays</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;No Waveform waves found for this Event!&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EventInfo.num_wave_samples">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.EventInfo.num_wave_samples">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_wave_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of samples in each channel&#39;s waveform or None if </span>
+<span class="sd">        no waveforms exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_waves</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">num_wave_samples</span></div>
+
+
+<div class="viewcode-block" id="EventInfo.shape">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.EventInfo.shape">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the shape of :meth:`.wavedata&#39; or None if no waveforms exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_waves</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_wave_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_channels</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="c1"># Channels</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List of all channels in the event</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">cd</span><span class="o">.</span><span class="n">channel</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">]</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="c1"># Timestamps</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">timestamps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All timestamps found throughout all of the channels we have</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">cd</span><span class="o">.</span><span class="n">timestamp</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">]</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Alias for :attr:`.min_timestamp`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_timestamp</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">min_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The smallest timestamp found in the list of timestamps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="p">)</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">max_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The largest timestamp found in the list of timestamps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="p">)</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">timestamp_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Range of timestamps from the maximum and minimum</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_timestamp</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_timestamp</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="c1"># Pulse Heights</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pulse_heights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the pulse heights on each channel.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">cd</span><span class="o">.</span><span class="n">pulse_height</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">]</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="c1"># Trigger Data</span>
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trigger_heights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the trigger heights trigger on each channel.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">cd</span><span class="o">.</span><span class="n">trigger_height</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">]</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channel_multiplicity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of channels that triggered at least once in this event&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cd</span><span class="o">.</span><span class="n">triggered</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span><span class="p">)</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pileup_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of the number of triggers fired for each channel&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">cd</span><span class="o">.</span><span class="n">trigger_multiplicity</span> <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_data</span> <span class="k">if</span> <span class="n">cd</span><span class="o">.</span><span class="n">triggered</span><span class="p">]</span>
+
+    <span class="c1"># .........................................................................</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_triggers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the total number of triggers that fired across all channels.</span>
+<span class="sd">        AKA Hit Multiplicity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pileup_count</span><span class="p">)</span></div>
+
+
+    <span class="c1"># .........................................................................</span>
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="BaseLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.BaseLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseLoader</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The base class that all Loader types are an extension of, Loaders extending this subclass this class and then implement load_channel_batch</span>
+
+<span class="sd">    All BaseLoader derived classes can be used as a context manager, i.e.:</span>
+
+<span class="sd">    with &lt;loader&gt;(file) as loader:</span>
+<span class="sd">        # Do whatever</span>
+
+<span class="sd">    NOTE:</span>
+<span class="sd">        An individual BaseLoader instance is able to run exactly *once* before needing to -reopen the file, please keep this in mind.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :fpath: filepath to the data file</span>
+<span class="sd">        :rebuild_events_with_window: timestamp window where channel data is considered part of the same event. If None, then it will return events as they are defined in the file.</span>
+
+<span class="sd">        FUTURE:</span>
+<span class="sd">            Add a parameter `resort_by_timestamp` that resorts all data</span>
+<span class="sd">            by the timestamp in the rare case that data isn&#39;t written to disk in</span>
+<span class="sd">            sequence. This is a slow and memory intensive operation that is never required</span>
+<span class="sd">            if your data is generated using the UI of a SkuTek digitizer. So it&#39;s not</span>
+<span class="sd">            worth doing at this time</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fpath</span> <span class="o">=</span> <span class="n">fpath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rebuild_events_with_window</span> <span class="o">=</span> <span class="n">rebuild_events_with_window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_event_building</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild_events_with_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel_ran</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">:</span> <span class="n">IO</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BaseLoader&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">traceback</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="BaseLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.BaseLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The base method for loading channels, this loads a sequence of channels (events) or individual channels.</span>
+
+<span class="sd">        This is specialized for all loader types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Many file formats save channels in columns and samples in rows</span>
+        <span class="c1"># which means it&#39;s nigh impossible to just load in one channel at a time</span>
+        <span class="c1"># For file formats where this is possible this function will return a single</span>
+        <span class="c1"># ChannelData. For file formats (like IGOR or EventCSV) where it&#39;s not,</span>
+        <span class="c1"># then we&#39;ll return a list of ChannelData</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;required overload&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="BaseLoader.channelByChannel">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.BaseLoader.channelByChannel">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channelByChannel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the individual channels, loaded one at a time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># This code is less complex than it looks, the first repeated while statement is basically just the previous one, but again</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Does a &quot;Not none&quot; check and also is just an entry-point to finish a list for an unfinished generator</span>
+            <span class="k">while</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">channel_ran</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># Load in the batch to a class-based variable</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadChannelBatch</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">channel_ran</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>
+
+            <span class="c1"># Yield as many channels as we can yield before we return</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">current_chan_in_values</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="BaseLoader.nextEvent">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.BaseLoader.nextEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nextEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">EventInfo</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtain the next event by loading the next batch.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># if we are not actively event building then we just define</span>
+        <span class="c1"># an event as it is defined in the file as a batch of channels</span>
+        <span class="c1"># i.e. no timestamp coincidence window checking</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_event_building</span><span class="p">:</span>
+            <span class="n">channel_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loadChannelBatch</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">channel_batch</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="k">return</span> <span class="n">EventInfo</span><span class="p">(</span><span class="n">channel_batch</span><span class="p">)</span>
+
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Otherwise we go through the data channel by channel</span>
+        <span class="c1"># and define an event by it&#39;s timestamp and coincidence window</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># grab the next channel data first to make sure we&#39;re not</span>
+            <span class="c1"># at the end of the file</span>
+            <span class="n">channel_data_generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">channelByChannel</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">first_cd</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">channel_data_generator</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="c1"># There&#39;s probably a smart walrus operator way to do this</span>
+            <span class="n">channels_in_event</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">cd</span> <span class="o">=</span> <span class="n">first_cd</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild_events_with_window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rebuild_events_with_window</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># channel_timestamp = cd.timestamp if cd.timestamp else cd.event_timestamp</span>
+                <span class="c1"># check to make sure the timestamp is in the event&#39;s coincidence window</span>
+                <span class="k">if</span> <span class="n">cd</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&lt;=</span> <span class="p">(</span>
+                    <span class="n">first_cd</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild_events_with_window</span>
+                <span class="p">):</span>
+                    <span class="n">channels_in_event</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cd</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">cd</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">channel_data_generator</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">return</span> <span class="n">EventInfo</span><span class="p">(</span><span class="n">channels_in_event</span><span class="p">)</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="BaseLoader.lazyLoad">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.BaseLoader.lazyLoad">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lazyLoad</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">EventInfo</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lazily yield events, returns the next event in a generator fashion for iterating</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># The while will be false if it&#39;s None, otherwise it&#39;s true</span>
+        <span class="k">while</span> <span class="n">event_tuple</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nextEvent</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">event_tuple</span></div>
+
+
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">EventInfo</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Iterate over a lazy-loading of events</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lazyLoad</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="EventCSVLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.EventCSVLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EventCSVLoader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loader for the TSV-type format for the Vireo EventCSV Format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EventCSVLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.EventCSVLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+        <span class="c1"># The way this works is we have a file made up of lines, if the line starts with a pound sign it&#39;s a comment</span>
+        <span class="c1"># Technically, the file is a TSV, but I didn&#39;t know that at the time, thus, I may eventually swap this to use a &quot;CSV&quot; reader in TSV mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="c1"># Splitting the line here is fine, because what we&#39;re doing is going through a space-separated value here.</span>
+        <span class="n">separated</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="c1"># Timestamp being first is fine....</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">separated</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Here&#39;s where it&#39;s no longer fine, we need to find the systems where the start and end are brackets, not spaces, as a temporary measure, we can</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">channel_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">separated</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;It is likely that you somehow inserted a space into the bracket array, this will cause the file to not be parsed, the underlying error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">data_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channel_list</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">separated</span><span class="p">[</span><span class="n">start</span><span class="p">]))</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">ChannelData</span><span class="p">(</span>
+                    <span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">,</span>
+                    <span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span>
+                    <span class="n">pulse_summary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">wave</span><span class="o">=</span><span class="n">array</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;It is likely that you somehow inserted a space into the bracket array, this will cause the file to not be parsed, the underlying error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">data_list</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="IGORPulseHeightLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.IGORPulseHeightLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IGORPulseHeightLoader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    IGOR pulse height loader, this type of loader does not actually have waveforms, but only the height and timestamp of a summary</span>
+
+<span class="sd">    Only the pulse_height section of ChannelData and the timestamp will be filled</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+        <span class="c1"># First line starts with IGOR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_waves</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp_col</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_to_channel_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="IGORPulseHeightLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.IGORPulseHeightLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_waves</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;END&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">channels_to_load_2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># Begin parsing!</span>
+            <span class="n">split_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split_line</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp_col</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">channel_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_to_channel_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">channel_called</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel_name</span><span class="p">)</span>
+                <span class="n">channels_to_load_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ChannelData</span><span class="p">(</span>
+                        <span class="n">channel_called</span><span class="p">,</span>
+                        <span class="n">timestamp</span><span class="p">,</span>
+                        <span class="p">{</span><span class="s2">&quot;pulse_height&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">split_line</span><span class="p">[</span><span class="n">column</span><span class="p">])},</span>
+                        <span class="kc">None</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels_to_load_2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">channels_to_load_2</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;//&quot;</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+        <span class="n">splitlines</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">column_to_channel_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">assert</span> <span class="n">splitlines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;WAVES/o/D&quot;</span><span class="p">)</span>
+        <span class="n">timestamp_column</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">filter</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+                    <span class="p">[</span>
+                        <span class="n">splitlines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitlines</span><span class="p">))</span>
+                    <span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># Map a column to a channel, remember, we</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp_col</span> <span class="o">=</span> <span class="n">timestamp_column</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">mapping_func</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitlines</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">splitlines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;chan&quot;</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">splitlines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">&quot;chan&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">chan_name</span> <span class="ow">in</span> <span class="n">mapping_func</span><span class="p">():</span>
+            <span class="n">column_to_channel_map</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">chan_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_to_channel_map</span> <span class="o">=</span> <span class="n">column_to_channel_map</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="c1"># Begin seeking the waveform, we&#39;re going to be looping from here-on-out</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;BEGIN&quot;</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">in_waves</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">channels_to_load</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Begin parsing!</span>
+        <span class="n">split_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split_line</span><span class="p">[</span><span class="n">timestamp_column</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saved_timestamp</span> <span class="o">=</span> <span class="n">timestamp</span>
+        <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">channel_name</span> <span class="ow">in</span> <span class="n">column_to_channel_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">channel_called</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel_name</span><span class="p">)</span>
+            <span class="n">channels_to_load</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">ChannelData</span><span class="p">(</span>
+                    <span class="n">channel_called</span><span class="p">,</span>
+                    <span class="n">timestamp</span><span class="p">,</span>
+                    <span class="p">{</span><span class="s2">&quot;pulse_height&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">split_line</span><span class="p">[</span><span class="n">column</span><span class="p">])},</span>
+                    <span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels_to_load</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">channels_to_load</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GretinaLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.GretinaLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GretinaLoader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Different from the original GretinaLoader, this wraps that to the standard BaseLoader interface for consistency purposes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loader</span> <span class="o">=</span> <span class="n">GretinaLoader</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GretinaLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.GretinaLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+        <span class="c1"># contain all of the code without typing and get it into a typed set of code, sucks but, what can you do.</span>
+        <span class="n">metadata</span><span class="p">,</span> <span class="n">event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">next_event</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">chan_list</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;channels&quot;</span><span class="p">]</span>
+        <span class="n">summaries</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;summaries&quot;</span><span class="p">]</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
+        <span class="n">channel_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chan_list</span><span class="p">)):</span>
+            <span class="n">channel</span> <span class="o">=</span> <span class="n">chan_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">summaries</span><span class="p">:</span>
+                <span class="n">summary</span> <span class="o">=</span> <span class="n">summaries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">summary</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">event_array</span> <span class="o">=</span> <span class="n">event</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+                <span class="n">channel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ChannelData</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">event_array</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">channel_list</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">traceback</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>  <span class="c1"># type: ignore</span></div>
+
+
+
+<span class="c1"># Directly translate the C structures here</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GretaPacketRoutingHeader</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">LittleEndianStructure</span><span class="p">):</span>
+    <span class="n">_pack_</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">_align_</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;flags&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;subtype&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;sequence_number&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;checksum&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">),</span>
+    <span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GretaPacketWaveSubheader</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">LittleEndianStructure</span><span class="p">):</span>
+    <span class="n">_pack_</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">_align_</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;subheader_version&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;trig_count&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;triggered&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;reserved_0&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int8</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;trigger_height&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;pulse_height&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;module_number&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;start_location&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;reserved_1&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int16</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;qdc_base_sum&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;qdc_fast_sum&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;qdc_slow_sum&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;qdc_tail_sum&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;reserved_3&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span> <span class="o">*</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GretaPacketTotal</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">LittleEndianStructure</span><span class="p">):</span>
+    <span class="n">_pack_</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">_align_</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="n">GretaPacketRoutingHeader</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;subheader&quot;</span><span class="p">,</span> <span class="n">GretaPacketWaveSubheader</span><span class="p">),</span>
+    <span class="p">]</span>
+
+
+<div class="viewcode-block" id="GretaLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.GretaLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GretaLoader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loader for the SkuTek GRETA single-packet format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GretaLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.GretaLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+        <span class="n">packet_initial_bytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">GretaPacketTotal</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">packet_initial_bytes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">total_initial_packet</span> <span class="o">=</span> <span class="n">GretaPacketTotal</span><span class="o">.</span><span class="n">from_buffer_copy</span><span class="p">(</span><span class="n">packet_initial_bytes</span><span class="p">)</span>
+        <span class="n">flexible_member_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">total_initial_packet</span><span class="o">.</span><span class="n">subheader</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">flexible_member_bytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint16</span> <span class="o">*</span> <span class="n">total_initial_packet</span><span class="o">.</span><span class="n">subheader</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="c1"># Building the actual ChannelData</span>
+        <span class="k">if</span> <span class="n">flexible_member_bytes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">flex_member_array_for_use</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span>
+                <span class="n">flexible_member_bytes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">flex_member_array_for_use</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">total_initial_packet</span><span class="o">.</span><span class="n">subheader</span><span class="o">.</span><span class="n">channel</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">total_initial_packet</span><span class="o">.</span><span class="n">subheader</span><span class="p">,</span> <span class="n">GretaPacketWaveSubheader</span><span class="p">)</span>
+        <span class="n">build_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">total_initial_packet</span><span class="o">.</span><span class="n">subheader</span><span class="o">.</span><span class="n">_fields_</span><span class="p">:</span>
+            <span class="n">build_dict</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">total_initial_packet</span><span class="o">.</span><span class="n">subheader</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">total_initial_packet</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">timestamp</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">ChannelData</span><span class="p">(</span>
+                <span class="n">channel</span><span class="p">,</span>
+                <span class="n">timestamp</span><span class="p">,</span>
+                <span class="n">build_dict</span><span class="p">,</span>
+                <span class="n">flex_member_array_for_use</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="IGORWaveLoader">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.IGORWaveLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IGORWaveLoader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A loader for the IGOR wave format type, this is an event type format and will consistently have events correctly built so long as the orignial event was made.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+        <span class="c1"># First line starts with IGOR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IGORWaveLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.IGORWaveLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+        <span class="c1"># externally defined functions that we just skip</span>
+
+        <span class="c1"># Items that we need to parse to get information such as timestamps</span>
+        <span class="n">event_num_start</span> <span class="o">=</span> <span class="s2">&quot;X evt_num =&quot;</span>
+        <span class="n">timestamp_start</span> <span class="o">=</span> <span class="s2">&quot;X timestamp =&quot;</span>
+        <span class="n">executed_comment</span> <span class="o">=</span> <span class="s2">&quot;X //&quot;</span>
+        <span class="n">end_line</span> <span class="o">=</span> <span class="s2">&quot;END&quot;</span>
+        <span class="n">waves_start</span> <span class="o">=</span> <span class="s2">&quot;WAVES/o/D&quot;</span>
+
+        <span class="c1"># Parsing logic</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_timestamp_line</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">timestamp_start</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">parse_timestamp</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_timestamp_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="n">timestamp_start</span><span class="p">))</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_event_num_line</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">event_num_start</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">parse_event_num</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_event_num_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="n">event_num_start</span><span class="p">))</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_comment</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">executed_comment</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_waves_line</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">waves_start</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">read_until_non_comment</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">while</span> <span class="n">is_comment</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">line</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_end</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">end_line</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">mapping_func</span><span class="p">(</span>
+            <span class="n">splitlines</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitlines</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">splitlines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;chan&quot;</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">splitlines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">&quot;chan&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+
+        <span class="c1"># load_channel_batch again</span>
+
+        <span class="c1"># Starting the parse</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">read_until_non_comment</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_end</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># timestamp &amp; more check, if it&#39;s not one of timestamp or event number, skip</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_event_num_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_timestamp_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">read_until_non_comment</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">is_event_num_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">read_until_non_comment</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># -1 is an invalid timestamp time as far as I&#39;m aware</span>
+        <span class="n">this_event_timestamp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">is_timestamp_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">this_event_timestamp</span> <span class="o">=</span> <span class="n">parse_timestamp</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">is_waves_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">read_until_non_comment</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># moved here for simplicity&#39;s sake</span>
+        <span class="k">assert</span> <span class="n">this_event_timestamp</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;The timestamp should exist!&quot;</span>
+
+        <span class="c1"># Parse what column after begin belonds in what channel</span>
+        <span class="n">column_to_channel_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">splitline</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">channel_name</span> <span class="ow">in</span> <span class="n">mapping_func</span><span class="p">(</span><span class="n">splitline</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+            <span class="n">column_to_channel_map</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">channel_name</span>
+
+        <span class="c1"># remove the BEGIN\n line</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+        <span class="c1"># Load the channel waves</span>
+        <span class="n">wave_lines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">is_end</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">wave_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+        <span class="n">raw_waves</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wave_lines</span><span class="p">)</span>
+
+        <span class="c1"># convert from a string to wave using numpy parser</span>
+        <span class="n">waveforms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">raw_waves</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="c1"># reshape from flattened view into a N rows and columns for each channel.</span>
+        <span class="c1"># This is a view, not a copy. So is a fast operation</span>
+        <span class="n">waveforms</span> <span class="o">=</span> <span class="n">waveforms</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">column_to_channel_map</span><span class="p">)))</span>
+
+        <span class="c1"># Collate each waveform into a distinct wave</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">this_event_timestamp</span>
+        <span class="n">channel_data_to_return</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">waveforms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">channel_value</span> <span class="o">=</span> <span class="n">column_to_channel_map</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">channel_data_to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="c1"># If this_event_timestamp doesn&#39;t exist, crash out</span>
+                <span class="n">ChannelData</span><span class="p">(</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">channel_value</span><span class="p">),</span> <span class="n">timestamp</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">waveforms</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">channel_data_to_return</span></div>
+</div>
+
+
+
+
+<span class="c1">###############################################################################</span>
+<div class="viewcode-block" id="quickLoad">
+<a class="viewcode-back" href="../../skutils.html#skutils.Loader.quickLoad">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">quickLoad</span><span class="p">(</span><span class="n">file_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">EventInfo</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;generator which loads events from the list of files provided. </span>
+<span class="sd">    This function determines which `Loader` object to use for each file</span>
+<span class="sd">    depending on the file extension and content. If you need to rebuild events or</span>
+<span class="sd">    utilize other loader features, you will need to use `Loader` Objects directly.</span>
+
+<span class="sd">    :param file_list: a list of files to load events from. Files will be </span>
+<span class="sd">        loaded in the order they are passed in </span>
+
+<span class="sd">    :yields: EventInfo object for each event in all files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s1">&#39;.ecsv&#39;</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">EventCSVLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.itx&quot;</span><span class="p">:</span>
+            <span class="c1"># grab the first lines of the file to determine if this is an </span>
+            <span class="c1"># Igor Pulse Height of IGOR wave format</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="c1"># discard first line</span>
+                <span class="n">raw_format_line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;X // &#39;</span><span class="p">)</span>
+                <span class="n">format_type</span> <span class="o">=</span> <span class="n">raw_format_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">format_type</span> <span class="o">==</span> <span class="s1">&#39;IGOR PULSE HEIGHTS&#39;</span><span class="p">:</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="n">IGORPulseHeightLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">format_type</span> <span class="o">==</span> <span class="s1">&#39;IGOR WAVES&#39;</span><span class="p">:</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="n">IGORWaveLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can&#39;t load SkuTek IGOR file &#39;</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.geb&quot;</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">WrappedGretinaLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">&quot;.greta&quot;</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">GretaLoader</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can&#39;t load file with extension &#39;</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">event</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

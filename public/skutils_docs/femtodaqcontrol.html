@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FemtoDAQ Family Digitizer &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dda2323a" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chickadee Family Digitizer" href="chickadeecontrol.html" />
+    <link rel="prev" title="Skutils Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="loading_data/index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">FemtoDAQ Family Digitizer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/femtodaqcontrol.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="femtodaq-family-digitizer">
+<h1>FemtoDAQ Family Digitizer<a class="headerlink" href="#femtodaq-family-digitizer" title="Link to this heading"></a></h1>
+<p>Requires FemtoDAQ Software v6.0.0 or above</p>
+<p>The <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController" title="skutils.FemtoDAQController.FemtoDAQController"><code class="xref py py-class docutils literal notranslate"><span class="pre">skutils.FemtoDAQController</span></code></a> is a class for
+controlling and coordinating the FemtoDAQ line of SkuTek Instrumentation
+digitizers. The FemtoDAQ line at this point in time includes the FemtoDAQ Vireo
+and FemtoDAQ Kingfisher.</p>
+<hr class="docutils" />
+<section id="connect-to-a-digitizer-hooked-up-via-usb">
+<h2>Connect to a Digitizer Hooked up via USB<a class="headerlink" href="#connect-to-a-digitizer-hooked-up-via-usb" title="Link to this heading"></a></h2>
+<p>use the <code class="xref py py-attr docutils literal notranslate"><span class="pre">skutils.FEMTODAQ_USB</span></code> to grab the USB IP Address</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Only 1 digitizer device can be connected via USB as a time</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="n">digitizer</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">skutils</span><span class="o">.</span><span class="n">FEMTODAQ_USB</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="connect-to-a-digitizer-on-the-network">
+<h2>Connect to a Digitizer on the Network<a class="headerlink" href="#connect-to-a-digitizer-on-the-network" title="Link to this heading"></a></h2>
+<p>Your digitizer will attempt to assign itself a hostname on your network composed of
+its product and serial number. e.g. <cite>vireo-000019</cite>. However, this may not be possible
+on some networks - particularly those in secure areas or within a Science DMZ.
+In these cases, the IP Address can be used instead.
+Consult with your network administrator for assistance getting the IP address.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">IP_ADDRESS_OR_URL</span> <span class="o">=</span> <span class="s2">&quot;vireo-000019.local&quot;</span>
+<span class="n">digitizer</span> <span class="o">=</span> <span class="n">skutils</span><span class="o">.</span><span class="n">FemtoDAQController</span><span class="p">(</span><span class="n">IP_ADDRESS_OR_URL</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="print-out-device-information">
+<h2>Print out Device Information<a class="headerlink" href="#print-out-device-information" title="Link to this heading"></a></h2>
+<p><cite>FemtoDAQController.summary()</cite> will print out information about your device</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">digitizer</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Vireo</span><span class="o">-</span><span class="mi">000019</span> <span class="p">(</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">vireo</span><span class="o">-</span><span class="mf">000019.</span><span class="n">tek</span><span class="p">)</span>
+<span class="n">Product</span> <span class="n">Revision</span>    <span class="p">:</span> <span class="n">VIREO100_REV_B</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">Channels</span>  <span class="p">:</span> <span class="mi">2</span>
+<span class="n">Sampling</span> <span class="n">Frequency</span>  <span class="p">:</span> <span class="mf">100.0</span> <span class="n">MHz</span>
+<span class="n">ADC</span> <span class="n">Bitdepth</span>        <span class="p">:</span> <span class="mi">14</span> <span class="n">bits</span>
+<span class="n">Maximum</span> <span class="n">Wave</span> <span class="n">Length</span> <span class="p">:</span> <span class="mf">81.92</span><span class="n">us</span>
+<span class="n">Firmware</span> <span class="n">Version</span>    <span class="p">:</span> <span class="mf">5.5.0</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">Software</span> <span class="n">Version</span>    <span class="p">:</span> <span class="mf">5.4.0</span>
+<span class="n">Linux</span> <span class="n">Image</span> <span class="n">Version</span> <span class="p">:</span> <span class="mf">5.1.1</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="changing-trigger-settings">
+<h2>Changing Trigger Settings<a class="headerlink" href="#changing-trigger-settings" title="Link to this heading"></a></h2>
+<p>“Trigger Active Window” is sometimes known as “Coincidence Window”</p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TRIGGER_X_POSITION</span>  <span class="o">=</span> <span class="mi">32</span>
+<span class="n">TRIGGER_WINDOW</span>      <span class="o">=</span> <span class="mi">128</span>
+<span class="n">TRIGGER_SENSITIVITY</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">TRIGGER_EDGE</span>        <span class="o">=</span> <span class="s2">&quot;rising&quot;</span>
+<span class="n">TRIGGER_AVERAGING</span>   <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerActiveWindow</span><span class="p">(</span><span class="n">TRIGGER_WINDOW</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerXPosition</span><span class="p">(</span><span class="n">TRIGGER_X_POSITION</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerSensitivity</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">TRIGGER_SENSITIVITY</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerEdge</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">TRIGGER_EDGE</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setTriggerAveragingWindow</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">TRIGGER_AVERAGING</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_trg_active_window</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getTriggerActiveWindow</span><span class="p">()</span>
+<span class="n">readback_trg_x_positon</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getTriggerXPosition</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+    <span class="n">readback_trg_sensitivity</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getTriggerSensitivity</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="n">readback_trg_edge</span>        <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getTriggerEdge</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="n">readback_trg_avg_window</span>  <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getTriggerAveragingWindow</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="changing-pulse-height-dsp-filter-settings">
+<h2>Changing Pulse Height/DSP Filter Settings<a class="headerlink" href="#changing-pulse-height-dsp-filter-settings" title="Link to this heading"></a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Historical Naming</p>
+<p>Pulse Height Window and Pulse Height Averaging Windows control
+windows and averaging for many other Digitial Signal Processing (DSP)
+quantities in FemtoDAQ Firmware. Including Rectangular and Triangular
+QDC filters.</p>
+</div>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DSP_WINDOW</span>             <span class="o">=</span> <span class="mi">128</span>
+<span class="n">DSP_QUANTITY_AVERAGING</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setPulseHeightWindow</span><span class="p">(</span><span class="n">DSP_WINDOW</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setPulseHeightAveragingWindow</span><span class="p">(</span><span class="n">DSP_QUANTITY_AVERAGING</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_ph_window</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getPulseHeightWindow</span><span class="p">()</span>
+<span class="n">readback_ph_avg_window</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">setPulseHeightAveragingWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="configuring-automatic-baseline-restoration">
+<h2>Configuring Automatic Baseline Restoration<a class="headerlink" href="#configuring-automatic-baseline-restoration" title="Link to this heading"></a></h2>
+<p>check Baseline Restoration support on your unit with <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.has_baseline_restoration" title="skutils.FemtoDAQController.FemtoDAQController.has_baseline_restoration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">has_baseline_restoration</span></code></a></p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">setEnableBaselineRestoration</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setBaselineRestorationExclusion</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_blr_enabled</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getEnableBaselineRestoration</span><span class="p">()</span>
+<span class="n">readback_blr_exclusion</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getBaselineRestorationExclusion</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="configuring-quadqdc-integration-windows">
+<h2>Configuring QuadQDC Integration Windows<a class="headerlink" href="#configuring-quadqdc-integration-windows" title="Link to this heading"></a></h2>
+<p>check QuadQDC support on your unit with <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.has_quadqdc_integration" title="skutils.FemtoDAQController.FemtoDAQController.has_quadqdc_integration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">has_quadqdc_integration</span></code></a></p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">base_width</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">fast_width</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">slow_width</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">tail_width</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setQuadQDCWindows</span><span class="p">(</span><span class="n">base_width</span><span class="p">,</span><span class="n">fast_width</span><span class="p">,</span><span class="n">slow_width</span><span class="p">,</span><span class="n">tail_width</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_quad_qdc</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getQuadQDCWindows</span><span class="p">()</span>
+
+<span class="n">readback_base_width</span> <span class="o">=</span> <span class="n">readback_quad_qdc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">readback_fast_width</span> <span class="o">=</span> <span class="n">readback_quad_qdc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">readback_slow_width</span> <span class="o">=</span> <span class="n">readback_quad_qdc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">readback_tail_width</span> <span class="o">=</span> <span class="n">readback_quad_qdc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="setting-bias-hv-voltage-output">
+<h2>Setting Bias (HV) Voltage Output<a class="headerlink" href="#setting-bias-hv-voltage-output" title="Link to this heading"></a></h2>
+<p>check Bias Voltage support on your unit with <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.has_high_voltage_output" title="skutils.FemtoDAQController.FemtoDAQController.has_high_voltage_output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">has_high_voltage_output</span></code></a></p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">setBiasVoltage</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_bias_voltage</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getBiasVoltage</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="setting-globalid-module-number">
+<h2>Setting GlobalID / Module Number<a class="headerlink" href="#setting-globalid-module-number" title="Link to this heading"></a></h2>
+<p>The global ID is used for identifying digitizers when
+operating them in arrays. It is sometimes known as a “module_number”</p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">module_number</span> <span class="o">=</span> <span class="mi">99</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setGlobalId</span><span class="p">(</span><span class="n">module_number</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_module_number</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getGlobalId</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="setting-input-channel-analog-offsets">
+<h2>Setting Input Channel Analog Offsets<a class="headerlink" href="#setting-input-channel-analog-offsets" title="Link to this heading"></a></h2>
+<p><strong>Quick Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desired_channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">analog_offset_percent</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50</span> <span class="c1"># 50% of minimum voltage</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setAnalogOffsetPercent</span><span class="p">(</span><span class="n">desired_channel</span><span class="p">,</span> <span class="n">analog_offset_percent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>High Precision Configuration</strong></p>
+<p>For high-precision applications such as non-linearity correction,
+we can achieve higher performance by writing a raw value directly
+to the voltage generator.</p>
+<p>Use <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.analog_offset_raw_min" title="skutils.FemtoDAQController.FemtoDAQController.analog_offset_raw_min"><code class="xref py py-attr docutils literal notranslate"><span class="pre">analog_offset_raw_min</span></code></a> and <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.analog_offset_raw_max" title="skutils.FemtoDAQController.FemtoDAQController.analog_offset_raw_max"><code class="xref py py-attr docutils literal notranslate"><span class="pre">analog_offset_raw_max</span></code></a>
+to view your available range of selections.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desired_channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">analog_offset_raw</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">analog_offset_raw_max</span> <span class="c1"># 50% of minimum voltage</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setAnalogOffsetRaw</span><span class="p">(</span><span class="n">desired_channel</span><span class="p">,</span> <span class="n">analog_offset_raw</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This value cannot be read back</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="setting-input-channel-digital-offsets">
+<h2>Setting Input Channel Digital Offsets<a class="headerlink" href="#setting-input-channel-digital-offsets" title="Link to this heading"></a></h2>
+<p>Use <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.adc_max_val" title="skutils.FemtoDAQController.FemtoDAQController.adc_max_val"><code class="xref py py-attr docutils literal notranslate"><span class="pre">adc_max_val</span></code></a> and <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.adc_min_val" title="skutils.FemtoDAQController.FemtoDAQController.adc_min_val"><code class="xref py py-attr docutils literal notranslate"><span class="pre">adc_min_val</span></code></a> to see the
+range of possible digital offset values for your FemtoDAQ unit.</p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desired_channel</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setDigitalOffset</span><span class="p">(</span><span class="n">desired_channel</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_dig_offset</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getDigitalOffset</span><span class="p">(</span><span class="n">desired_channel</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="inverting-input-channel-adc-signals">
+<h2>Inverting Input Channel ADC Signals<a class="headerlink" href="#inverting-input-channel-adc-signals" title="Link to this heading"></a></h2>
+<p><cite>True</cite> inverts input values (i.e. -1 * raw_value).</p>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desired_channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">setInvertADCSignal</span><span class="p">(</span><span class="n">desired_channel</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readback</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">readback_inverted</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getInvertADCSignal</span><span class="p">(</span><span class="n">desired_channel</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="configuring-in-firmware-histogramming">
+<h2>Configuring in-firmware histogramming<a class="headerlink" href="#configuring-in-firmware-histogramming" title="Link to this heading"></a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Firmware Histogramming ignores coincidence conditions.
+A trigger on any channel updates histogram quantities on all channels</p>
+</div>
+<p><strong>Configuration</strong></p>
+<p>In-Firmware Histogramming can be performed for different DSP quantities
+that are calculated in firmware.  See <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.setHistogramQuantity" title="skutils.FemtoDAQController.FemtoDAQController.setHistogramQuantity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setHistogramQuantity()</span></code></a> or
+or your devices user manual for more information about possible histogram
+quantities.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Underflow and Overflow</p>
+<p>There are generally fewer histogram bins than possible values for your quantity
+As a result you may need to scale your histograms using <cite>setHistogramScaling</cite>.
+Scaling will consolidate multiple values into a single histogram bin to expand
+the possible range of histogrammed values.</p>
+<ul class="simple">
+<li><p>Quantity values below the valid range will be placed in bin0.</p></li>
+<li><p>Quantity values above the valid range will be placed in the final bin.</p></li>
+<li><p>See the valid range of quantity values with <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.getHistogramValueRange" title="skutils.FemtoDAQController.FemtoDAQController.getHistogramValueRange"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getHistogramValueRange()</span></code></a></p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desired_quantity</span> <span class="o">=</span> <span class="s2">&quot;pulse_height&quot;</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setHistogramQuantity</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">desired_quantity</span><span class="p">)</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">setHistogramScaling</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">valid_quantity_range</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getHistogramValueRange</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Zero Histograms</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+    <span class="n">digitizer</span><span class="o">.</span><span class="n">zeroHistogram</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Readout</strong></p>
+<p>Unlike waveform events, firmware histograms can be read out at before,after,
+or during data collection.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_hists</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getHistogramData</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+    <span class="n">channel_hist</span> <span class="o">=</span> <span class="n">all_hists</span><span class="p">[:,</span><span class="n">channel</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="configuring-coincidence">
+<h2>Configuring Coincidence<a class="headerlink" href="#configuring-coincidence" title="Link to this heading"></a></h2>
+<p>Two types of coincidence are available in FemtoDAQ digitizers.</p>
+<section id="multiplicity">
+<h3>Multiplicity<a class="headerlink" href="#multiplicity" title="Link to this heading"></a></h3>
+<p>Multiplicity coincidence will capture events which have at least
+a specified number of channels that triggered</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="hit-pattern">
+<h3>Hit Pattern<a class="headerlink" href="#hit-pattern" title="Link to this heading"></a></h3>
+<p>Hit Pattern Coincidence requires certain channels to either trigger or not trigger
+in a specified pattern.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hit_pattern</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;channel_0_trigger_hit_pattern&quot;</span> <span class="p">:</span> <span class="s2">&quot;COINCIDENCE&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;channel_1_trigger_hit_pattern&quot;</span> <span class="p">:</span> <span class="s2">&quot;ANTICOINCIDENCE&quot;</span><span class="p">}</span>
+
+<span class="n">digitizer</span><span class="o">.</span><span class="n">configureCoincidence</span><span class="p">(</span><span class="s2">&quot;hit_pattern&quot;</span><span class="p">,</span> <span class="n">hit_pattern</span><span class="o">=</span><span class="n">hit_pattern</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="readback-of-coincidence-mode">
+<h3>Readback of Coincidence Mode<a class="headerlink" href="#readback-of-coincidence-mode" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">getCoincidenceSettings</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s1">&#39;coincidence_mode&#39;</span><span class="p">:</span> <span class="s1">&#39;multiplicity&#39;</span><span class="p">,</span>
+<span class="s1">&#39;trigger_multiplicity&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="s1">&#39;trigger_hit_pattern&#39;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="s1">&#39;channel_0_trigger_hit_pattern&#39;</span><span class="p">:</span> <span class="s1">&#39;COINCIDENCE&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;channel_1_trigger_hit_pattern&#39;</span><span class="p">:</span> <span class="s1">&#39;ANTICOINCIDENCE&#39;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="configuring-data-recording">
+<h2>Configuring Data Recording<a class="headerlink" href="#configuring-data-recording" title="Link to this heading"></a></h2>
+<p>See <span class="xref std std-doc">file_formats</span> for information about the possible file formats specified
+with the <cite>file_recording_format</cite> parameter</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.configureRecording" title="skutils.FemtoDAQController.FemtoDAQController.configureRecording"><code class="xref py py-meth docutils literal notranslate"><span class="pre">configureRecording()</span></code></a> for full documentation</p>
+</div>
+<p><strong>Configuration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">configureRecording</span><span class="p">(</span>
+                            <span class="n">channels_to_record</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="n">number_of_samples_to_capture</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+                            <span class="n">file_recording_name_prefix</span><span class="o">=</span><span class="s2">&quot;my_experiment_run&quot;</span>
+                            <span class="n">file_recording_format</span><span class="o">=</span><span class="s1">&#39;eventcsv&#39;</span>
+                            <span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<hr class="docutils" />
+<section id="starting-stopping-data-collection">
+<h2>Starting/Stopping Data Collection<a class="headerlink" href="#starting-stopping-data-collection" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NUMBER_OF_EVENTS_TO_RECORD</span> <span class="o">=</span> <span class="mi">100_000</span>
+
+<span class="c1"># Start data collection</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">NUMBER_OF_EVENTS_TO_RECORD</span><span class="p">)</span>
+<span class="c1"># Wait until data collection is done or 5 minutes have passed</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">waitUntil</span><span class="p">(</span><span class="n">timeout_time</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="c1"># stop data collection - this will do nothing if collection has already completed</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="forcing-a-trigger">
+<h2>Forcing a Trigger<a class="headerlink" href="#forcing-a-trigger" title="Link to this heading"></a></h2>
+<p>This is useful if you want to perform calibrations after specific software
+events. Such as <a class="reference internal" href="#setting-input-channel-analog-offsets"><span class="std std-ref">Setting Input Channel Analog Offsets</span></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">forceTrigger</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="downloading-recorded-data">
+<h2>Downloading Recorded Data<a class="headerlink" href="#downloading-recorded-data" title="Link to this heading"></a></h2>
+<p>See <span class="xref std std-doc">loaders</span> for information about reading in this data
+once downloaded</p>
+<p>Save to the current working directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>OR saving to a specific directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">downloadLastRunDataFiles</span><span class="p">(</span><span class="n">save_to</span><span class="o">=</span><span class="s2">&quot;/path/to/download/location&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_files_on_digitizer</span> <span class="o">=</span> <span class="n">digitizer</span><span class="o">.</span><span class="n">getListOfDataFiles</span><span class="p">()</span>
+<span class="c1"># download all files that matches a certain pattern</span>
+<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">all_data_files_on_digitizer</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;my_experiment_run_name&quot;</span> <span class="ow">in</span> <span class="n">fname</span><span class="p">:</span>
+        <span class="n">digitizer</span><span class="o">.</span><span class="n">downloadFile</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resetting-timestamps">
+<h2>Resetting Timestamps<a class="headerlink" href="#resetting-timestamps" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">zeroTimestamp</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="saving-loading-data-collection-settings">
+<h2>Saving/Loading Data Collection Settings<a class="headerlink" href="#saving-loading-data-collection-settings" title="Link to this heading"></a></h2>
+<p>This saves the current FPGA and software configuration to a file on your FemtoDAQ
+unit directly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">saveCurrentConfig</span><span class="p">(</span><span class="s1">&#39;my_experiment_config&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This configuration can then be loaded again
+with <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.loadandApplyExistingConfig" title="skutils.FemtoDAQController.FemtoDAQController.loadandApplyExistingConfig"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loadandApplyExistingConfig()</span></code></a>. This is useful to ensure
+that you can replicate your experiment if someone else has changed
+settings on the device.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">loadandApplyExistingConfig</span><span class="p">(</span><span class="s1">&#39;other_experiment_config&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A basic default configuration comes with your unit. The settings will
+likely be suboptimal for your experiment, but can be used to effectively
+“reset” the device to a common reference.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">loadDefaultConfig</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="reserving-your-digitizer-from-others">
+<h2>Reserving your digitizer from others<a class="headerlink" href="#reserving-your-digitizer-from-others" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even if you don’t explicitly reserve the unit, most settings cannot be changed
+if data collection is ongoing unless another user uses the <cite>force</cite> keyword.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">digitizer</span><span class="o">.</span><span class="n">saveCurrentConfig</span><span class="p">(</span><span class="s1">&#39;my_experiment_config&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This configuration can then be loaded again
+with <a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController.loadandApplyExistingConfig" title="skutils.FemtoDAQController.FemtoDAQController.loadandApplyExistingConfig"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loadandApplyExistingConfig()</span></code></a>. This is useful to ensure
+that you can replicate your experiment if someone else has changed
+settings on the device.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Skutils Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chickadeecontrol.html" class="btn btn-neutral float-right" title="Chickadee Family Digitizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

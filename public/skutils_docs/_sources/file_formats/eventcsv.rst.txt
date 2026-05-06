@@ -1,0 +1,73 @@
+Event Comma Separated Values (Event CSV) Format
+===============================================
+
+EventCSV is variation of a comma separated value. It was brought to our attention by researchers at the Facility for Rare Isotope Beams.
+
+Event CSV files are a mixture of tab-separate data columns and comma separated values
+
+Average Data Rate
+-----------------
+
+.. list-table:: 
+   :header-rows: 0
+   :stub-columns: 1
+
+   * - Average Data Rate
+     - 4.66 MB/s
+   * - 512 Sample Waves Per Second
+     - 2274
+
+Header
+------
+
+Each EventCSV file contains a human-readable header with Metadata information about the collection run. 
+Each line of the header is prefixed with `#` to indicate that it's a comment and 
+should be ignored by any parsing tools.
+
+Example
+*******
+
+.. code-block:: text
+   :linenos:
+
+   # Datetime        : "UTC Time: 2025-01-17 15:06:05"
+   # GlobalID        : 0
+   # Product         : "Vireo"
+   # SerialNumber    : "000019"
+   # SoftwareVersion : "5.2.2"
+   # FirmwareVersion : "255.255.255"
+   # FormatSample : 
+   # timestamp	channel_list	channel_data-->
+   # timestamp1	[channel_list]	[channelA_0, ..., channelA_N]	[channelB_0, ..., channelB_N]	...
+   # timestamp2	[channel_list]	[channelA_0, ..., channelA_N]	[channelB_0, ..., channelB_N]	...
+   # # BEGIN
+
+Data Format
+-----------
+
+Following the header, each line of the file contains data related to an event that occured
+at a specific timestamp. Columns are separated by tab characters.
+
+The first column is the timestamp of the Event. This is defined as the timestamp of first 
+channel that triggered within the trigger window.
+
+The second column is a bracketed list of channels that are represented in the event. The channels 
+are separated by commas within the brackets and the order of channels in this list is the order
+channel data appears in subsequent columns
+
+All remaining columns contain waveform data from the channels that triggered in the Event. 
+Each wave is a bracketed list of comma separated values
+
+
+Example
+*******
+**Note**: Only 8 sample waves are shown for readability. Your data files will likely contain many 
+more samples per wave.
+
+.. code-block:: text
+   
+   # timestamp	channel_list	channel_data-->
+   67353554155614	[0,1]	[632,632,633,636,636,633,635]	[675,673,672,678,677,676,675,678]
+   67353554670210	[0,1]	[634,633,632,632,632,636,634]	[677,676,675,679,677,677,678,678]
+   67353554696271	[0,1]	[632,631,631,633,631,633,632]	[673,677,676,675,674,674,674,674]
+   ...

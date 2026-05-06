@@ -1,0 +1,7 @@
+skutils
+=======
+
+.. toctree::
+   :maxdepth: 4
+
+   skutils

@@ -1,0 +1,191 @@
+IGOR Wave Format
+================
+
+.. list-table:: 
+   :header-rows: 0
+   :stub-columns: 1
+
+   * - Average Data Rate
+     - 4.4MB/s
+   * - 512 Sample Waves Per Second
+     - 2148
+
+
+The IGOR (**.itx**) data format stores data in IGOR. This format is intended to be loaded 
+into a IGOR project with several functions predefined. Calls to these functions are embedded
+in the IGOR file so they are run automatically as data is imported. 
+
+
+Functions that must be Defined
+------------------------------
+
+1) `FUNCTION InitProcessing (ntimes)` Should preallocate memory for all the events in the file and define global variables.
+
+Example:
+********
+
+.. code-block:: igor
+   
+   FUNCTION InitProcessing (ntimes)
+   VARIABLE ntimes
+      // Folder Scratch will be created if it does not exist
+      NewDataFolder /O/S root:Scratch
+      VARIABLE/g max_index = 0 // prepare aux variables
+      VARIABLE/g min_index = 0
+
+      NewDataFolder /O/S root:Data
+      VARIABLE/g evt_num = -1 // running event number
+      VARIABLE/g timestamp = -1 // running timestamp
+      MAKE/o/n=(ntimes) chan1_height_list // list of ALL chan1 pulse heights
+      MAKE/o/n=(ntimes) chan0_height_list // list of ALL chan0 pulse height
+      MAKE/o/n=(ntimes) chan1_TRUE_list // list of TRUE chan1 pulse heights
+      MAKE/o/n=(ntimes) chan1_RAND_list // list of RAND chan1 pulse heights
+      MAKE/o/n=(ntimes) chan0_TRUE_list // list of TRUE chan0 pulse heights
+      MAKE/o/n=(ntimes) chan0_RAND_list // list of RAND chan0 pulse heights
+      MAKE/o/n=(ntimes) dt_DIF_list // list of time differences chan1 to chan0
+      chan1_height_list = NAN // Not-a-number is a safe default value
+      chan1_TRUE_list = NAN
+      chan1_RAND_list = NAN
+      chan0_height_list = NAN
+      chan0_TRUE_list = NAN
+      chan0_RAND_list = NAN
+      dt_DIF_list = NAN
+      PRINT "Prepared arrays for ", ntimes, " events, at ", time()
+   END // InitProcessing
+
+
+2) `FUNCTION ProcessOneEvent ()` Should process a single Event
+
+Example:
+********
+
+.. code-block:: igor
+
+   FUNCTION ProcessOneEvent ()
+
+      SetDataFolder root:Data
+      // NVAR is linking a local variable to a global variable created in InitProcessing
+      NVAR evt_num = root:Data:evt_num // event number
+      NVAR max_index = root:Scratch:max_index // peak of the pulse
+      // These two waves are “automagically” linked to the ones read from the file
+      WAVE Chan0 = root:Data:Chan0 // Input: Chan0 waveform
+      WAVE Chan1 = root:Data:Chan1 // Input: Chan1 waveform
+
+      // The local waves are linked to the global waves created by InitProcessing
+      // Each list provides one memory cell per event (a floating point number)
+      WAVE chan1_height_list = root:Data:chan1_height_list // pulse height ALL
+      WAVE chan1_TRUE_list = root:Data:chan1_TRUE_list // pulse height TRU
+      WAVE chan1_RAND_list = root:Data:chan1_RAND_list // pulse height RAN
+      WAVE chan0_height_list = root:Data:chan0_height_list // pulse height ALL
+      WAVE chan0_TRUE_list = root:Data:chan0_TRUE_list // pulse height TRU
+      WAVE chan0_RAND_list = root:Data:chan0_RAND_list // pulse height RAN
+      WAVE dt_DIF_list = root:Data:dt_DIF_list // time differences
+
+      // Local variables
+      VARIABLE base, len, i, dum
+      VARIABLE dt_peak, dt_DIF
+      VARIABLE chan1_DIF_location, chan0_DIF_location
+      evt_num = evt_num + 1 // begin next event
+
+      //---- chan1 ----
+      // Sample numbers below were read from the waveform display with the cursors
+      // and hardcoded below. Utility Functions are discussed in the next Appendix.
+      // Differentiate is provided by IGOR.
+      base = SubtractBaseline (chan1, 2, 70) // See the next Appendix
+      chan1_height_list [evt_num] = FindPulseHeight (chan1, 100, 200)
+      Differentiate chan1/D=chan1_DIF // provided by IGOR
+      dum = GetMax (chan1_DIF) // sets the scratch variable max_index
+      chan1_DIF_location = max_index // maximum slope of the leading edge
+
+      //---- chan0 ----
+      base = SubtractBaseline (chan0, 2, 100) // See the next Appendix
+      chan0_height_list [evt_num] = FindPulseHeight (chan0, 100, 200)
+      Differentiate chan0/D=chan0_DIF // provided by IGOR
+      dum = GetMax (chan0_DIF) // sets the scratch variable max_index
+      chan0_DIF_location = max_index // maximum slope of the leading edge
+
+      //------------------------------
+      //---- Time between pulses ----
+      //------------------------------
+      dt_DIF = chan1_DIF_location – chan0_DIF_location // START: chan1. STOP: NaI
+      dt_DIF_list [evt_num] = dt_DIF // running list of time diff
+
+      // --------------------------------------------------------
+      // --- TRUE and RANDOM Pulse heights in NaI and chan1 ---
+      // --------------------------------------------------------
+      IF ((dt_DIF >-100) && (dt_DIF < 100)) // timing limits are discussed in the text
+         IF ((dt_DIF >-12) && (dt_DIF < -2)) // TRUE prompt coincidence peak
+            // copy the PH from the main unconstrained lists to coincidence lists
+            chan0_TRUE_list [evt_num] = chan0_height_list [evt_num]
+            chan1_TRUE_list [evt_num] = chan1_height_list [evt_num]
+         ELSE
+            chan0_RAND_list [evt_num] = chan0_height_list [evt_num]
+            chan1_RAND_list [evt_num] = chan1_height_list [evt_num]
+         ENDIF
+      ENDIF
+      print "Event number=", evt_num, " at ", time() // shown in the history window
+      END // ProcessOneEvent
+
+Header
+------
+
+A comment block header indicated the serial number, globalID, and version information
+at the top of the file
+
+Example
+*******
+
+.. code-block:: igor
+
+   IGOR
+   X // Datetime        = "UTC Time: 2025-01-21 18:38:53"
+   X // GlobalID        = 0
+   X // Product         = "VIREO100_REV_B"
+   X // SerialNumber    = "000019"
+   X // SoftwareVersion = "5.3.0"
+   X // FirmwareVersion = "5.3.1"
+
+Event Data Format
+-----------------
+
+Wave data is stored in a WAVE array. Each column represents a different channel. 
+
+**Note**: Only 8 sample waves are shown for readability. Your data files will likely contain many 
+more samples per wave.
+
+Example
+*******
+
+.. code-block:: igor
+
+   X InitProcessing(001146) // allocate memory for the number of events in this file
+   X evt_num = 1
+   X timestamp = 67425321069274
+   WAVES/o/D chan0, chan1
+   BEGIN
+   629 676
+   632 676
+   632 673
+   634 675
+   633 677
+   634 677
+   637 676
+   632 676
+   END
+   X ProcessOneEvent()
+   X evt_num = 2
+   X timestamp = 67425321584304
+   WAVES/o/D chan0, chan1
+   BEGIN
+   634 676
+   635 677
+   633 675
+   632 677
+   633 678
+   634 675
+   633 674
+   630 674
+   END
+   X ProcessOneEvent()
+   // Additional Events Below
+   // ...

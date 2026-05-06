@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IGOR Pulse Height Format &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gretina Event Builder (GEB) Format" href="gretina.html" />
+    <link rel="prev" title="IGOR Wave Format" href="igorwave.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reading &amp; Processing Digitizer Data Files</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#format-specifications">Format Specifications</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reading &amp; Processing Digitizer Data Files</a></li>
+      <li class="breadcrumb-item active">IGOR Pulse Height Format</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/loading_data/igorph.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="igor-pulse-height-format">
+<h1>IGOR Pulse Height Format<a class="headerlink" href="#igor-pulse-height-format" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This format can be loaded into Python with <code class="xref py py-class docutils literal notranslate"><span class="pre">skutils.Loaders.IgorPulseHeightLoader</span></code></p>
+</div>
+<section id="format-features">
+<h2>Format Features<a class="headerlink" href="#format-features" title="Link to this heading"></a></h2>
+<table class="docutils align-left">
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Type</p></th>
+<td><p>IGOR Text Wave (ASCII)</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Extension</p></th>
+<td><p>“.itx”</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Contains Event Timestamp</p></th>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Contains Channel Timestamps</p></th>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Contains Pulse Summary (DSP Quantities)</p></th>
+<td><p>Only pulse heights as calculated by the digitizer DSP</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Contains Waveforms</p></th>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>2 Channel Events Per Second (approx)</p></th>
+<td><p>15612</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="decoding-example">
+<h2>Decoding Example<a class="headerlink" href="#decoding-example" title="Link to this heading"></a></h2>
+<p>Skutils Loaders provide <a class="reference internal" href="../skutils.html#id21" title="skutils.Loaders.BaseLoader.EventInfo"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code></a> objects which contain all Summary and Waveform data
+associated with your events.
+See <a class="reference internal" href="../skutils.html#id21" title="skutils.Loaders.BaseLoader.EventInfo"><code class="xref any py py-class docutils literal notranslate"><span class="pre">EventInfo</span></code></a> and <a class="reference internal" href="../skutils.html#id0" title="skutils.Loaders.BaseLoader.ChannelData"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ChannelData</span></code></a>
+for more information about available quantities.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">skutils</span>
+<span class="linenos"> 2</span><span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/path/to/your/file_seq000001.itx&#39;</span><span class="p">,</span>
+<span class="linenos"> 3</span>              <span class="s1">&#39;/path/to/your/file_seq000002.itx&#39;</span><span class="p">]</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">skutils</span><span class="o">.</span><span class="n">quickLoad</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+<span class="linenos"> 6</span>   <span class="c1"># grab event timestamp and the channels in this event</span>
+<span class="linenos"> 7</span>   <span class="n">event_timestamp</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">event_timestamp</span>
+<span class="linenos"> 8</span>   <span class="n">channels</span>        <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">channels</span>
+<span class="linenos"> 9</span>   <span class="c1"># DSP Quantities are not saved in this format and their values will be None</span>
+<span class="linenos">10</span>   <span class="k">for</span> <span class="n">ch_data</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">channel_data</span><span class="p">:</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pulse Height for Channel </span><span class="si">{</span><span class="n">ch_data</span><span class="o">.</span><span class="n">channel</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">ch_data</span><span class="o">.</span><span class="n">pulse_height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="n">ch_data</span><span class="o">.</span><span class="n">channel_timestamp</span> <span class="c1"># will be the same as event timestamp --&gt; Not defined in this format</span>
+<span class="linenos">13</span>    <span class="n">ch_data</span><span class="o">.</span><span class="n">trigger_height</span>    <span class="c1"># all other DSP quantities be None --&gt; Not defined in this format</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="c1"># Will raise a RunTimeError --&gt; Waveforms are not saved in this format</span>
+<span class="linenos">16</span>    <span class="n">waveform</span>        <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">wavedata</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>The IGOR (<strong>.itx</strong>) data format stores pulse height data in IGOR. Channel
+waveforms are not supported in this format. Because this format only saves
+pulse heights not full traces, much higher event rates can be sustained than
+when recording waves.</p>
+</section>
+<section id="header">
+<h2>Header<a class="headerlink" href="#header" title="Link to this heading"></a></h2>
+<p>A comment block header indicated the serial number, globalID, and version information
+at the top of the file</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-igor notranslate"><div class="highlight"><pre><span></span>IGOR
+X<span class="w"> </span><span class="c1">// Format          = &quot;IGOR PULSE HEIGHTS&quot;</span>
+X<span class="w"> </span><span class="c1">// Datetime        = &quot;UTC Time: 2025-01-21 18:38:53&quot;</span>
+X<span class="w"> </span><span class="c1">// GlobalID        = 0</span>
+X<span class="w"> </span><span class="c1">// Product         = &quot;VIREO100_REV_B&quot;</span>
+X<span class="w"> </span><span class="c1">// SerialNumber    = &quot;000019&quot;</span>
+X<span class="w"> </span><span class="c1">// SoftwareVersion = &quot;5.3.0&quot;</span>
+X<span class="w"> </span><span class="c1">// FirmwareVersion = &quot;5.3.1&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="event-format">
+<h2>Event Format<a class="headerlink" href="#event-format" title="Link to this heading"></a></h2>
+<p>The first column is the timestamp of the event. The following columns
+represent the height of each pulse detected on the indicated channel.
+No predefined function definitions are required for this format.</p>
+<section id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-igor notranslate"><div class="highlight"><pre><span></span>WAVES/o/D<span class="w"> </span>timestamp,<span class="w"> </span>chan0,<span class="w"> </span>chan1
+BEGIN
+8338315286802 638 680
+8338316209893 639 681
+8338316230464 641 680
+8338316244863 639 680
+8338316258152 642 680
+8338316271272 640 680
+8338316284321 641 680
+8338316297393 639 680
+8338316310365 639 680
+8338316323368 641 682
+<span class="kr">END</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="igorwave.html" class="btn btn-neutral float-left" title="IGOR Wave Format" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gretina.html" class="btn btn-neutral float-right" title="Gretina Event Builder (GEB) Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+
+
+.. _sphx_glr_auto_examples_General:
+
+.. _general-index:
+
+
+General
+=======
+
+These are general examples of recording and analyzing data produced by a
+FemtoDAQ digitizer. Common tasks include histogramming data results and setting
+up a recording session.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Loading Events from a series of data files">
+
+.. only:: html
+
+  .. image:: /auto_examples/General/images/thumb/sphx_glr_automatic_file_loading_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_General_automatic_file_loading.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Loading Events from a series of data files</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Processing data found across multiple files and performing analysis on them. This example will be filled in upon the creation of a new app note, but for now, it exists as a skeleton for theoretical demonstration purposes.">
+
+.. only:: html
+
+  .. image:: /auto_examples/General/images/thumb/sphx_glr_loading_multiple_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_General_loading_multiple.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Loading multiple data files of the same format type</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Inspecting and Plotting Events">
+
+.. only:: html
+
+  .. image:: /auto_examples/General/images/thumb/sphx_glr_inspecting_events_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_General_inspecting_events.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Inspecting and Plotting Events</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="=======">
+
+.. only:: html
+
+  .. image:: /auto_examples/General/images/thumb/sphx_glr_Untitled_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_General_Untitled.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Example</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Load your data files into numpy arrays for every event in your file">
+
+.. only:: html
+
+  .. image:: /auto_examples/General/images/thumb/sphx_glr_loading_eventcsv_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_General_loading_eventcsv.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Loading in EventCSV Formatted Data</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip=" Skutils is not just designed to help one with analyzing data from your FemtoDAQ Digitizer, but it is also designed to be a fully-controllable system for managing your FemtoDAQ digitizer.">
+
+.. only:: html
+
+  .. image:: /auto_examples/General/images/thumb/sphx_glr_recording_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_examples_General_recording.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Recording and Analyzing Data Using Skutils and a FemtoDAQ Vireo 2-Channel Digitizer</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/General/automatic_file_loading
+   /auto_examples/General/loading_multiple
+   /auto_examples/General/inspecting_events
+   /auto_examples/General/Untitled
+   /auto_examples/General/loading_eventcsv
+   /auto_examples/General/recording
+

@@ -1,0 +1,33 @@
+Digitizer Control
+=================
+
+Loaders
+-------
+
+Loaders are a type of class that is designed to allow for reading data
+written by a FemtoDAQ digitizer after a recording has been made. Loaders
+support all current FemtoDAQ digitizer formats, from a semi-custom GRETINA
+based format to an "eventcsv" to IGOR as put out by our digitizers. A
+full list can be found at :py:mod:`skutils.Loader`.
+
+.. toctree::
+
+    loaders
+
+FemtoDAQController
+------------------
+
+The :py:class:`skutils.FemtoDAQController.FemtoDAQController` is a class for
+controlling and coordinating the FemtoDAQ line of SkuTek Instrumentation
+digitizers. The FemtoDAQ line at this point in time includes the FemtoDAQ Vireo
+and FemtoDAQ Kingfisher.
+
+
+.. attention::
+   Not every version of FemtoDAQController, the method of controlling FemtoDAQ devices,
+   can be used with every version of the FemtoDAQ HAL library. Be sure to look up your
+   FemtoDAQ device for details.
+
+.. toctree::
+
+    femtodaq

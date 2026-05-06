@@ -1,0 +1,44 @@
+FemtoDAQController Overview
+---------------------------
+
+The
+:py:class:`skutils.FemtoDAQController.FemtoDAQController` is a controller for
+FemtoDAQ devices, able to control common operations on any FemtoDAQ device
+such as starting and stopping data collection. FemtoDAQ devices include the
+FemtoDAQ Vireo and FemtoDAQ kingfisher as found on
+`the skutek website <http://skutek.com>`_.
+
+The FemtoDAQController has generally two typs of methods: "Set" methods, which
+create POST HTTP requests and do not have a return value, and "Get" requests,
+which create GET HTTP requests and return a value.
+
+The GET functions are of these types:
+
+* Ones that replicate their input and return a dict of the same names as the
+  "set" functions. (getCoincidenceSettings)
+* Those that return an invidual value or list of values. These will have more
+  definitive structures that are not dictionaries as their return values.
+  (getTriggerXPosition)
+* And those that return a dictionary that is defined by the openapi spec of
+  the FemtoDAQ device. (getRuntimeStatistics)
+
+The functions that return raw dictionaries require consultantion with specific
+FemtoDAQ products, and the exact options can differ between each FemtoDAQ and
+skutils version.
+
+Common functionality includes changing settings, starting and stopping the
+digitization of events. Live output is **not** available via Skutils
+excepting Streaming data back to your computer via UDP, however runtime
+statistics are queryable.
+
+.. attention::
+    **Not all updates of Skutils are perfectly compatible with all updates to
+    FemtoDAQControllers**, consult the FemtoDAQController page docs for more
+    specific information, Skutils FemtoDAQControllers will ERROR on versions too
+    old to use, or consult the FemtoDAQController file for a specific FemtoDAQ HAL
+    compatible version.
+
+FemtoDAQ Controller
+^^^^^^^^^^^^^^^^^^^
+
+* :mod:`skutils.FemtoDAQController`

@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FemtoDAQController Overview &mdash; skutils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ae83248f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Management Tools" href="dmtools.html" />
+    <link rel="prev" title="Loader Overview" href="loaders.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview of components</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="digitizercontrol.html">Digitizer Control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="digitizercontrol.html#loaders">Loaders</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="digitizercontrol.html#femtodaqcontroller">FemtoDAQController</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FemtoDAQController Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#femtodaq-controller">FemtoDAQ Controller</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmtools.html">Data Management Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Digitizer Data Collection Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/recording.html">Recording and Analyzing Data Using Skutils and a FemtoDAQ Vireo 2-Channel Digitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/loading_multiple.html">Loading multiple data files of the same format type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/loading_eventcsv.html">Loading in EventCSV Formatted Data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="skutils.html">skutils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="digitizercontrol.html">Digitizer Control</a></li>
+      <li class="breadcrumb-item active">FemtoDAQController Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/femtodaq.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="femtodaqcontroller-overview">
+<h1>FemtoDAQController Overview<a class="headerlink" href="#femtodaqcontroller-overview" title="Link to this heading"></a></h1>
+<p>The
+<a class="reference internal" href="skutils.html#skutils.FemtoDAQController.FemtoDAQController" title="skutils.FemtoDAQController.FemtoDAQController"><code class="xref py py-class docutils literal notranslate"><span class="pre">skutils.FemtoDAQController.FemtoDAQController</span></code></a> is a controller for
+FemtoDAQ devices, able to control common operations on any FemtoDAQ device
+such as starting and stopping data collection. FemtoDAQ devices include the
+FemtoDAQ Vireo and FemtoDAQ kingfisher as found on
+<a class="reference external" href="http://skutek.com">the skutek website</a>.</p>
+<p>The FemtoDAQController has generally two typs of methods: “Set” methods, which
+create POST HTTP requests and do not have a return value, and “Get” requests,
+which create GET HTTP requests and return a value.</p>
+<p>The GET functions are of these types:</p>
+<ul class="simple">
+<li><p>Ones that replicate their input and return a dict of the same names as the
+“set” functions. (getCoincidenceSettings)</p></li>
+<li><p>Those that return an invidual value or list of values. These will have more
+definitive structures that are not dictionaries as their return values.
+(getTriggerXPosition)</p></li>
+<li><p>And those that return a dictionary that is defined by the openapi spec of
+the FemtoDAQ device. (getRuntimeStatistics)</p></li>
+</ul>
+<p>The functions that return raw dictionaries require consultantion with specific
+FemtoDAQ products, and the exact options can differ between each FemtoDAQ and
+skutils version.</p>
+<p>Common functionality includes changing settings, starting and stopping the
+digitization of events. Live output is <strong>not</strong> available via Skutils
+excepting Streaming data back to your computer via UDP, however runtime
+statistics are queryable.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p><strong>Not all updates of Skutils are perfectly compatible with all updates to
+FemtoDAQControllers</strong>, consult the FemtoDAQController page docs for more
+specific information, Skutils FemtoDAQControllers will ERROR on versions too
+old to use, or consult the FemtoDAQController file for a specific FemtoDAQ HAL
+compatible version.</p>
+</div>
+<section id="femtodaq-controller">
+<h2>FemtoDAQ Controller<a class="headerlink" href="#femtodaq-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="skutils.html#module-skutils.FemtoDAQController" title="skutils.FemtoDAQController"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skutils.FemtoDAQController</span></code></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="loaders.html" class="btn btn-neutral float-left" title="Loader Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmtools.html" class="btn btn-neutral float-right" title="Data Management Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

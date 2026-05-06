@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skutils.Loaders.IGORWaveLoader &mdash; skutils 0.1.0a0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d8a2add5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=dda2323a" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=edcd63a1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            skutils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../femtodaqcontrol.html">FemtoDAQ Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#connect-to-a-digitizer-hooked-up-via-usb">Connect to a Digitizer Hooked up via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#connect-to-a-digitizer-on-the-network">Connect to a Digitizer on the Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#print-out-device-information">Print out Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#changing-trigger-settings">Changing Trigger Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#changing-pulse-height-dsp-filter-settings">Changing Pulse Height/DSP Filter Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-automatic-baseline-restoration">Configuring Automatic Baseline Restoration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-quadqdc-integration-windows">Configuring QuadQDC Integration Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-bias-hv-voltage-output">Setting Bias (HV) Voltage Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-globalid-module-number">Setting GlobalID / Module Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-input-channel-analog-offsets">Setting Input Channel Analog Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#setting-input-channel-digital-offsets">Setting Input Channel Digital Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#inverting-input-channel-adc-signals">Inverting Input Channel ADC Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-in-firmware-histogramming">Configuring in-firmware histogramming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-coincidence">Configuring Coincidence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../femtodaqcontrol.html#multiplicity">Multiplicity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../femtodaqcontrol.html#hit-pattern">Hit Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../femtodaqcontrol.html#readback-of-coincidence-mode">Readback of Coincidence Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#configuring-data-recording">Configuring Data Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#starting-stopping-data-collection">Starting/Stopping Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#forcing-a-trigger">Forcing a Trigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#downloading-recorded-data">Downloading Recorded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#resetting-timestamps">Resetting Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#saving-loading-data-collection-settings">Saving/Loading Data Collection Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../femtodaqcontrol.html#reserving-your-digitizer-from-others">Reserving your digitizer from others</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../chickadeecontrol.html">Chickadee Family Digitizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../chickadeecontrol.html#chickadeecontroller">ChickadeeController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../chickadeecontrol.html#connect-to-a-chickadee-on-the-network">Connect to a Chickadee on the Network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../chickadeecontrol.html#dsp-subsystem">DSP Subsystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../chickadeecontrol.html#accessing-the-digital-signal-processing-dsp-subsystem">Accessing the Digital Signal Processing (DSP) Subsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../chickadeecontrol.html#dumping-all-register-setting-values">Dumping all Register Setting Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loading_data/index.html">Reading &amp; Processing Digitizer Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../loading_data/index.html#format-specifications">Format Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/eventcsv.html">Event Comma Separated Values (Event CSV) Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/igorwave.html">IGOR Wave Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/igorph.html">IGOR Pulse Height Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/gretina.html">Gretina Event Builder (GEB) Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../loading_data/index.html#loadering-overview">Loadering Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#downloading-data-from-a-femtodaq-digitizer">Downloading Data from a FemtoDAQ Digitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#loading-data-from-files">Loading Data from Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../loading_data/index.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#iterating-through-channels-in-an-event">Iterating through channels in an Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#waveform-data">Waveform Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../loading_data/index.html#rebuilding-events">Rebuilding Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../skutils.html">skutils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#module-skutils.FemtoDAQController">skutils.FemtoDAQController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.FemtoDAQController.BusyError"><code class="docutils literal notranslate"><span class="pre">BusyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.FemtoDAQController.CollectionNotRunningError"><code class="docutils literal notranslate"><span class="pre">CollectionNotRunningError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.FemtoDAQController.FemtoDAQController"><code class="docutils literal notranslate"><span class="pre">FemtoDAQController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#skutils-chickadeecontroller-module">skutils.ChickadeeController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.FpgaSignalMimic"><code class="docutils literal notranslate"><span class="pre">FpgaSignalMimic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.dsp_dict_to_dsp_namespace"><code class="docutils literal notranslate"><span class="pre">dsp_dict_to_dsp_namespace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.dsp_namespace_to_dsp_dict"><code class="docutils literal notranslate"><span class="pre">dsp_namespace_to_dsp_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.update_dsps_simultaneously"><code class="docutils literal notranslate"><span class="pre">update_dsps_simultaneously()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.ChickadeeDspRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.ChickadeeDspBitsRemote"><code class="docutils literal notranslate"><span class="pre">ChickadeeDspBitsRemote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.ChickadeeController.ChickadeeController"><code class="docutils literal notranslate"><span class="pre">ChickadeeController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#module-skutils.Loaders">skutils.Loader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.ChannelData"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.EventInfo"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#id0"><code class="docutils literal notranslate"><span class="pre">ChannelData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#id21"><code class="docutils literal notranslate"><span class="pre">EventInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.BaseLoader"><code class="docutils literal notranslate"><span class="pre">BaseLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.EventCSVLoader"><code class="docutils literal notranslate"><span class="pre">EventCSVLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.GretinaLoader"><code class="docutils literal notranslate"><span class="pre">GretinaLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.IGORPulseHeightLoader"><code class="docutils literal notranslate"><span class="pre">IGORPulseHeightLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.IGORWaveLoader"><code class="docutils literal notranslate"><span class="pre">IGORWaveLoader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.Loaders.quickLoad"><code class="docutils literal notranslate"><span class="pre">quickLoad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#module-skutils.SolidagoController">skutils.SolidagoController module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.SolidagoController.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.SolidagoController.SolidagoController"><code class="docutils literal notranslate"><span class="pre">SolidagoController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../skutils.html#skutils-helpers-module">skutils.helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.HitPatternCoincidenceBuilder"><code class="docutils literal notranslate"><span class="pre">HitPatternCoincidenceBuilder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.mac_to_num"><code class="docutils literal notranslate"><span class="pre">mac_to_num()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.get_ip_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_ip_address_of_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../skutils.html#skutils.helpers.get_mac_address_of_interface"><code class="docutils literal notranslate"><span class="pre">get_mac_address_of_interface()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples/Application Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">skutils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">skutils.Loaders.IGORWaveLoader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for skutils.Loaders.IGORWaveLoader</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">Generator</span><span class="p">,</span>
+    <span class="n">List</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+    <span class="n">IO</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.BaseLoader</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseLoader</span><span class="p">,</span><span class="n">ChannelData</span>
+
+<div class="viewcode-block" id="IGORWaveLoader">
+<a class="viewcode-back" href="../../../skutils.html#skutils.Loaders.IGORWaveLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IGORWaveLoader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A loader for the IGOR wave format type, this is an event type format and will consistently have events correctly built so long as the orignial event was made.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__BYTES_TO_BUFFER</span> <span class="o">=</span> <span class="mi">1024</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+        <span class="c1"># First line starts with IGOR</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">rebuild_events_with_window</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_group_regex</span>        <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?:X\sevt_num.*?X\sProcessOneEvent.*?\))&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comment_regex</span>            <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;X\s//.*\n&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp_regex</span>          <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;X\stimestamp\s*=\s*(?P&lt;timestamp&gt;[0-9-]{1,})\n&quot;</span><span class="p">,</span> 
+                                                    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evt_num_regex</span>            <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;X\sevt_num\s*=\s*(?P&lt;evt_num&gt;[0-9-]{1,})\n&quot;</span><span class="p">,</span> 
+                                                    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ps_wave_regex</span>            <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;WAVES/o/D\/N=\((?P&lt;num_quantities&gt;\d*),(?P&lt;num_channels&gt;\d*)\)\spulse_summaries\sBEGIN\n(?P&lt;data&gt;.*?)\nEND&quot;</span><span class="p">,</span> 
+                                                    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ps_dim_label_regex</span>       <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;X\sSetDimLabel\s*(?P&lt;igor_axis&gt;\d)\s*,\s*(?P&lt;quantity_index&gt;\d)\s*,\s*&#39;(?P&lt;quantity_label&gt;.*?)&#39;\s*,\s*pulse_summaries&quot;</span><span class="p">,</span> 
+                                                    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">waveform_wave_regex</span>      <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;WAVES/o/D\s(?P&lt;channel_names&gt;.*?)\nBEGIN\n(?P&lt;data&gt;.*?)\sEND&quot;</span><span class="p">,</span>
+                                                    <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+        
+    <span class="c1"># _________________________________________________________________________</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__readNextEventTextBlockWithBuffering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># import time; lap_start_t = time.monotonic(); init_start_t = lap_start_t; idx = 0</span>
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Buffer until we detect that the entire content of an event if in memory</span>
+        <span class="n">event_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># idx += 1; print(f&quot;==== loop start {idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">tmp_buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__BYTES_TO_BUFFER</span><span class="p">)</span>
+            <span class="c1"># print(f&quot;reading : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic()</span>
+            <span class="n">bytes_read</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_buf</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tmp_buf</span><span class="p">)</span>
+            <span class="c1"># print(f&quot;writing to buffer : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic()</span>
+            <span class="k">if</span> <span class="s2">&quot;ProcessOneEvent&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">():</span>
+            
+                <span class="n">event_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">event_group_regex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+                <span class="c1"># print(f&quot;event search : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic()</span>
+                <span class="k">if</span> <span class="n">event_match</span><span class="p">:</span>
+                    <span class="c1"># grab block of text that represents an event in the IGOR format</span>
+                    <span class="n">event_text</span> <span class="o">=</span> <span class="n">event_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+                    <span class="c1"># roll the remaining data into a new buffer</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span> <span class="n">event_match</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">)</span>
+                    <span class="n">remaining_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">remaining_data</span><span class="p">)</span>
+                    <span class="c1"># print(f&quot;rolling over buffer : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic()</span>
+                    <span class="k">break</span>
+            
+            <span class="k">if</span> <span class="n">bytes_read</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="c1"># idx += 1; print(f&quot;==== loop end {idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic()</span>
+
+        <span class="c1"># print(f&quot;Total Time is {1000*(time.monotonic()-init_start_t):.2f}ms&quot;); </span>
+
+        <span class="k">return</span> <span class="n">event_text</span>
+
+    <span class="c1"># _________________________________________________________________________</span>
+<div class="viewcode-block" id="IGORWaveLoader.loadChannelBatch">
+<a class="viewcode-back" href="../../../skutils.html#skutils.Loaders.IGORWaveLoader.loadChannelBatch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadChannelBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]]:</span>
+        <span class="c1"># import time; lap_start_t = time.monotonic(); init_start_t = lap_start_t; idx = 0</span>
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Get the next block of Event Text</span>
+        <span class="n">event_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__readNextEventTextBlockWithBuffering</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">event_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># remove comments</span>
+        <span class="n">event_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comment_regex</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">event_text</span><span class="p">)</span>
+        <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># timestamp parsing</span>
+        <span class="n">timestamp_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp_regex</span><span class="p">,</span> <span class="n">event_text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">timestamp_match</span><span class="p">:</span>
+            <span class="c1"># use the last timestamp specified in the event text. Should only ever be 1</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">timestamp_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># evt_num parsing</span>
+        <span class="n">evt_num_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evt_num_regex</span><span class="p">,</span> <span class="n">event_text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">evt_num_match</span><span class="p">:</span>
+            <span class="c1"># use the last evt_num specified in the event text. Should only ever be 1</span>
+            <span class="n">evt_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">evt_num_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;evt_num&#39;</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">evt_num</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+            
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Pulse Summary Parsing</span>
+        <span class="n">all_ps_dicts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ps_data_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ps_wave_regex</span><span class="p">,</span> <span class="n">event_text</span><span class="p">)</span>
+        <span class="n">ps_dim_matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ps_dim_label_regex</span><span class="p">,</span> <span class="n">event_text</span><span class="p">)]</span>
+        <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+
+        <span class="k">if</span> <span class="n">ps_data_match</span> <span class="ow">and</span> <span class="n">ps_dim_matches</span><span class="p">:</span>
+            <span class="c1"># ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+            <span class="c1"># The following block converts the pulse summary WAVE into a numpy array</span>
+            <span class="n">num_quantities</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ps_data_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;num_quantities&#39;</span><span class="p">))</span>
+            <span class="n">num_channels</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ps_data_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;num_channels&#39;</span><span class="p">))</span>
+            <span class="n">raw_ps_data</span> <span class="o">=</span> <span class="n">ps_data_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>   
+            <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+
+            <span class="n">tmp_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">raw_ps_data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">tmp_array</span> <span class="o">=</span> <span class="n">tmp_array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="p">(</span><span class="n">num_quantities</span><span class="p">,</span><span class="n">num_channels</span><span class="p">)</span> <span class="p">)</span>
+            <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+
+            <span class="c1"># ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+            <span class="c1"># The following block decodes which column/row contains the pulse summary data</span>
+            <span class="c1"># that we need. In IGOR this is specified by the &quot;SetDimLabel&quot; command</span>
+
+            <span class="c1"># create a dictionary storing pulse summary information for each column (ie channel) in the event</span>
+            <span class="n">all_ps_dicts</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tmp_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> 
+            <span class="c1"># iterate through every single line in this event that contains &quot;SetDimLabel&quot;</span>
+            <span class="k">for</span> <span class="n">dim_components</span> <span class="ow">in</span> <span class="n">ps_dim_matches</span><span class="p">:</span>
+                <span class="n">igor_axis</span>      <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dim_components</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;igor_axis&#39;</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">quantity_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dim_components</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;quantity_index&#39;</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">quantity_label</span> <span class="o">=</span> <span class="n">dim_components</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;quantity_label&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+
+                <span class="c1"># if the SetDimLabel axus is 0, then we are specifying the name and index </span>
+                <span class="c1"># of the quantity in the pulse summary. </span>
+                <span class="k">if</span> <span class="n">igor_axis</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">col_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tmp_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">all_ps_dicts</span><span class="p">[</span><span class="n">col_idx</span><span class="p">][</span><span class="n">quantity_label</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tmp_array</span><span class="p">[</span><span class="n">quantity_index</span><span class="p">,</span><span class="n">col_idx</span><span class="p">])</span>
+                <span class="c1"># otherwise the SetDimLabel row is referring to the experimenter-defined name of </span>
+                <span class="c1"># the column itself</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">col_idx</span> <span class="o">=</span> <span class="n">quantity_index</span>
+                    <span class="n">all_ps_dicts</span><span class="p">[</span><span class="n">col_idx</span><span class="p">][</span><span class="s1">&#39;channel_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quantity_label</span>
+                <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+
+        <span class="n">ps_by_channel</span> <span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">]):</span><span class="n">ps</span> <span class="k">for</span> <span class="n">ps</span> <span class="ow">in</span> <span class="n">all_ps_dicts</span><span class="p">}</span>
+
+        <span class="c1"># Not used at this time. For future where we can specify name of channel in FemtoDAQ GUI</span>
+        <span class="n">names_to_channels</span> <span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ps</span><span class="p">[</span><span class="s1">&#39;channel_name&#39;</span><span class="p">]:</span><span class="n">ps</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">ps</span> <span class="ow">in</span> <span class="n">all_ps_dicts</span><span class="p">}</span> <span class="c1"># type: ignore</span>
+        
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Waveform Parsing</span>
+        <span class="n">wave_by_channel</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">wavedata</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">waveform_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">waveform_wave_regex</span><span class="p">,</span> <span class="n">event_text</span><span class="p">)</span>
+        <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+        <span class="k">if</span> <span class="n">waveform_match</span><span class="p">:</span>
+            <span class="n">channel_names</span> <span class="o">=</span> <span class="n">waveform_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;channel_names&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">raw_wavedata</span>  <span class="o">=</span> <span class="n">waveform_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+
+            <span class="c1"># NOTE: In future we may want to replace this with a lookup using `names_to_channels`</span>
+            <span class="n">wavedata_channels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\D&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">name</span><span class="p">))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">channel_names</span><span class="p">]</span>
+            <span class="n">wavedata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">raw_wavedata</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">wavedata</span> <span class="o">=</span> <span class="n">wavedata</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavedata_channels</span><span class="p">)))</span>
+
+            <span class="n">wave_by_channel</span> <span class="o">=</span> <span class="p">{</span><span class="n">ch</span><span class="p">:</span><span class="n">wavedata</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wavedata_channels</span><span class="p">)}</span>
+        <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+            
+        <span class="c1"># .....................................................................</span>
+        <span class="c1"># Build the list of Channels and return</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">all_channels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">wave_by_channel</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">ps_by_channel</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">all_channels</span><span class="p">:</span>
+            <span class="n">channel_data_batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ChannelData</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">all_channels</span><span class="p">:</span>
+                <span class="n">waveform</span> <span class="o">=</span> <span class="n">wave_by_channel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">summary</span>  <span class="o">=</span> <span class="n">ps_by_channel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">channel_data_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">ChannelData</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">waveform</span><span class="p">,</span> <span class="n">other_data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;evt_num&#39;</span><span class="p">:</span><span class="n">evt_num</span><span class="p">})</span> <span class="p">)</span>
+
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">channel_data_batch</span>
+        <span class="c1"># # print(f&quot;{idx} : {1000*(time.monotonic()-lap_start_t):.1f}ms&quot;); lap_start_t = time.monotonic(); idx += 1</span>
+        <span class="c1"># print(f&quot;Total Time is {1000*(time.monotonic()-init_start_t):.2f}ms&quot;); \</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 SkuTek Instrumentation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

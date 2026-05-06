@@ -138,14 +138,16 @@ export default function HighlightsSpace() {
 
   // ── Scroll-driven values ──────────────────────────────────────────────────
 
-  // CROSSFADE ZONE (p: 0 → 0.35)
-  // Highlights fades out while space fades in simultaneously
-  const highlightsOpacity = map(p, 0.10, 0.35, 1, 0);
-  const spaceOpacity      = map(p, 0.10, 0.35, 0, 1);
+  // CROSSFADE ZONE — desktop: p 0.10→0.35 / mobile: p 0.55→0.75 (cards stay tappable longer)
+  const fadeStart = isMobile ? 0.55 : 0.10;
+  const fadeEnd   = isMobile ? 0.75 : 0.35;
+  const spStart   = isMobile ? 0.75 : 0.35;
+
+  const highlightsOpacity = map(p, fadeStart, fadeEnd, 1, 0);
+  const spaceOpacity      = map(p, fadeStart, fadeEnd, 0, 1);
 
   // SPACE ANIMATION (sp: normalised progress of just the space portion)
-  // Space animation runs from p=0.35 onward
-  const sp = map(p, 0.35, 1.0, 0, 1);
+  const sp = map(p, spStart, 1.0, 0, 1);
 
   const imageOpacity      = map(sp, 0, 0.12, 0, 1);
   const scale             = sp < 0.93 ? map(sp, 0.05, 0.93, 1, 1.25) : map(sp, 0.93, 1.0, 1.25, 0.82);
@@ -220,7 +222,7 @@ export default function HighlightsSpace() {
             to start collecting data!
           </p>
           <Link
-            href="/products"
+            href="/products/digitizers/femtodaq-vireo"
             className="inline-block bg-accent text-white text-sm font-semibold px-7 py-2.5 rounded-full hover:bg-main transition-colors duration-200"
           >
             Learn More
