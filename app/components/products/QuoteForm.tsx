@@ -40,7 +40,7 @@ export default function QuoteForm({ preselectedProduct }: Props) {
           </svg>
         </div>
         <h3 className="text-xl font-bold text-gray-900">Quote request sent!</h3>
-        <p className="text-gray-500 text-sm max-w-xs">We'll be in touch shortly. For immediate assistance email <a href="mailto:info@skutek.com" className="text-main underline">info@skutek.com</a>.</p>
+        <p className="text-gray-500 text-sm max-w-xs">We&apos;ll be in touch shortly. For immediate assistance email <a href="mailto:info@skutek.com" className="text-main underline">info@skutek.com</a>.</p>
         <button onClick={() => setSubmitted(false)} className="mt-2 text-sm text-gray-500 hover:text-gray-700 underline">Submit another request</button>
       </div>
     );
