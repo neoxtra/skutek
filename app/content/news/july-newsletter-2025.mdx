@@ -1,0 +1,141 @@
+## Welcome to the First Edition of SkuTek News! 🌐
+
+**July 2025**
+
+We're excited to introduce to you our first monthly newsletter where we share technical insights, latest developments and our new tools for Digital Data Acquisition. Whether you're at a university or national lab, we're here to support you throughout the entire data acquisition chain.
+
+---
+
+## About SkuTek Instrumentation
+
+### Where Science Meets Industry
+
+At SkuTek Instrumentation, we're more than an equipment company. We're your scientific partners in advancing the frontiers of physics research. We are a small woman-owned American company founded and led by former scientists. We understand the unique challenges of modern physics research because we've lived them.
+
+Our team combines expertise in nuclear physics, particle astrophysics, and digital signal processing with hands-on experience from major national laboratory projects. This unique perspective allows us to develop solutions that don't just meet specifications – they solve real research problems.
+
+### Proven Track Record in World-Class Science
+
+Our technology powers some of the most ambitious physics experiments on Earth:
+
+- **LUX-ZEPLIN Dark Matter Experiment:** 1,500+ channels powering the world's largest dark matter search. *Publication: The Data Acquisition System of the LZ Dark Matter Detector: FADR*
+- **National Laboratory Deployments:** Active installations at SURF, Lawrence Berkeley National Lab, and FRIB.
+- **DOE Office of Science Funding:** Our technology development is supported by federal Small Business Innovation Research (SBIR) grants awarded by the DOE Office of Science, Nuclear Physics.
+- **Zero Failures:** Over 5 years of continuous operation in the demanding underground environment of LUX-ZEPLIN with no reported failures.
+- **Global Deployments:** Our instruments are used at laboratories spanning the Americas, Europe, and Asia-Pacific research facilities.
+
+### Complete Data Acquisition Solutions
+
+We provide the entire data acquisition chain – from digitizers, firmware pulse processing, and data management for scientific applications big or small. Our scalable platform grows with your research:
+
+- **Tabletop Systems:** 2–10 channels for student training and small experiments.
+- **Research Platforms:** 32–320+ channels for facility-scale installations.
+- **Custom Solutions:** Purpose-built hardware engineering for specialized research requirements.
+
+---
+
+## Scientific Heritage
+
+### Standing on the Shoulders of Giants: From 1950s Oscilloscopes to Modern DAQ
+
+Our company follows the footsteps laid down by previous generations of scientists and engineers. Our 40-channel instrument brings back memories of a 50-channel oscilloscope built for Dr. Archie Tunturi at the University of Oregon medical school. In the early 1950s, Dr. Tunturi initiated an oscilloscope that would display 50 waveforms simultaneously which could be photographed on a single negative. The result was the instrument you see in the series of photographs provided by the Museum of Vintage Tektronix Equipment. Our 40-channel Digital Acquisition System can be seen as a distant successor of Dr. Tunturi's instrument, but of a much smaller size and cost.
+
+**Read More about Dr. Tunturi's Design Here**
+
+---
+
+## Technology Update
+
+### SkuTek Launches Open-Source Control Library
+
+We're excited to announce the beta release of **SkuTek Utilities** – a free, open-source Python library that puts complete control of your SkuTek hardware at your fingertips.
+
+**Key Features:**
+
+- Remote hardware control via REST API from any lab computer
+- Python integration for seamless data analysis workflows
+- Pip installable for maximum portability across lab environments
+- Student-friendly design ideal for teaching experimental automation
+
+**Perfect for Research & Education:** SkuTek Utilities enables integration of data collection and analysis into single Python scripts, making it ideal for automated workflows and easy-to-port experiments. The library is specifically designed with students in mind – perfect for distributing Jupyter Notebooks that teach experimental automation alongside data analysis.
+
+> **Get Started Today:** The library is completely free and open-source, with 4 example experiments already published and more coming soon. Python was chosen due to its prevalence in research and education communities.
+
+[Learn more: SkuTek Utilities (Skutils)](/skutils)
+
+### Shipment of Firebird, 40-Channel DAQ
+
+We're pleased to announce the successful shipment of a **40-channel Digital Data Acquisition system** to Lawrence Berkeley National Laboratory.
+
+The instrument can simultaneously digitize forty signals with **14-bit precision** (16,384 voltage levels) and process the data with an embedded 1 GHz local processor running Linux.
+
+![Firebird — SkuTek's 40-Channel DAQ integrated with VME crates](/files/DDC-40_5_zv88fw)
+
+*Firebird, our 40-Channel DAQ that can be easily integrated with existing VME crates*
+
+---
+
+## Product Spotlight
+
+### SkuTek Digitizers
+
+The same technology powering the world's largest dark matter search (LUX-ZEPLIN, 1,500+ channels) is available for your research – from 2-channel bench-top to 320+ channel facility-scale systems. We now support automatic linearity calibration and high-speed 10 Gbps streaming!
+
+Our complete digitizer portfolio continues to prove its versatility across the full spectrum of physics research, from undergraduate education to world-record experiments.
+
+**Complete Range:**
+
+- **FemtoDAQ Vireo:** 2-channel bench-top digitizer with built-in SiPM bias supply. Perfect for student training and small experiments.
+- **FemtoDAQ Kingfisher:** 10-channel bench-top digitizer with built-in SiPM bias supply for mid-scale research.
+- **Chickadee-32:** 32-channel digitizer with embedded Linux and streaming events at 1G in a variety of formats.
+- **Chickadee-32 RTM:** Rear Transition Module adds 10G event streaming and additional I/O.
+- **Customized DAQ Solutions:** Systems that integrate seamlessly with your research and applications.
+
+**Capabilities:**
+
+- 14-bit ADCs at 100 MHz across all platforms
+- Universal detector support from HPGe precision to plastic scintillators
+- Real-time digital pulse processing with FPGA-based algorithms
+
+[Read more about our Digitizers](/products)
+
+### Technology Focus: Rear Transition Module (RTM) with 10G Ethernet
+
+The RTM transforms your SkuTek digitizers from 1 Gbps to **10 Gbps streaming** – a 10× performance increase. Each digitizer can now stream up to 1 gigabyte per second, eliminating data bottlenecks that limit experimental throughput.
+
+**Seamless Integration:**
+
+- VME64x with standard back cage installation
+- High-performance connection with the digitizer via 96-pin P0 connector
+- Works with existing CHK-32 SkuTek digitizers
+- Parallel streaming maintains independent data paths from each digitizer
+
+> **Real-World Impact:** Large-scale experiments with hundreds of channels can achieve high data rates. As accelerator facilities increase beam intensities and detector arrays grow larger, 10G capability ensures your DAQ system won't become the bottleneck.
+
+**Future-Proof Investment:** As accelerator facilities increase beam intensities and detector arrays grow larger, 10G capability ensures your DAQ system won't become the bottleneck.
+
+[Learn more: Chickadee-32 Rear Transition Module](/products/digitizers/chickadee-32)
+
+### Data Management: Solidago UDP Network Generator
+
+**Solidago UDP Event Generator — up to 160 Gbps Performance Testing**
+
+Originally developed to stress-test our own 100 Gbps data management systems, Solidago proved so effective that we've made it available as a standalone product for the research community.
+
+**Key Capabilities:**
+
+- 160 Gbps total throughput across 16 synchronized 10G streams
+- FPGA-based streaming with no software tuning required
+- Clock-synchronized digitizer emulation replicates real experimental conditions
+- Web GUI and REST API for easy control and automation
+
+> **Solving Real Problems:** Traditional software can't replicate the synchronized "burst" behavior of digitizer arrays that overwhelm network buffers. Solidago's FPGA-based approach provides realistic testing for DAQ validation, network stress testing, and data management development – all without deploying expensive detector hardware.
+
+**Applications:**
+
+- Validate DAQ systems before major experimental deployments
+- Stress test network infrastructure for high-throughput facilities
+- Develop data management software with realistic data streams
+- Test multi-detector synchronization without full experimental setup
+
+[Read More about Solidago](/products/digitizers/solidago-udp)

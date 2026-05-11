@@ -1,0 +1,162 @@
+## Welcome to SkuTek DAQ News! 🌐
+
+**January 2026 Edition**
+
+*Where Science Meets Industry*
+
+*News editors: Ujval Madhu, Edmond Tan, Research Engineers*
+
+We wish you a prosperous New Year 2026! In this issue, we present our research-grade digitizers which deliver high performance spectroscopy, sub‑ns timing, and easy scaling to 1000+ channels. We also describe a Compton coincidence experiment performed with our table top unit.
+
+---
+
+## Product Spotlight
+
+### FemtoDAQ Vireo 2-Channel Digitizer
+
+*Modern FPGA based digitization for bench-top experimentation*
+
+The FemtoDAQ Vireo is an affordable 2-channel table-top digitizer. It works without external NIM electronics.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/vireo_fy29tx" alt="FemtoDAQ Vireo 2-Channel Digitizer" />
+    <p className="img-side-caption">FemtoDAQ Vireo 2-Channel Digitizer.</p>
+  </div>
+  <div className="img-side-right">
+    <strong>Key features:</strong>
+    <ul>
+      <li>2 Channels, 14 bits @ 100 MHz ADC per channel</li>
+      <li>FPGA based real-time pulse processing implements timing filters, discriminators, coincidence logic and scalers.</li>
+      <li>Can process signals from scintillators, SiPMs, and virtually any other detector.</li>
+      <li>Live histograms, 2D correlation plots, and waveforms directly in the browser.</li>
+      <li>Integrated SiPM bias supply from 11 to 56 volts.</li>
+      <li>Customizable file output formats.</li>
+      <li>Open-source Python and C libraries.</li>
+      <li>External trigger and clock synchronization.</li>
+    </ul>
+  </div>
+</div>
+
+**Applications:**
+
+<div className="two-col-list">
+  <ul>
+    <li>Gamma-ray spectroscopy</li>
+    <li>Coincidence measurements</li>
+    <li>Time-of-flight experiments</li>
+  </ul>
+  <ul>
+    <li>Scintillator characterization</li>
+    <li>Educational labs</li>
+    <li>Radiation monitoring</li>
+  </ul>
+</div>
+
+[Download Vireo datasheet](#)
+
+---
+
+### Chickadee 32-Channel Digitizer
+
+*Scalable high-performance digitization*
+
+The Chickadee DAQ System can be scaled from 32 channels to thousands providing high speed 1G readout from each board. 10G is available as an option.
+
+Scalable architecture with 32 channels per module, 14‑bit resolution at 100 MHz sampling. Timestamp and triggers can be synchronized across multiple units. Sub-nanosecond time resolution can be achieved with fast signals thanks to low noise and excellent pulse shape response. The system supports a wide range of detectors, HPGe, liquid noble gas arrays, Si detectors.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/CHK_demo_btpqdj" alt="SkuTek Chickadee 32-Channel Digitizer" />
+    <p className="img-side-caption">SkuTek Chickadee 32-Channel Digitizer. Real time data acquisition demonstration at APS DNP conference, Fall 2025.</p>
+  </div>
+  <div className="img-side-right">
+    <ul>
+      <li><strong>FPGA-powered signal processing:</strong> Real-time pulse height, shape analysis, timestamp extraction, and configurable trigger logic with multiplicity counting.</li>
+      <li><strong>High-speed triggered and triggerless:</strong> 1 Gbps streaming per module (default) and optional 10 Gbps streaming, with both triggered and triggerless operation.</li>
+      <li><strong>Open software ecosystem:</strong> Open-source Python/C libraries, GRETA‑compatible event format, Debian Linux for control and monitoring over network.</li>
+      <li><strong>Clock and channel synchronization:</strong> Facility clock integration, and VME backplane trigger distribution. Timestamps can be synchronized with other facility electronics.</li>
+      <li><strong>VME module format:</strong> VME card format simplifies system building and delivers power but does not rely on the VME data plane. Each module can operate in parallel with Ethernet readout and control.</li>
+    </ul>
+  </div>
+</div>
+
+[Download CHK datasheet](#)
+
+---
+
+## Example Table-Top Experiment
+
+### Demonstrating Compton Scattering Through Coincidence Detection
+
+**Developed for student labs and classrooms**
+
+We demonstrate Compton scattering with coincidence measurement using the Vireo's coincidence firmware.
+
+**Experiment 1: 180° Compton Back Scattering**
+
+We used two NaI(Tl) detectors positioned at 180°, with signals processed by Vireo. We applied a coincidence window of 100ns between both the channels replacing traditional NIM electronics. The histogram and the 2D correlation plot were collected using a ¹³⁷Cs source.
+
+![Experimental setup for Compton back scattering at 180°](/files/setup_180_upwvwh)
+
+*The complete experimental setup configured for Compton back scattering at 180°.*
+
+![¹³⁷Cs coincidence histograms at 180° geometry](/files/hist_180_gtwd2x)
+
+*The ¹³⁷Cs 1D histograms from both channels were dominated by the Compton edge and the Compton backscatter peaks due to 662 keV gamma ray scattering, visible in both channels due to the symmetric detector setup. The "singles" peaks at 32 keV and 662 keV were due to random coincidences.*
+
+![2D correlation plot of pulse heights at 180° geometry](/files/2d_plot_180_xundng)
+
+*2D correlation plot of pulse heights with coincidence and 180° geometry. The red spots indicate the true coincidence between the backscatter photon from the one detector and the Compton edge in the other detector. The plot is symmetric due to the symmetry of the detector setup.*
+
+**Experiment 2: 90° Scattering Angle**
+
+In the next step, we positioned the detector B at the right angle with respect to the detector A and the source. We used a lead shield to prevent the direct gammas from entering the detector B. In this geometry, we observed Compton scattering of the gamma ray from detector A to detector B at 90°. The 2D correlation plot reflected the new scattering angle.
+
+![2D correlation plot at 90° geometry](/files/2d_plot_90_bfq98m)
+
+*2D correlation plot (90° geometry). The Compton edge and backscatter components merge into a single anti-diagonal band.*
+
+These results demonstrate Vireo's ability to collect coincidence events without using external NIM electronics. Details are available upon request.
+
+---
+
+## The Relevance for Education
+
+Our results demonstrate how SkuTek's digital DAQ can be used to teach students modern digital techniques such as:
+
+- Live histogram and 2D correlation display for immediate feedback.
+- Built-in pulse processing without external analog electronics.
+- Python/C scripting will allow students to easily modify examples and develop their own creative experiments and solutions.
+
+---
+
+## Connecting with the Nuclear Physics Community
+
+- **We attended the Department of Energy (DOE) Office of Nuclear Physics SBIR/STTR exchange meeting:** Two of our principal investigators presented online, covering our current research directions and findings. Presentations from the SBIR/STTR meeting can be found here:
+  - [High Channel Density Digital DAQ](https://science.osti.gov/-/media/np/pdf/sbir-sttr/2025/7-29/SkuTek_DE-SC0023557_Xchange_July_29_2025.pdf) by our Chief Technology Officer, **Wojciech Skulski**
+  - [Data Management for High Speed DAQ](https://science.osti.gov/-/media/np/pdf/sbir-sttr/2025/7-30/SkutekInstrumentation_JeffMaggio_DataManagement_SBIRXchange2025_FINAL.pdf) by our Principal Investigator, **Jeffrey Maggio**
+
+- **We participated in the workshop on New Generations of Detector and Data Acquisition Systems for Nuclear Physics at the Facility for Rare Isotope Beams at Michigan State University:** [More Information »](https://indico.frib.msu.edu/event/85/)
+
+![Participants at the NEXTGENDD workshop](/files/FRIB_sbpqem)
+
+*Participants at the NEXTGENNDD workshop (Photo courtesy: FRIB).*
+
+- **American Physical Society Division of Nuclear Physics Fall 2025:** We set up a table and presented our DAQ developments. [More Information »](https://indico.phy.anl.gov/event/58/)
+
+![SkuTek presentation at APS DNP Conference](/files/APS_DNP_rglgl4)
+
+*SkuTek presentation at the APS DNP Conference, Jackson Hebel (Sr. Research Engineer) and Wojciech Skulski (CTO).*
+
+---
+
+## Inspiring Tomorrow's Scientists: Nuclear Science Day for Scouts
+
+On October 11, 2025, over 250 young scouts and leaders joined Berkeley Lab's Nuclear Science Division along with Advanced Light Source, and the Berkeley Lab K–12 STEM Education & Outreach for the 13th Annual Nuclear Science Day for Scouts. The event focused on International Year of Quantum Science and Technology. We're proud to have played a role in this event, by supporting a "Hands-On-Radioactivity" station demonstrating cosmic-ray detection using our Vireo digitizer shown earlier in this newsletter.
+
+[Read the full article »](https://nuclearscience.lbl.gov/2025/11/01/scouts-explore-the-quantum-world-at-berkeley-labs-13th-annual-nuclear-science-day/)
+
+![A full auditorium of scouts at LBNL](/files/LBNL_scouts_s1knqd)
+
+*A full auditorium of scouts and leaders ready to head off for their day at LBNL. (Credit: Heather Crawford)*

@@ -1,0 +1,228 @@
+## Welcome to SkuTek Newsletter! 🌐
+
+**August 2025 Edition**
+
+*Where Science Meets Industry*
+
+Welcome to the August edition of SkuTek Newsletter. This month, in addition to demonstrating our Nuclear Physics DAQ capabilities we're sharing real experimental results showcasing the FemtoDAQ Vireo's gamma spectroscopy capabilities, and updates to our growing software ecosystem.
+
+---
+
+## About SkuTek Instrumentation
+
+SkuTek delivers complete Nuclear Physics DAQ solutions consisting of digitizers, trigger logic units, data collection computers, and data stream management software covering all the way from detector signals to high performance computing centers. We take care of the entire DAQ chain, relieving the researchers of DAQ minutiae.
+
+Our DAQ scales from tabletop systems for student training to facility-scale installations powering world-class experiments.
+
+### Large-Scale DAQ Systems
+
+![SkuTek end-to-end DAQ system diagram](/files/Skutek_DAQ_System_rgzkfp)
+
+*SkuTek offers end-to-end hardware and software solutions for every stage between detector and HPC centers.*
+
+**Complete DAQ chain from the detector to the HPC center:**
+
+- Digitization of PMT's, SiPM's, or semiconductor detectors.
+- 14 bits @ 100 MSPS with 1.2 LSB noise RMS.
+- Modular architecture starting from 32 channels to thousands, enabling scaling to experimental requirements.
+- Flexible internal trigger with noise suppression.
+- External trigger and veto.
+- Both triggered and triggerless operation.
+- Either internal or external clock.
+- On-board coincidence logic and system-wide multiplicity trigger.
+- Waveforms up to 81 μs per channel.
+- 48-bit time stamp for every event.
+- Ethernet streaming output @ 1 Gbps standard, 10 Gbps optional (please inquire).
+- GRETA event format.
+- On-board Linux for setting up and monitoring each digitizer.
+- Optional Logic Master for defining system-wide trigger conditions.
+- Over 5 years of continuous operation in the LZ environment at SURF with no reported failures.
+
+The world's most sensitive dark matter experiment **LUX-ZEPLIN** has adopted SkuTek DAQ system with 1,359 channels. [*"The Data Acquisition System of the LZ Dark Matter Detector: FADR"* arXiv:2405.14732](https://arxiv.org/abs/2405.14732)
+
+### Table-Top Digital Instruments for Research & Education
+
+**FemtoDAQ Vireo** (2-channel) and **FemtoDAQ Kingfisher** (10-channel):
+
+14 bits @ 100 MSPS with on-board pulse processing firmware, event recording, and multi channel analyzer (MCA) in each channel for real time histograms. Perfect for student training, small to mid-scale research projects, and educational demonstrations. Both instruments provide an integrated SiPM bias supply, web GUI, and Python based controls.
+
+---
+
+## Technology Update
+
+### Solidago — UDP Event Generator for Advanced Testing and Validation of DAQ Systems
+
+Solidago provides comprehensive FPGA-based testing of high performance DAQ Ethernet network infrastructure.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/Solidago-scaled_edexdo" alt="Solidago connected to 100 Gbps data management system" />
+    <p className="img-side-caption"><strong>Solidago</strong> (indicated in green) testing our 100 Gbps Data Management System</p>
+  </div>
+  <div className="img-side-right">
+    <strong>Key Features:</strong>
+    <ul>
+      <li><strong>Emulates 0.1 to 160 Gbps streaming</strong> from 16 Digitizers (512 Channels).</li>
+      <li><strong>FPGA Hardware-based testing</strong> — software is not limiting the performance. Firmware based design provides deterministic timing.</li>
+      <li><strong>Fully configurable data streams</strong> — adjust packet frequency, size, timing, and delays to precisely match your DAQ specifications and operating conditions.</li>
+      <li><strong>Easy to use</strong> web based control and monitoring.</li>
+      <li><strong>Can be daisy-chained</strong> for emulation of large DAQ systems.</li>
+    </ul>
+  </div>
+</div>
+
+**Applications:**
+
+- Stress testing routing equipment
+- Testing for network buffer overflow
+- Designing error correction systems
+- Developing scientific data management systems before hardware is in hand
+- Emulation of randomized timing or clock synchronized array of digitizers
+
+[Learn more: Solidago — UDP Event Generator](/products/digitizers/solidago-udp)
+
+---
+
+## Data Management and Transfer Solutions with Open-Source Libraries & Tools
+
+We provide a complete path from the detector to the high performance computing centers (HPC). The event files are saved to Data Collector computers with Python and C libraries engineered for throughput in research environment. The files can then be transferred to the HPC center of your choice. Our software libraries provide integration with existing DAQ networking infrastructure while providing efficient data transfer to the HPC.
+
+**Data Collector Computers:**
+
+- **Liatris:** 80 Gbps data collector for high density digitizer arrays
+- **Monarda:** 10 Gbps data collector for smaller systems
+
+### Software Systems
+
+<div className="logo-row">
+  <div className="logo-col">
+    <img src="/files/dmutils_wngtwm" alt="Data Management Utilities" className="img-logo" />
+    <p className="logo-caption">SkuTek Data Management Utilities</p>
+  </div>
+  <div className="logo-content">
+    <strong>Data Management Utilities:</strong>
+    <ul>
+      <li>Python based library that allows for easy tuning of 80+ parameters in DAQ systems, across kernel settings, hardware drivers, network configuration and software dependencies.</li>
+      <li>Designed based on years of research and development.</li>
+      <li>Drastically reduces the effort to research and manually tune and optimize system performance.</li>
+    </ul>
+  </div>
+</div>
+
+<div className="logo-row">
+  <div className="logo-col">
+    <img src="/files/spew_gn1zze" alt="SkuTek Performance Writing Library" className="img-logo" />
+    <p className="logo-caption">SkuTek Performance Writing Library</p>
+  </div>
+  <div className="logo-content">
+    <strong>SkuTek Performance Writing Library (SPEW):</strong>
+    <ul>
+      <li>C language library for optimizing writing of large quantities of data to storage.</li>
+      <li>Easy to adjust buffering, memory alignment, metadata syncing, block-usage etc.</li>
+      <li>Achieve high performance, low-latency, and deterministic write operations across any storage medium with intuitive and easy-to-use functions.</li>
+    </ul>
+  </div>
+</div>
+
+<div className="logo-row">
+  <div className="logo-col">
+    <img src="/files/globus_kfis87" alt="SkuTek Globus Auto File Transfer System" className="img-logo" />
+    <p className="logo-caption">SkuTek Globus Auto File Transfer System</p>
+  </div>
+  <div className="logo-content">
+    <strong>SkuTek Globus Auto File Transfer System:</strong>
+    <ul>
+      <li>Interface to the Globus scheduling software, that allows for more user friendly operation, automation and scheduling.</li>
+      <li>Can run on any computer with Globus network access.</li>
+    </ul>
+  </div>
+</div>
+
+<div className="logo-row">
+  <div className="logo-col">
+    <img src="/files/skutilslogo_bak0e3" alt="SkuTek Utilities" className="img-logo" />
+    <p className="logo-caption">SkuTek Utilities</p>
+  </div>
+  <div className="logo-content">
+    <strong>SkuTek Utilities (Skutils):</strong>
+    <ul>
+      <li>Open source Python based library that allows for control and data management of all SkuTek product lines.</li>
+      <li>Used for configuring experiments, pulse processing, trigger logic, data streaming and loading, real time monitoring, event building and file handling.</li>
+      <li>Can run on lab computers for remote control of all SkuTek products.</li>
+    </ul>
+  </div>
+</div>
+
+[Learn more: Skutils Documentation](/skutils)
+
+---
+
+## Spotlight: Real-Time Gamma Spectroscopy with MCA Mode
+
+### Focus on Education: FemtoDAQ Vireo Delivers Live Histograms of Gamma Radiation
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/vireo_setup_og3mkq" alt="Experimental setup showing two NaI(Tl) detectors, the source, and the Vireo digitizer" />
+    <p className="img-side-caption">Experimental setup showing two NaI(Tl) detectors, the source, and the Vireo digitizer</p>
+  </div>
+  <div className="img-side-right">
+    This month, we're sharing experimental results that showcase the ease of use of our instrumentation. Using our FemtoDAQ Vireo 2-channel digitizer paired with NaI(Tl) scintillation detectors, we demonstrated gamma-ray spectroscopy of ¹³⁷Cs and ⁴⁰K sources. The experiment was rapidly configured using the web interface and the setup consisted of two detectors and the Vireo digitizer. No other electronics was required.
+  </div>
+</div>
+
+**Results from our experiments:**
+
+The ¹³⁷Cs measurement revealed all expected spectral features:
+
+![Real-time ¹³⁷Cs gamma spectrum from Vireo](/files/137cs_spectral_zbhfnj)
+
+*Real-time ¹³⁷Cs gamma spectrum generated using Vireo's built-in MCA firmware — no external electronics required. The detector bias was adjusted in order to match the pulse heights in both channels shown as blue and pink histograms.*
+
+- **662 keV photopeak** with FWHM of 55 keV or 8.4%.
+- **Barium K X-rays** at ~32 keV from internal conversion.
+- **Detectable barium L X-rays** at ~5 keV, demonstrating low-noise performance.
+- **Compton continuum** and backscatter peak at 184 keV.
+
+**Plug-and-Play Simplicity:** Built-in Multi Channel Analyzer (MCA) mode enabled real-time histogram visualization and detector PMT gain matching "by eye" using simple HV adjustments — no complex calibration procedures were required. After adjusting the PMT gain we successfully detected the 1460.83 keV γ-ray from naturally occurring ⁴⁰K in commercial KCl "diet salt" after 5 hours of data taking. It was pretty remarkable that we achieved this feat with 1" × 1" NaI(Tl) detectors.
+
+![Real-time ⁴⁰K histogram from natural potassium in diet salt](/files/40k_hist_tbzbvr)
+
+*Real-time ⁴⁰K histogram from natural potassium in "diet salt".*
+
+The complete setup consisted of the Vireo and two detectors without any pulse shaping electronics. This experiment demonstrates that high quality nuclear spectroscopy is achievable with compact, affordable instrumentation – opening doors for smaller labs and educational institutions to conduct both the research and education.
+
+---
+
+## Coming Next Month
+
+**Coincidence detection results: First measurements with our new firmware update**
+
+Based on experimental insights from our dual-detector measurements, we have introduced coincidence detection capabilities in our MCA firmware. This enhancement will enable:
+
+- **Time-correlated event analysis** for cascade gamma studies.
+- **Background reduction** through coincidence gating.
+- **Nuclear structure investigations** with educational hardware.
+
+---
+
+### Teaching Real Physics
+
+The gamma spectroscopy results demonstrate how modern digital acquisition can make advanced experimental techniques accessible to students at low cost with features including:
+
+- **Live histogram display** for immediate feedback.
+- **Built-in pulse processing** eliminates complex analog electronics.
+- Our entry-level digital DAQ electronics enables hands-on student research.
+
+---
+
+### Real Research Opportunities
+
+These DAQ systems will excel in diverse applications:
+
+- **Nuclear Physics:** Gamma-ray spectroscopy, nuclear structure studies.
+- **Astronomy/Astrophysics:** Cosmic ray detection, gamma-ray astronomy.
+- **Environmental Monitoring:** Detect naturally occurring radioactivity in geological samples.
+- **Material Science:** Study activation products and trace contamination.
+- **Nuclear Forensics:** Isotope identification and quantification.
+- **Mining and Oil Industries:** Formation identification, safety monitoring, environmental compliance.

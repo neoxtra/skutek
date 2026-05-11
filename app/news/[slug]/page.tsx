@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import CloudinaryImage from '../../components/CloudinaryImage';
+import { readFile } from 'fs/promises';
+import path from 'path';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import { newsArticles } from '../../data/newsArticles';
 import { articleContents } from '../../data/articleContents';
 import type { Category } from '../../data/newsArticles';
@@ -34,18 +36,28 @@ function Avatar({ name }: { name: string }) {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
+async function loadMdx(id: string): Promise<string | null> {
+  try {
+    const filePath = path.join(process.cwd(), 'app/content/news', `${id}.mdx`);
+    return await readFile(filePath, 'utf-8');
+  } catch {
+    return null;
+  }
+}
+
+export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = newsArticles.find(a => a.id === params.slug);
   if (!article) notFound();
 
-  const content = articleContents[article.id] ?? '<p>Full article content coming soon.</p>';
+  const mdxSource = await loadMdx(article.id);
+  const htmlContent = articleContents[article.id] ?? '<p>Full article content coming soon.</p>';
 
   return (
     <main className="font-sans bg-gray-50 min-h-screen">
 
       {/* ── Hero header ── */}
-      <section className="bg-gray-900 text-white pt-16 pb-0 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-gray-900 text-white pt-16 pb-10 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-xs text-white/40 font-medium mb-6">
@@ -70,7 +82,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           </h1>
 
           {/* Author */}
-          <div className="flex items-center gap-3 mt-6 pb-8">
+          <div className="flex items-center gap-3 mt-6">
             <Avatar name={article.author} />
             <div>
               <p className="text-sm font-semibold text-white">{article.author}</p>
@@ -79,30 +91,19 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           </div>
 
         </div>
-
-        {/* Thumbnail strip — full width, bleeds to edge */}
-        {article.img && (
-          <div className="w-full max-w-5xl mx-auto overflow-hidden rounded-t-2xl">
-            <CloudinaryImage
-              src={article.img}
-              width={1200}
-              height={630}
-              alt={article.title}
-              className="w-full h-auto object-cover"
-              priority
-            />
-          </div>
-        )}
       </section>
 
       {/* ── Article body ── */}
       <section className="px-6 lg:px-8 py-12">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
 
-          <div
-            className="article-content bg-white rounded-2xl shadow-sm border border-gray-100 px-8 py-10 md:px-12 md:py-12"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <div className="article-content bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-10 md:px-10 md:py-12">
+            {mdxSource ? (
+              <MDXRemote source={mdxSource} />
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+            )}
+          </div>
 
           {/* Back link */}
           <div className="mt-10 flex items-center gap-4">

@@ -14,14 +14,14 @@ export interface NewsArticle {
 
 export const newsArticles: NewsArticle[] = [
   {
-    id: 'december-newsletter-2025',
-    title: 'December Newsletter',
+    id: 'january-newsletter-2026',
+    title: 'January Newsletter',
     blurb:
-      'January 2026 edition featuring updates from our research engineers Ujval Madhu and Edmond Tan. Discover the latest milestones, product news, and upcoming events from SkuTek.',
+      'The January 2026 edition of SkuTek DAQ News — featuring our Vireo and Chickadee digitizers, Compton coincidence experiments, and highlights from recent nuclear physics community events.',
     author: 'Edmond Tan',
     date: 'Jan 2026',
     category: 'Newsletter',
-    img: 'dec_news_e05rrl',
+    img: 'News_Reporting_Presentation_in_Red_Grey_Newspaper_Style_3_allwj6',
     featured: true,
   },
   {
@@ -55,7 +55,7 @@ export const newsArticles: NewsArticle[] = [
     date: 'Jul 2025',
     category: 'Newsletter',
     img: 'july_news_q5hfxp',
-    featured: true,
+    featured: false,
   },
   {
     id: 'open-source-control-library',
