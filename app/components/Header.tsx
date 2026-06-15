@@ -156,7 +156,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/quote"
+              href="/contact"
               className="bg-main text-white text-lg font-semibold px-6 py-2 rounded-lg hover:bg-accent transition flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -253,7 +253,7 @@ export default function Header() {
 
             <div className="pt-3">
               <Link
-                href="/quote"
+                href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block bg-main text-white text-base font-semibold px-6 py-3 rounded-lg hover:bg-accent transition text-center"
               >

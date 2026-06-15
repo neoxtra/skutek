@@ -192,7 +192,7 @@ export default function ProductsPage() {
                 </svg>
               </Link>
               <Link
-                href="/quote"
+                href="/contact"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-3 rounded-lg hover:border-white/50 transition-colors duration-200 text-sm"
               >
                 Get a quote

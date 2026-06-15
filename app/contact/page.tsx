@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 // ─── Contact card data ────────────────────────────────────────────────────────
 
 const channels = [
