@@ -34,6 +34,19 @@ function Avatar({ name }: { name: string }) {
   );
 }
 
+// ─── MDX components ───────────────────────────────────────────────────────────
+
+const mdxComponents = {
+  a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    const isExternal = href?.startsWith('http') || href?.startsWith('//');
+    return (
+      <a href={href} {...props} {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+        {children}
+      </a>
+    );
+  },
+};
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 async function loadMdx(id: string): Promise<string | null> {
@@ -99,7 +112,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
           <div className="article-content bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-10 md:px-10 md:py-12">
             {mdxSource ? (
-              <MDXRemote source={mdxSource} />
+              <MDXRemote source={mdxSource} components={mdxComponents} />
             ) : (
               <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
             )}

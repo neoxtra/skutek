@@ -55,7 +55,7 @@ export default function DigitizerProductPage({ params }: { params: { slug: strin
             <div className="mt-8">
               {product.specSheetUrl ? (
                 <a
-                  href={`https://res.cloudinary.com/YOUR_CLOUD/image/upload/${product.specSheetUrl}.pdf`}
+                  href={`/files/${product.specSheetUrl}.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 bg-main text-white font-semibold px-7 py-3 rounded-lg hover:bg-accent transition-colors duration-200"

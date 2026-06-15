@@ -18,10 +18,6 @@ const slides = [
     caption: 'Our UDP Saturator: Solidago. For your data management stress testing needs',
   },
   {
-    src: 'kingfisher_kg77gg',
-    caption: 'Our 10 Channel Digitizer: FemtoDAQ Kingfisher!',
-  },
-  {
     src: 'cosmic_ray_thgulu',
     caption: 'Live Cosmic Ray Demo at LECM!',
   },

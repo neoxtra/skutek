@@ -21,7 +21,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Edmond Tan',
     date: 'Jan 2026',
     category: 'Newsletter',
-    img: 'News_Reporting_Presentation_in_Red_Grey_Newspaper_Style_3_allwj6',
+    img: 'vireo_fy29tx',
     featured: true,
   },
   {
@@ -43,8 +43,8 @@ export const newsArticles: NewsArticle[] = [
     author: 'Edmond Tan',
     date: 'Aug 2025',
     category: 'Newsletter',
-    img: 'aug_news_uaasjo',
-    featured: true,
+    img: 'vireo_setup_og3mkq',
+    featured: false,
   },
   {
     id: 'july-newsletter-2025',
@@ -54,7 +54,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Edmond Tan',
     date: 'Jul 2025',
     category: 'Newsletter',
-    img: 'july_news_q5hfxp',
+    img: 'DDC-40_5_zv88fw',
     featured: false,
   },
   {
@@ -109,7 +109,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'Jackson Hebel',
     date: 'Aug 2024',
     category: 'Team',
-    img: 'intern_news_byebm8',
+    img: 'charlie_news_tyykbs',
     featured: false,
   },
   {
@@ -120,18 +120,19 @@ export const newsArticles: NewsArticle[] = [
     author: 'Jackson Hebel',
     date: 'Aug 2023',
     category: 'Team',
-    img: 'charlie_news_tyykbs',
+    img: 'intern_news_byebm8',
     featured: false,
   },
   {
     id: 'app-notes-cables',
     title: 'Application Notes: Surprises with Cables',
     blurb:
-      'How to identify and troubleshoot electrical artifacts using the FemtoDAQ Kingfisher. Designing an experiment is sometimes full of surprises — especially with cables.',
+      'How to identify and troubleshoot electrical artifacts with SkuTek digitizers. Designing an experiment is sometimes full of surprises — especially with cables.',
     author: 'Jackson Hebel',
     date: 'Mar 2024',
     category: 'Technical',
     img: 'Surprises_With_Cables_figure5-1024x523-1_bihv2q',
+    href: '/files/Surprises_with_Cables_final_z78mpm.pdf',
     featured: false,
   },
 ];

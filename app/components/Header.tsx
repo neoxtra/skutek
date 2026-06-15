@@ -148,9 +148,6 @@ export default function Header() {
             <Link href="/news" className="text-xl font-semibold text-black hover:text-main transition">
               News and Articles
             </Link>
-            <Link href="/careers" className="text-xl font-semibold text-black hover:text-main transition">
-              Careers
-            </Link>
             <Link href="/documentation" className="text-xl font-semibold text-black hover:text-main transition">
               Documentation
             </Link>
@@ -246,9 +243,6 @@ export default function Header() {
             {/* Top-level links */}
             <Link href="/news" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300 mt-2">
               News and Articles
-            </Link>
-            <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
-              Careers
             </Link>
             <Link href="/documentation" onClick={() => setMobileMenuOpen(false)} className="block text-base font-bold text-gray-900 hover:text-main py-2 border-b border-gray-300">
               Documentation

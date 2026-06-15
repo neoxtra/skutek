@@ -52,7 +52,7 @@ export const digitizers: DigitizerProduct[] = [
       'vireo_gui_qfyksh',
       'vireo_download_tqx814',
     ],
-    specSheetUrl: undefined,
+    specSheetUrl: 'FemtoDAQ_Vireo_Spec_sheet_v3.5.1',
     specs: [
       { label: 'Channel Count',                value: '2' },
       { label: 'Bit Resolution',               value: '14' },
@@ -89,7 +89,7 @@ export const digitizers: DigitizerProduct[] = [
       'lux_oecdss',
       'science_op_nn64pn',
     ],
-    specSheetUrl: undefined,
+    specSheetUrl: 'Multichannel_DAQ-Spec-Sheet-v3.5_cednxy',
     specs: chk32Specs,
   },
   {
@@ -102,7 +102,7 @@ export const digitizers: DigitizerProduct[] = [
       'rtm_blue_s6gnqb',
       'chk32_rtm_pcb_lvv7g7',
     ],
-    specSheetUrl: undefined,
+    specSheetUrl: 'RTM-Spec-Sheet-v3.5_frqgr6',
     specs: chk32Specs,
   },
   {
@@ -120,7 +120,7 @@ export const digitizers: DigitizerProduct[] = [
       'Solidago_SYNC_qux40s',
       'solidago_hookup_drkqte',
     ],
-    specSheetUrl: undefined,
+    specSheetUrl: 'Solidago-Spec-Sheet-v1.2_v87oii',
     tableIntro: [
       'The Solidago is unique in that its UDP streams are generated in FPGA firmware which allows more control and higher performance than any software-based system. Packets streamed across multiple ports can be synchronized to within a few nanoseconds of each other. Delays between packets and events have a step precision of 8ns and are randomizable within a user-specified range. This high degree of control means that the Solidago can be tuned to emulate a streaming system\'s rate with high precision anywhere between 0.01 Gbps to 160 Gbps. Importantly the Solidago can stream packets in short-duration bursts which can be precisely timed. This level of precision is impossible for software-based emulation. This makes it perfect for stress testing routing equipment, testing network buffer overflow, error correction systems, or for developing a scientific data management system before hardware is in hand.',
       'Packets can be streamed in clusters known as events. This pulsed streaming behavior is typical of scientific instrumentation in nuclear or particle physics where trigger-based acquisition is used. The frequency, size, and inter-packet spacing of events can be configured or randomized to match the behavior of your particle accelerator or experimental setup. All stream ports can be configured to stream packets in sync. This mimics the behavior of an array of clock-synchronized digitizers. Streaming ports can also run asynchronously with independent configuration or randomized timing to mimic the behavior of an array of software systems. Synchronization can be daisy-chained between Solidagos for emulation of large systems.',

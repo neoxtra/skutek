@@ -116,7 +116,6 @@ export const articleContents: Record<string, string> = {
 </p>
 <ul>
   <li><strong>FemtoDAQ Vireo:</strong> 2-channel bench-top digitizer with built-in SiPM bias supply. Perfect for student training and small experiments.</li>
-  <li><strong>FemtoDAQ Kingfisher:</strong> 10-channel bench-top digitizer with built-in SiPM bias supply for mid-scale research.</li>
   <li><strong>Chickadee-32:</strong> 32-channel digitizer with embedded Linux, streaming events at 1 Gbps in a variety of formats.</li>
   <li><strong>Chickadee-32 RTM:</strong> Rear Transition Module adds 10 Gbps event streaming and additional I/O.</li>
   <li><strong>Custom DAQ Solutions:</strong> Systems that integrate seamlessly with your research and applications.</li>
@@ -487,7 +486,7 @@ export const articleContents: Record<string, string> = {
 </p>
 <h3>What They Worked On</h3>
 <ul>
-  <li>Hardware qualification testing for the FemtoDAQ Kingfisher</li>
+  <li>Hardware qualification testing for SkuTek digitizers</li>
   <li>Development of automated test scripts in Python</li>
   <li>Documentation for internal calibration procedures</li>
   <li>Support for ongoing SBIR deliverables</li>
@@ -501,7 +500,7 @@ export const articleContents: Record<string, string> = {
   'app-notes-cables': `
 <h2>Application Notes: Surprises with Cables</h2>
 <p>
-  How to troubleshoot electrical artifacts using the FemtoDAQ Kingfisher.
+  How to troubleshoot electrical artifacts using SkuTek digitizers.
   Designing an experiment is sometimes full of surprises — especially with cables.
 </p>
 <h3>The Problem</h3>
@@ -510,9 +509,9 @@ export const articleContents: Record<string, string> = {
   cabling between the detector and the digitizer. Impedance mismatches, ground loops,
   and reflections can all introduce artifacts that look deceptively like real signals.
 </p>
-<h3>Diagnosing with the Kingfisher</h3>
+<h3>Diagnosing with the Digitizer</h3>
 <p>
-  The FemtoDAQ Kingfisher's high-resolution waveform capture mode makes it straightforward
+  The FemtoDAQ Vireo's high-resolution waveform capture mode makes it straightforward
   to identify cable-induced reflections by their characteristic timing relative to the
   primary pulse.
 </p>

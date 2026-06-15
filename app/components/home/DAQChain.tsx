@@ -187,7 +187,7 @@ export default function DAQChain() {
                   <p className="text-[9px] font-bold uppercase tracking-wider text-gray-700 text-center mb-1.5">Digitizers</p>
                   <div className="flex items-center">
                     <div className="flex flex-col justify-between h-[72px]">
-                      {['Vireo', 'Kingfisher', 'CHK-32'].map(name => (
+                      {['Vireo', 'Kestrel-16', 'CHK-32'].map(name => (
                         <div key={name} className="px-3 py-0.5 bg-main rounded-full text-white text-[10px] font-bold whitespace-nowrap shadow-sm">
                           {name}
                         </div>
@@ -296,7 +296,7 @@ export default function DAQChain() {
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-700 text-center mb-2">Digitizers</p>
                 <div className="flex items-center">
                   <div className="flex flex-col justify-between h-[100px]">
-                    {['Vireo', 'Kingfisher', 'CHK-32'].map(name => (
+                    {['Vireo', 'Kestrel-16', 'CHK-32'].map(name => (
                       <div key={name} className="px-5 py-1.5 bg-main rounded-full text-white text-sm font-bold whitespace-nowrap shadow-md">
                         {name}
                       </div>

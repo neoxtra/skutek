@@ -5,7 +5,7 @@ const nextConfig = {
       {
         source: '/files/:path*',
         destination: 'https://res.cloudinary.com/dv68rvg7w/image/upload/:path*'
-      }
+      },
     ]
   }
 };
