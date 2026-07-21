@@ -219,11 +219,11 @@ export default function AboutPage() {
 
             <p className="text-xs uppercase tracking-widest text-main font-bold mb-3">Collaboration</p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-4">
-              Working with universities &amp; research labs
+              Working with Universities and Research Labs
             </h2>
             <p className="text-gray-500 leading-relaxed max-w-lg mx-auto mb-8">
-              If you are a university, national lab, or research group looking to partner with us —
-              whether for custom instrumentation, joint development, or hardware support — we would
+              If you are a university, national lab, or research group looking to partner with us,
+              whether for custom instrumentation, joint development, or hardware support, we would
               love to hear from you.
             </p>
 

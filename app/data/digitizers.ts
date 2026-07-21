@@ -14,7 +14,7 @@ export interface DigitizerProduct {
   specs: SpecRow[];       // Additional Information table
 }
 
-const chk32Specs: SpecRow[] = [
+const rtmSpecs: SpecRow[] = [
   { label: 'Optical Fiber Transceivers', value: 'One for GRETA / GRETINA Time and Trigger Control Link. One for 10G Ethernet.' },
   { label: 'Digitizer Readout Rate',     value: '10G with Ethernet' },
   { label: 'NIM Outputs',               value: '4 (LEMO connectors)' },
@@ -29,10 +29,31 @@ const chk32Specs: SpecRow[] = [
   { label: 'API',                       value: 'Register Configuration via Python Remote Procedure Calls' },
 ];
 
-const chk32Description = [
+const rtmDescription = [
   "The Chickadee-32's Rear Transition Module (RTM) allows for transportation of additional I/O ports to our Chickadee-32 digitizer inside a standard VME 64x crate configuration. It allows the Chickadee-32 to communicate over the GRETA / GRETINA Time and Trigger Control Link.",
   'The RTM, which is 6U in VME crate size, communicates with the Chickadee-32 through a Hard Metric P0 connector. This RTM is also ideal for users of the Chickadee-32 who want additional digital logic I/O, or communication over 10G Ethernet.',
   'Coming Soon: an additional 10 MHz clock input from White Rabbit.',
+];
+
+const chk32Specs: SpecRow[] = [
+  { label: 'Channel Count',           value: '32 per module. Scalable to 1000+ channels across multiple modules.' },
+  { label: 'Bit Resolution',          value: '14-bit (16-bit option available)' },
+  { label: 'Sampling Frequency',      value: '100 MHz (125 MHz for 16-bit option)' },
+  { label: 'Real-Time Processing',    value: 'Pulse height, shape analysis, timestamp extraction, configurable trigger logic with multiplicity counting' },
+  { label: 'Trigger Modes',           value: 'Triggered and triggerless operation' },
+  { label: 'Readout Rate',            value: '1 Gbps per module (standard). 10 Gbps optional.' },
+  { label: 'Form Factor',             value: '6U VME (no VME readout — Ethernet used for data)' },
+  { label: 'Synchronization',         value: 'GRETA / GRETINA TTCL. Compatible with White Rabbit and GPS clock sources. Timestamps synchronized across modules.' },
+  { label: 'Computer Interfaces',     value: 'Gigabit Ethernet' },
+  { label: 'Software',                value: 'Open-source Python and C libraries. GRETA-compatible event format. REST API.' },
+  { label: 'Operating System',        value: 'Embedded Debian Linux' },
+  { label: 'Power',                   value: 'VME 5V' },
+];
+
+const chk32Description = [
+  'The Chickadee-32 is a 32-channel FPGA-based digitizer designed for scalable, high-performance nuclear physics data acquisition. Modules can be combined to instrument 1000+ channels while maintaining synchronized timestamps and triggers across the system.',
+  'Each module delivers 1 Gbps Ethernet readout (10 Gbps optional) and runs real-time FPGA pulse processing — including pulse height analysis, shape discrimination, timestamp extraction, and configurable trigger logic with multiplicity counting. The system supports a wide range of detectors including HPGe, liquid noble gas arrays, and silicon detectors.',
+  'An open-source Python and C software ecosystem, GRETA-compatible event format, and embedded Debian Linux make the Chickadee-32 straightforward to integrate into existing facility infrastructure.',
 ];
 
 export const digitizers: DigitizerProduct[] = [
@@ -80,8 +101,8 @@ export const digitizers: DigitizerProduct[] = [
   },
   {
     id: 'multichannel-daq-system',
-    name: 'Chickadee-32 Rear Transition Module',
-    tagline: 'Multi-Channel DAQ System',
+    name: 'Chickadee-32',
+    tagline: '32-Channel DAQ System',
     description: chk32Description,
     images: [
       'chk32_mounted_knjt8y',
@@ -96,14 +117,14 @@ export const digitizers: DigitizerProduct[] = [
     id: 'chickadee-32',
     name: 'Chickadee-32 Rear Transition Module',
     tagline: 'Rear Transition Module',
-    description: chk32Description,
+    description: rtmDescription,
     images: [
       'rtm_rear_slz6pb',
       'rtm_blue_s6gnqb',
       'chk32_rtm_pcb_lvv7g7',
     ],
     specSheetUrl: 'RTM-Spec-Sheet-v3.5_frqgr6',
-    specs: chk32Specs,
+    specs: rtmSpecs,
   },
   {
     id: 'solidago-udp',
