@@ -14,11 +14,22 @@ export interface NewsArticle {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: 'june-newsletter-2026',
+    title: 'June Newsletter',
+    blurb:
+      'The June 2026 edition of SkuTek DAQ News — introducing the new Kestrel-16 250 MSPS digitizer, a 96-channel standalone DAQ system, and two table-top experiments: muon decay and Trinitite gamma spectroscopy.',
+    author: 'SkuTek Team',
+    date: 'Jun 2026',
+    category: 'Newsletter',
+    img: 'Muon_ray_result_xkkgpo',
+    featured: true,
+  },
+  {
     id: 'january-newsletter-2026',
     title: 'January Newsletter',
     blurb:
       'The January 2026 edition of SkuTek DAQ News — featuring our Vireo and Chickadee digitizers, Compton coincidence experiments, and highlights from recent nuclear physics community events.',
-    author: 'Edmond Tan',
+    author: 'SkuTek Team',
     date: 'Jan 2026',
     category: 'Newsletter',
     img: 'vireo_fy29tx',
@@ -40,7 +51,7 @@ export const newsArticles: NewsArticle[] = [
     title: 'August Newsletter',
     blurb:
       'The August 2025 edition of SkuTek News — Where Science Meets Industry. Catch up on our latest product updates, research highlights, and team news.',
-    author: 'Edmond Tan',
+    author: 'SkuTek Team',
     date: 'Aug 2025',
     category: 'Newsletter',
     img: 'vireo_setup_og3mkq',
@@ -51,7 +62,7 @@ export const newsArticles: NewsArticle[] = [
     title: 'July Newsletter',
     blurb:
       'Welcome to the first edition of SkuTek News! We\'re excited to share our latest developments in data acquisition technology and growing research partnerships.',
-    author: 'Edmond Tan',
+    author: 'SkuTek Team',
     date: 'Jul 2025',
     category: 'Newsletter',
     img: 'DDC-40_5_zv88fw',

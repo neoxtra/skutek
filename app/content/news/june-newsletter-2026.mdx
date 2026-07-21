@@ -1,0 +1,193 @@
+## Welcome to SkuTek DAQ News! 🌐
+
+**June 2026 Edition**
+
+*Where Science Meets Industry*
+
+*News editors: Ujval Madhu, Edmond Tan, Research Engineers*
+
+In this issue, we introduce our new 16-channel 250 MSPS digitizer. We also describe two table-top measurements performed using our 2-channel benchtop digitizer unit.
+
+---
+
+## Product Spotlight
+
+### New Product: SkuTek Kestrel-16
+
+*16 Channel 250 MSPS scalable digitizer module*
+
+**Kestrel-16** is our new 250 MSPS digitizer module designed for experiments that demand both precision and throughput. We have completed testing the unit and successfully digitized input pulses at 250 MSPS.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/KESTREL16_CLOUDINARY_ID" alt="SkuTek Kestrel-16 250 MSPS digitizer module" />
+    <p className="img-side-caption">SkuTek Kestrel-16 250 MSPS digitizer module.</p>
+  </div>
+  <div className="img-side-right">
+    <strong>Key features:</strong>
+    <ul>
+      <li>16 Channels, 14 bits @ 250 MSPS per channel. Please inquire if you need a 16-bit version.</li>
+      <li>Kintex 7 FPGA running real-time pulse processing: timing filters, discriminators, coincidence logic and scalers.</li>
+      <li>The readout and clocking are compatible with our established DAQ infrastructure.</li>
+      <li>Embedded Linux and software libraries (REST API, Python, C) for control and automation.</li>
+    </ul>
+  </div>
+</div>
+
+**Applications:**
+
+<div className="two-col-list">
+  <ul>
+    <li>High sample rate DAQ</li>
+    <li>Coincidence timing</li>
+    <li>Large channel count systems</li>
+  </ul>
+  <ul>
+    <li>Fast scintillators</li>
+    <li>Time-of-flight experiments</li>
+    <li>Nuclear spectroscopy</li>
+  </ul>
+</div>
+
+[Request a quote](/contact)
+
+---
+
+### Standalone Multi-Channel Digitizer System
+
+*96 channel high-density digitization*
+
+We are showing an example standalone 96-channel digitizer system built with three 32-channel DAQ modules. The system provides high-speed 1G Ethernet readout from each module. 10G is available as an option. The VME crate is used as a convenient source of power. The VME readout protocol is not used because all modules are individually accessed over Ethernet.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/CHK_demo_rvu65q" alt="96-channel digitizer system" />
+    <p className="img-side-caption">The 96-channel digitizer system. The digitizers can be assembled with either 14-bit or 16-bit ADCs clocked up to 125 MHz.</p>
+  </div>
+  <div className="img-side-right">
+    The system demonstrates our DAQ architecture. Timestamp and triggers can be synchronized across all modules. Sub-nanosecond time resolution can be achieved with fast signals thanks to low noise and excellent pulse shape response. The system supports a wide range of detectors, both high resolution and high speed.
+
+    - **FPGA-powered signal processing:** Real-time pulse height, shape analysis, timestamp extraction, and configurable trigger logic with multiplicity counting.
+    - **High-speed triggered and triggerless:** 1 Gbps streaming per module (default) and optional 10 Gbps streaming, with both triggered and triggerless operation.
+    - **Open software ecosystem:** Open-source Python/C libraries, GRETA‑compatible event format, Debian Linux for control and monitoring over network.
+    - **Clock and channel synchronization:** Clock and timestamps can be synchronized with other electronics. Modules can employ White Rabbit or GPS-based clock synchronization.
+    - **VME module format:** VME card format simplifies system building and delivers power but does not rely on the VME data plane. Each module can operate in parallel with Ethernet readout and control.
+  </div>
+</div>
+
+[Download CHK datasheet](/files/Multichannel_DAQ-Spec-Sheet-v3.5_cednxy.pdf)
+
+---
+
+## Example Table-Top Experiments
+
+*Developed for student labs and classrooms*
+
+### 1. Cosmic Ray Muon Decay Experiment
+
+We demonstrate a classic muon decay experiment using our modern digital signal processing as an alternative to conventional analog NIM electronics.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/Muon_ray_result_xkkgpo" alt="Muon decay curve" />
+    <p className="img-side-caption">This decay curve shows cosmic ray muons detected in the scintillator. The green histogram plots the time between a muon's arrival and its decay into an electron, while the red dashed line shows the exponential fit.</p>
+  </div>
+  <div className="img-side-right">
+    **Overview of experiment**
+
+    Cosmic ray protons hit Earth's upper atmosphere and produce muons. We estimate 1 in 6,000 of the muons passing through the detector stops inside the scintillator and then decays, producing a detectable electron. The experiment aimed to capture this decay signature and calculate the muon half-life.
+  </div>
+</div>
+
+![The fully digital experimental setup for the muon decay experiment.](/files/Muon_ray_setup_mjxumr)
+
+*The fully digital experimental setup for the muon decay experiment.*
+
+**How the signal was identified**
+
+Each event recorded two pulses — a "leading" pulse (the incoming muon) and a "trailing" pulse (the decay electron). By measuring the time difference (dT) between the two, an exponential decay distribution emerged, which is indicative of muon decay.
+
+**Separating signal from background**
+
+The data revealed two distinct groups of events:
+
+- **Group A** (low amplitude) caused by ambient radioactivity, likely potassium-40. These showed no muon decay pattern.
+- **Group B** (high amplitude) genuine cosmic ray muons, showing a clear exponential decay up to ~8 microseconds.
+
+Filtering out Group A reduced the random background by a factor of 8.
+
+**Results**
+
+Fitting the exponential decay curve gave a measured muon half-life of 1.479 ± 0.073 µs, with a mean lifetime of 2.135 µs. The accepted textbook value is ~1.5 µs for the half-life and ~2.2 µs for the mean lifetime, making this an accurate result for a table-top experiment.
+
+[Download full report](/files/Muon_decay_experiment_March_23_2026_mvi9ai.pdf)
+
+---
+
+### 2. Gamma Spectroscopy of Trinitite
+
+Trinitite is a remnant of the Trinity nuclear explosion test from 1945. The mineral formed from the intense heat and pressure of the detonation fusing desert sand, soil minerals, and bomb debris. It carries a radioactive fingerprint of that moment captured over 80 years ago.
+
+<div className="img-side">
+  <div className="img-side-left">
+    <img src="/files/Setup_labelled_without_plastic_spbvbr" alt="Spectroscopy experimental setup" />
+    <p className="img-side-caption">The complete experimental setup configured for the Trinitite spectrum measurement. The setup comprised the FemtoDAQ Vireo MCA and 25×25mm NaI(Tl) detector with built-in preamp and HV.</p>
+  </div>
+  <div className="img-side-right">
+    **Overview of experiment**
+
+    We recorded a gamma-ray pulse height histogram in order to detect nuclides in the Trinitite sample. The experiment was deliberately minimal: a NaI(Tl) scintillation detector with built-in HV supply and preamplifier, paired with the FemtoDAQ Vireo operating in multichannel analyzer (MCA) mode. No NIM electronics were used for signal shaping or triggering.
+  </div>
+</div>
+
+**Extraction of net Trinitite spectrum**
+
+The Trinitite samples were measured continuously for over 75 hours. To isolate the signal from ambient radioactivity, a background spectrum was collected separately over 24 hours under identical geometry, scaled proportionally to 75 hours, and subtracted. This extracted the net Trinitite spectrum.
+
+![Scaled background spectrum superimposed with the Trinitite spectrum.](/files/tinitite_with_background_b7g3gi)
+
+*Scaled background spectrum superimposed with the Trinitite spectrum.*
+
+![The net Trinitite gamma-ray spectrum after background subtraction, plotted in log scale.](/files/Histo_Trinitie_1kohms_Linear_cal_log_xu78tg)
+
+*The net Trinitite gamma-ray spectrum after background subtraction, plotted in log scale.*
+
+**Peak identification**
+
+The peaks from the spectrum can be indicative of the nuclides shown below:
+
+![Peak identification from known nuclear data.](/files/Peak_identification_lpstwk)
+
+*Peak identification from known nuclear data.*
+
+The plutonium peaks (A) are a direct remnant of the weapon core. The europium signatures (B, C) reflect neutron activation of rare earth elements in the surrounding soil. The cesium-137 peak (D) is a classic fission product, while the potassium-40 peak (E) serves as a useful natural reference. Together, this is indicative of what happened at the Trinity site in July 1945.
+
+These results demonstrate Vireo's ability to implement custom logic-based acquisition and perform spectroscopy without using external NIM electronics.
+
+[Download full report](/files/Trinitite_Report_v4_UM_WS_May_09_2026_A_kdymz0.pdf)
+
+---
+
+## The Relevance for Education
+
+Our results demonstrate how SkuTek's digital DAQ can be used to teach students modern digital techniques such as:
+
+- **Live histogram display** with visual feedback.
+- **Built-in pulse processing** without external analog electronics.
+- **Python/C scripting** will allow students to easily modify examples and develop their own creative experiments and solutions.
+
+---
+
+## Connecting with the Nuclear Physics Community: Upcoming Events
+
+- **8th International Symposium on Capture Gamma-Ray Spectroscopy and Related Topics (CGS18), June 14–19, 2026, Monterey, California:** Research Engineer Jackson Hebel will attend the conference to demonstrate our multi-channel digitizer system.
+
+- **Low Energy Community Meeting 2026, August 12–14, 2026, Argonne National Laboratory:** Chief Technology Officer Wojciech Skulski and Research Engineer Jackson Hebel will attend and demonstrate our DAQ systems.
+
+---
+
+## We Appreciate Your Feedback
+
+Please let us know whether you liked our newsletter. Please let us know about your needs in the field of data acquisition electronics. We are always listening to the community!
+
+[Request a Quote](/contact)
