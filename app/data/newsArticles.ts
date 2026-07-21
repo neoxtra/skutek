@@ -21,7 +21,7 @@ export const newsArticles: NewsArticle[] = [
     author: 'SkuTek Team',
     date: 'Jun 2026',
     category: 'Newsletter',
-    img: 'Muon_ray_result_xkkgpo',
+    img: 'Kestrel_250_cropped_fshk9r',
     featured: true,
   },
   {
